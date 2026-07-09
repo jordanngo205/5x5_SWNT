@@ -1,0 +1,3107 @@
+{
+  "leagues": [],
+  "seasons": {
+    "result": [
+      {
+        "name": "2004-2005",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0bd",
+        "iid": 2004,
+        "updated": "2021-08-20T22:05:48.595Z"
+      },
+      {
+        "name": "2005-2006",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0be",
+        "iid": 2005,
+        "updated": "2021-08-20T22:05:48.741Z"
+      },
+      {
+        "name": "2006-2007",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0bf",
+        "iid": 2006,
+        "updated": "2021-08-20T22:05:48.751Z"
+      },
+      {
+        "name": "2007-2008",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c0",
+        "iid": 2007,
+        "updated": "2021-08-20T22:05:48.763Z"
+      },
+      {
+        "name": "2008-2009",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c1",
+        "iid": 2008,
+        "updated": "2021-08-20T22:05:48.774Z"
+      },
+      {
+        "name": "2009-2010",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c2",
+        "iid": 2009,
+        "updated": "2021-08-20T22:05:48.781Z"
+      },
+      {
+        "name": "2010-2011",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c3",
+        "iid": 2010,
+        "updated": "2021-08-20T22:05:48.789Z"
+      },
+      {
+        "name": "2011-2012",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c4",
+        "iid": 2011,
+        "updated": "2021-08-20T22:05:48.802Z"
+      },
+      {
+        "name": "2012-2013",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c5",
+        "iid": 2012,
+        "updated": "2021-08-20T22:05:48.809Z"
+      },
+      {
+        "name": "2013-2014",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c6",
+        "iid": 2013,
+        "updated": "2021-08-20T22:05:48.818Z"
+      },
+      {
+        "name": "2014-2015",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c7",
+        "iid": 2014,
+        "updated": "2021-08-20T22:05:48.825Z"
+      },
+      {
+        "name": "2015-2016",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c8",
+        "iid": 2015,
+        "updated": "2021-08-20T22:05:48.833Z"
+      },
+      {
+        "name": "2005",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0c9",
+        "iid": 2005,
+        "updated": "2021-05-25T14:38:52.387Z"
+      },
+      {
+        "name": "2010",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0ca",
+        "iid": 2010,
+        "updated": "2021-05-25T14:38:52.394Z"
+      },
+      {
+        "name": "2011",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0cb",
+        "iid": 2011,
+        "updated": "2021-05-25T14:38:52.401Z"
+      },
+      {
+        "name": "2012",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0cc",
+        "iid": 2012,
+        "updated": "2021-05-25T14:38:52.407Z"
+      },
+      {
+        "name": "2013",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0cd",
+        "iid": 2013,
+        "updated": "2021-05-25T14:38:52.413Z"
+      },
+      {
+        "name": "2014",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0ce",
+        "iid": 2014,
+        "updated": "2021-05-25T14:38:52.419Z"
+      },
+      {
+        "name": "2015",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0cf",
+        "iid": 2015,
+        "updated": "2021-05-25T14:38:52.425Z"
+      },
+      {
+        "name": "2016",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0d0",
+        "iid": 2016,
+        "updated": "2021-05-25T14:38:52.431Z"
+      },
+      {
+        "name": "2004-2005",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0d1",
+        "iid": 2004,
+        "updated": "2021-05-25T14:38:52.48Z"
+      },
+      {
+        "name": "2005-2006",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0d2",
+        "iid": 2005,
+        "updated": "2021-05-25T14:38:52.487Z"
+      },
+      {
+        "name": "2006-2007",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa45762021398add0d3",
+        "iid": 2006,
+        "updated": "2021-05-25T14:38:52.495Z"
+      },
+      {
+        "name": "2007-2008",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0d4",
+        "iid": 2007,
+        "updated": "2021-05-25T14:38:52.502Z"
+      },
+      {
+        "name": "2008-2009",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0d5",
+        "iid": 2008,
+        "updated": "2021-05-25T14:38:52.509Z"
+      },
+      {
+        "name": "2009-2010",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0d6",
+        "iid": 2009,
+        "updated": "2021-05-25T14:38:52.516Z"
+      },
+      {
+        "name": "2010-2011",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0d7",
+        "iid": 2010,
+        "updated": "2021-05-25T14:38:52.523Z"
+      },
+      {
+        "name": "2011-2012",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0d8",
+        "iid": 2011,
+        "updated": "2021-05-25T14:38:52.53Z"
+      },
+      {
+        "name": "2012-2013",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0d9",
+        "iid": 2012,
+        "updated": "2021-05-25T14:38:52.537Z"
+      },
+      {
+        "name": "2013-2014",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0da",
+        "iid": 2013,
+        "updated": "2021-05-25T14:38:52.545Z"
+      },
+      {
+        "name": "2014-2015",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0db",
+        "iid": 2014,
+        "updated": "2021-05-25T14:38:52.559Z"
+      },
+      {
+        "name": "2015-2016",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0dc",
+        "iid": 2015,
+        "updated": "2021-05-25T14:38:52.565Z"
+      },
+      {
+        "name": "2005-2006",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0dd",
+        "iid": 2005,
+        "updated": "2021-05-25T14:38:52.619Z"
+      },
+      {
+        "name": "2006-2007",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0de",
+        "iid": 2006,
+        "updated": "2021-05-25T14:38:52.626Z"
+      },
+      {
+        "name": "2008-2009",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0df",
+        "iid": 2008,
+        "updated": "2021-05-25T14:38:52.633Z"
+      },
+      {
+        "name": "2009-2010",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0e0",
+        "iid": 2009,
+        "updated": "2021-05-25T14:38:52.641Z"
+      },
+      {
+        "name": "2010-2011",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0e1",
+        "iid": 2010,
+        "updated": "2021-05-25T14:38:52.65Z"
+      },
+      {
+        "name": "2011-2012",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0e2",
+        "iid": 2011,
+        "updated": "2021-05-25T14:38:52.66Z"
+      },
+      {
+        "name": "2012-2013",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0e3",
+        "iid": 2012,
+        "updated": "2021-05-25T14:38:52.669Z"
+      },
+      {
+        "name": "2013-2014",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0e4",
+        "iid": 2013,
+        "updated": "2021-05-25T14:38:52.677Z"
+      },
+      {
+        "name": "2014-2015",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0e5",
+        "iid": 2014,
+        "updated": "2021-05-25T14:38:52.685Z"
+      },
+      {
+        "name": "2015-2016",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0e6",
+        "iid": 2015,
+        "updated": "2021-05-25T14:38:52.692Z"
+      },
+      {
+        "name": "2006",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0f1",
+        "iid": 2006,
+        "updated": "2021-05-25T14:38:52.838Z"
+      },
+      {
+        "name": "2007",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0f2",
+        "iid": 2007,
+        "updated": "2021-05-25T14:38:52.844Z"
+      },
+      {
+        "name": "2008",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0f3",
+        "iid": 2008,
+        "updated": "2021-05-25T14:38:52.851Z"
+      },
+      {
+        "name": "2009",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0f4",
+        "iid": 2009,
+        "updated": "2021-05-25T14:38:52.857Z"
+      },
+      {
+        "name": "2010",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0f5",
+        "iid": 2010,
+        "updated": "2021-05-25T14:38:52.864Z"
+      },
+      {
+        "name": "2012",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0f6",
+        "iid": 2012,
+        "updated": "2021-05-25T14:38:52.871Z"
+      },
+      {
+        "name": "2013",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0f7",
+        "iid": 2013,
+        "updated": "2021-05-25T14:38:52.878Z"
+      },
+      {
+        "name": "2014",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0f8",
+        "iid": 2014,
+        "updated": "2021-05-25T14:38:52.885Z"
+      },
+      {
+        "name": "2015",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add0f9",
+        "iid": 2015,
+        "updated": "2021-05-25T14:38:52.892Z"
+      },
+      {
+        "name": "2007-2008",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add100",
+        "iid": 2007,
+        "updated": "2021-07-14T23:23:57.94Z"
+      },
+      {
+        "name": "2008-2009",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add101",
+        "iid": 2008,
+        "updated": "2021-07-14T23:23:58.073Z"
+      },
+      {
+        "name": "2009-2010",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add102",
+        "iid": 2009,
+        "updated": "2021-07-14T23:23:58.083Z"
+      },
+      {
+        "name": "2010-2011",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add103",
+        "iid": 2010,
+        "updated": "2021-07-14T23:23:58.092Z"
+      },
+      {
+        "name": "2011-2012",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add104",
+        "iid": 2011,
+        "updated": "2021-07-14T23:23:58.1Z"
+      },
+      {
+        "name": "2012-2013",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add105",
+        "iid": 2012,
+        "updated": "2021-07-14T23:23:58.108Z"
+      },
+      {
+        "name": "2013-2014",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add106",
+        "iid": 2013,
+        "updated": "2021-07-14T23:23:58.115Z"
+      },
+      {
+        "name": "2014-2015",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add107",
+        "iid": 2014,
+        "updated": "2021-07-14T23:23:58.124Z"
+      },
+      {
+        "name": "2015-2016",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add108",
+        "iid": 2015,
+        "updated": "2021-07-14T23:23:58.131Z"
+      },
+      {
+        "name": "2006-2007",
+        "description": "2006-2007",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add116",
+        "iid": 2006,
+        "updated": "2022-01-12T20:30:47.333Z"
+      },
+      {
+        "name": "2007-2008",
+        "description": "2007-2008",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add117",
+        "iid": 2007,
+        "updated": "2022-01-12T20:30:47.644Z"
+      },
+      {
+        "name": "2008-2009",
+        "description": "2008-2009",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add118",
+        "iid": 2008,
+        "updated": "2022-01-12T20:30:47.699Z"
+      },
+      {
+        "name": "2009-2010",
+        "description": "2009-2010",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add119",
+        "iid": 2009,
+        "updated": "2022-01-12T20:30:47.718Z"
+      },
+      {
+        "name": "2010-2011",
+        "description": "2010-2011",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add11a",
+        "iid": 2010,
+        "updated": "2022-01-12T20:30:47.737Z"
+      },
+      {
+        "name": "2012-2013",
+        "description": "2012-2013",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add11b",
+        "iid": 2012,
+        "updated": "2022-01-12T20:30:47.797Z"
+      },
+      {
+        "name": "2013-2014",
+        "description": "2013-2014",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add11c",
+        "iid": 2013,
+        "updated": "2022-01-12T20:30:47.818Z"
+      },
+      {
+        "name": "2014-2015",
+        "description": "2014-2015",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add11d",
+        "iid": 2014,
+        "updated": "2022-01-12T20:30:47.838Z"
+      },
+      {
+        "name": "2015-2016",
+        "description": "2015-2016",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add11e",
+        "iid": 2015,
+        "updated": "2022-01-12T20:30:47.887Z"
+      },
+      {
+        "name": "2016-2017",
+        "description": "2016-2017",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add11f",
+        "iid": 2016,
+        "updated": "2022-01-12T20:30:47.91Z"
+      },
+      {
+        "name": "2006",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add140",
+        "iid": 2006,
+        "updated": "2021-05-25T14:38:53.647Z"
+      },
+      {
+        "name": "2010",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add141",
+        "iid": 2010,
+        "updated": "2021-06-14T07:03:58.706Z"
+      },
+      {
+        "name": "2012",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add142",
+        "iid": 2012,
+        "updated": "2021-06-14T07:03:58.848Z"
+      },
+      {
+        "name": "2013",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add143",
+        "iid": 2013,
+        "updated": "2021-06-14T07:03:58.859Z"
+      },
+      {
+        "name": "2014",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add144",
+        "iid": 2014,
+        "updated": "2021-06-14T07:03:58.868Z"
+      },
+      {
+        "name": "2015",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57589fa55762021398add145",
+        "iid": 2015,
+        "updated": "2021-06-14T07:03:58.876Z"
+      },
+      {
+        "name": "2016-2017",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5769aea35762021398c59091",
+        "iid": 2016,
+        "updated": "2021-05-25T14:38:52.572Z"
+      },
+      {
+        "name": "2016",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "576c24a25762021398c5c4ae",
+        "iid": 2016,
+        "updated": "2021-06-14T07:03:58.886Z"
+      },
+      {
+        "name": "2016",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5776b9dd5762021398fe3f11",
+        "iid": 2016,
+        "updated": "2021-05-25T14:38:52.899Z"
+      },
+      {
+        "name": "2016-2017",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57ae10a557620213988d93a2",
+        "iid": 2016,
+        "updated": "2021-08-20T22:05:48.842Z"
+      },
+      {
+        "name": "2016-2017",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "57b63ce457620213988eb087",
+        "iid": 2016,
+        "updated": "2021-05-25T14:38:52.699Z"
+      },
+      {
+        "name": "2016-2017",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "584a9a24d95ef3f74c17d058",
+        "iid": 2016,
+        "updated": "2021-07-14T23:23:58.139Z"
+      },
+      {
+        "name": "2017",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5905273435268c61b048e384",
+        "iid": 2017,
+        "updated": "2021-05-25T14:38:52.437Z"
+      },
+      {
+        "name": "2017-2018",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "59af08c917120e9c9a9797ff",
+        "iid": 2017,
+        "updated": "2021-08-20T22:05:48.854Z"
+      },
+      {
+        "name": "2017-2018",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "59af08c917120e9c9a97983b",
+        "iid": 2017,
+        "updated": "2021-05-25T14:38:52.578Z"
+      },
+      {
+        "name": "2017",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "59af08c917120e9c9a97988e",
+        "iid": 2017,
+        "updated": "2021-05-25T14:38:52.906Z"
+      },
+      {
+        "name": "2017",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "59af08c917120e9c9a979960",
+        "iid": 2017,
+        "updated": "2021-06-14T07:03:58.893Z"
+      },
+      {
+        "name": "2017-2018",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "59d33e3144b2b8aa7e26c3f3",
+        "iid": 2017,
+        "updated": "2021-05-25T14:38:52.705Z"
+      },
+      {
+        "name": "2017-2018",
+        "description": "2017-2018",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "59de408e44b2b8aa7e7e9086",
+        "iid": 2017,
+        "updated": "2022-01-12T20:30:47.926Z"
+      },
+      {
+        "name": "2017-2018",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "59f6b83df934491175ce9c5b",
+        "iid": 2017,
+        "updated": "2021-07-14T23:23:58.148Z"
+      },
+      {
+        "name": "2018",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5ae7a65a9559b26e7e729b29",
+        "iid": 2018,
+        "updated": "2021-05-25T14:38:52.443Z"
+      },
+      {
+        "name": "2018",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5b1d58749559b26e7e35069b",
+        "iid": 2018,
+        "updated": "2021-06-14T07:03:58.902Z"
+      },
+      {
+        "name": "2018",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5b312e2e9559b26e7e9665e0",
+        "iid": 2018,
+        "updated": "2021-05-25T14:38:52.912Z"
+      },
+      {
+        "name": "2018-2019",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5b4bd3ab9559b26e7e107793",
+        "iid": 2018,
+        "updated": "2021-05-25T14:38:52.584Z"
+      },
+      {
+        "name": "2018-2019",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5b6e102011ef0d11039af1e3",
+        "iid": 2018,
+        "updated": "2021-08-20T22:05:48.869Z"
+      },
+      {
+        "name": "2018-2019",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5b72832e11ef0d1103e22fb3",
+        "iid": 2018,
+        "updated": "2021-05-25T14:38:52.713Z"
+      },
+      {
+        "name": "2019-2020",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5bb32f6faeda7199396199f9",
+        "iid": 2019,
+        "updated": "2021-05-25T14:38:52.72Z"
+      },
+      {
+        "name": "2018-2019",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5bc392c0aeda719939860403",
+        "iid": 2018,
+        "updated": "2021-07-14T23:23:58.156Z"
+      },
+      {
+        "name": "2018-2019",
+        "description": "2018-2019",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5bce09a6aeda719939a8d11e",
+        "iid": 2018,
+        "updated": "2022-01-12T20:30:47.942Z"
+      },
+      {
+        "name": "2015-2016",
+        "description": "2015-2016",
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5bd8140baeda719939f73f46",
+        "iid": 2015,
+        "updated": "2022-01-12T20:30:47.995Z"
+      },
+      {
+        "name": "2016-2017",
+        "description": "2016-2017",
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5bd8140baeda719939f73f48",
+        "iid": 2016,
+        "updated": "2022-01-12T20:30:21.284Z"
+      },
+      {
+        "name": "2018-2019",
+        "description": "2018-2019",
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5bd8140baeda719939f73f49",
+        "iid": 2018,
+        "updated": "2022-01-12T20:30:48.017Z"
+      },
+      {
+        "name": "2019",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5cb0eda27d52cb39ca5768c8",
+        "iid": 2019,
+        "updated": "2021-05-25T14:38:52.449Z"
+      },
+      {
+        "name": "2019",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5ce24a03f52909811e23a061",
+        "iid": 2019,
+        "updated": "2021-06-14T07:03:58.91Z"
+      },
+      {
+        "name": "2019",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5d1394bdf52909811ec7674e",
+        "iid": 2019,
+        "updated": "2021-08-04T13:33:56.916Z"
+      },
+      {
+        "name": "2019-2020",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5d51e0c6f52909811e13ee2d",
+        "iid": 2019,
+        "updated": "2021-08-20T22:05:48.878Z"
+      },
+      {
+        "name": "2019-2020",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5d56fb68f52909811e1c65e5",
+        "iid": 2019,
+        "updated": "2021-05-25T14:38:52.591Z"
+      },
+      {
+        "name": "2019-2020",
+        "description": "2019-2020",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5d934d357455336e8793cf11",
+        "iid": 2019,
+        "updated": "2022-01-12T20:30:47.961Z"
+      },
+      {
+        "name": "2019-2020",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5d9e637b7455336e876e6789",
+        "iid": 2019,
+        "updated": "2021-07-14T23:23:58.166Z"
+      },
+      {
+        "name": "2020-2021",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5dad07257455336e8774eb66",
+        "iid": 2020,
+        "updated": "2021-09-06T21:46:07.829Z"
+      },
+      {
+        "name": "2019-2020",
+        "description": "2019-2020",
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5de949b47455336e872694c6",
+        "iid": 2019,
+        "updated": "2022-01-12T20:30:48.062Z"
+      },
+      {
+        "name": "2020",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5f161ca5e0962f87ad531628",
+        "iid": 2020,
+        "updated": "2021-06-16T22:33:59.206Z"
+      },
+      {
+        "name": "2020-2021",
+        "description": "2020-2021",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5f65470ae6c2413bc4a98180",
+        "iid": 2020,
+        "updated": "2022-01-12T20:25:44.127Z"
+      },
+      {
+        "name": "2020-2021",
+        "description": "2020-2021",
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5f735257e6c2413bc4aa7a2e",
+        "iid": 2020,
+        "updated": "2022-01-19T19:15:51.077Z"
+      },
+      {
+        "name": "2020-2021",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5f809bd41cb0540001a542a7",
+        "iid": 2020,
+        "updated": "2021-09-06T21:46:08.005Z"
+      },
+      {
+        "name": "2020",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5fad35f9f68e52f82703f0a2",
+        "iid": 2020,
+        "updated": "2021-06-14T07:03:58.919Z"
+      },
+      {
+        "name": "2020-2021",
+        "description": "2020-2021",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5fce72f5f68e52f827c39b4c",
+        "iid": 2020,
+        "updated": "2021-10-20T20:15:52.5Z"
+      },
+      {
+        "name": "2003-2004",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5ff76b425fe05a0e9f0643d3",
+        "iid": 2003,
+        "updated": "2021-05-25T14:38:52.612Z"
+      },
+      {
+        "name": "2003-2004",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "5ff76b435fe05a0e9f065302",
+        "iid": 2003,
+        "updated": "2021-05-25T14:38:52.473Z"
+      },
+      {
+        "name": "2020-2021",
+        "description": "2020-2021",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "601c254d6416d8c9ea744f7a",
+        "iid": 2020,
+        "updated": "2021-11-05T16:25:39.023Z"
+      },
+      {
+        "name": "2021-2022",
+        "description": "2021-2022",
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6054fd07840a62ef3c69720a",
+        "iid": 2021,
+        "updated": "2022-01-19T19:15:51.343Z"
+      },
+      {
+        "name": "2021-2022",
+        "description": "2021",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6085b5d0e6c2413bc4ba9122",
+        "iid": 2021,
+        "updated": "2022-08-23T20:00:51.898Z"
+      },
+      {
+        "name": "2021",
+        "description": "2021",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "608f5dd35e7b4977beddb49f",
+        "iid": 2021,
+        "updated": "2022-04-23T17:45:51.626Z"
+      },
+      {
+        "name": "2021",
+        "description": "2021",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "60c6ff1ff172c7ea936560f4",
+        "iid": 2021,
+        "updated": "2022-06-12T21:01:02.162Z"
+      },
+      {
+        "name": "2021-2022",
+        "description": "2021-2022",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "60ef71d0f172c7ea93b0bcbd",
+        "iid": 2021,
+        "updated": "2021-11-05T16:25:39.038Z"
+      },
+      {
+        "name": "2021",
+        "description": "2021",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "610a96ff686c37328da4bbe3",
+        "iid": 2021,
+        "updated": "2021-08-04T13:33:57.046Z"
+      },
+      {
+        "name": "2021-2022",
+        "description": "2021-2022",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6120261cea4488c9fd5c57c5",
+        "iid": 2021,
+        "updated": "2022-09-01T20:26:31.62Z"
+      },
+      {
+        "name": "2021-2022",
+        "description": "2021-2022",
+        "league": {
+          "name": "High School",
+          "abbr": "HS",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6132e9a5f4b1fbbad2b8deab",
+        "iid": 2021,
+        "updated": "2022-08-24T15:31:02.898Z"
+      },
+      {
+        "name": "2021-2022",
+        "description": "2021",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "61368adda9139a5be9761ade",
+        "iid": 2021,
+        "updated": "2022-08-23T20:00:53.271Z"
+      },
+      {
+        "name": "2021-2022",
+        "description": "2021-2022",
+        "league": {
+          "name": "Ontario Scholastic Basketball Association - Girls",
+          "abbr": "OSBA",
+          "id": "6175ac57bd5a38f5d93225ad",
+          "iid": 234
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6175b5ba3e4dd39c0079a557",
+        "iid": 2021,
+        "updated": "2022-10-03T16:10:17.352Z"
+      },
+      {
+        "name": "2022",
+        "description": "2022",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "62022000ef4e6d1f884be241",
+        "iid": 2022,
+        "updated": "2023-06-05T21:15:14.077Z"
+      },
+      {
+        "name": "2022",
+        "description": "2022",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "62643adf611aca8b7491c6db",
+        "iid": 2022,
+        "updated": "2023-05-05T16:35:12.703Z"
+      },
+      {
+        "name": "2023",
+        "description": "2023",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "62a653296b7b4c5617e75bd1",
+        "iid": 2023,
+        "updated": "2025-01-15T12:20:16.783Z"
+      },
+      {
+        "name": "2022",
+        "description": "2022",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "62b9d51301080d8219dd72f3",
+        "iid": 2022,
+        "updated": "2023-06-28T06:25:17.298Z"
+      },
+      {
+        "name": "2022-2023",
+        "description": "2022-2023",
+        "league": {
+          "name": "High School Boys",
+          "abbr": "HSB",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "62c1ba1ea0121476368184e9",
+        "iid": 2022,
+        "updated": "2024-03-26T08:45:41.231Z"
+      },
+      {
+        "name": "2022-2023",
+        "description": "2022-2023",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "62fe65fb2c6c3881c0cf66ba",
+        "iid": 2022,
+        "updated": "2024-03-26T08:45:41.706Z"
+      },
+      {
+        "name": "2022-2023",
+        "description": "2022-2023",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "630530b90a41b857ff3c1500",
+        "iid": 2022,
+        "updated": "2024-03-26T08:45:41.124Z"
+      },
+      {
+        "name": "2022-2023",
+        "description": "2022-2023",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "630530d30a41b857ff3c1501",
+        "iid": 2022,
+        "updated": "2024-03-26T08:45:41.178Z"
+      },
+      {
+        "name": "2022-2023",
+        "description": "2022-2023",
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "63064410f92725bdb7805b9a",
+        "iid": 2022,
+        "updated": "2024-03-26T08:45:41.283Z"
+      },
+      {
+        "name": "2022-2023",
+        "description": "2022-2023",
+        "league": {
+          "name": "Ontario Scholastic Basketball Association - Girls",
+          "abbr": "OSBA",
+          "id": "6175ac57bd5a38f5d93225ad",
+          "iid": 234
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "633b0887e4199b2b0d54e75d",
+        "iid": 2022,
+        "updated": "2024-03-26T08:45:42.249Z"
+      },
+      {
+        "name": "2022-2023",
+        "description": "2022-2023",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "633ddfc7722ccbead8a35a06",
+        "iid": 2022,
+        "updated": "2024-03-26T08:45:41.893Z"
+      },
+      {
+        "name": "2023",
+        "description": "2023",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6455301d17466e1640096b12",
+        "iid": 2023,
+        "updated": "2023-05-05T16:40:12.331Z"
+      },
+      {
+        "name": "2023-2024",
+        "description": "2023-2024",
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "648cbae0113444c3da12f01a",
+        "iid": 2023,
+        "updated": "2025-01-15T12:20:17.069Z"
+      },
+      {
+        "name": "2023-2024",
+        "description": "2023-2024",
+        "league": {
+          "name": "High School Boys",
+          "abbr": "HSB",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "648cbaead8285b68b28f844b",
+        "iid": 2023,
+        "updated": "2025-01-15T12:20:16.909Z"
+      },
+      {
+        "name": "2023",
+        "description": "2023",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6499cb4a9a7b7ba43e84a40c",
+        "iid": 2023,
+        "updated": "2025-01-15T12:20:18.701Z"
+      },
+      {
+        "name": "2023-2024",
+        "description": "2023-2024",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [
+          {
+            "type": 4,
+            "value": "104319",
+            "updated": "2023-10-10T07:57:55.186Z"
+          }
+        ],
+        "id": "64da359a0d288f7495c0bdc9",
+        "iid": 2023,
+        "updated": "2025-01-15T12:20:16.489Z"
+      },
+      {
+        "name": "2023-2024",
+        "description": "2023-2024",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [
+          {
+            "type": 4,
+            "value": "105255",
+            "updated": "2023-10-10T08:07:59.758Z"
+          }
+        ],
+        "id": "64da35a80d288f7495c0bdca",
+        "iid": 2023,
+        "updated": "2025-01-15T12:20:16.572Z"
+      },
+      {
+        "name": "2023-2024",
+        "description": "2023-2024",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "64f9bf357612ded076eaa397",
+        "iid": 2023,
+        "updated": "2024-03-26T08:45:41.917Z"
+      },
+      {
+        "name": "2023-2024",
+        "description": "2023-2024",
+        "league": {
+          "name": "Ontario Scholastic Basketball Association - Girls",
+          "abbr": "OSBA",
+          "id": "6175ac57bd5a38f5d93225ad",
+          "iid": 234
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "650dcc292b469e66686e8384",
+        "iid": 2023,
+        "updated": "2025-01-15T12:20:18.5Z"
+      },
+      {
+        "name": "2023-2024",
+        "description": "2023-2024",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "651b131d1507a2202c01094c",
+        "iid": 2023,
+        "updated": "2025-01-15T12:20:17.82Z"
+      },
+      {
+        "name": "2024",
+        "description": "2024",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "662c715b49658b4622fd0479",
+        "iid": 2024,
+        "updated": "2025-01-15T12:20:18.842Z"
+      },
+      {
+        "name": "2024",
+        "description": "2024",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "665f794d1a40a141ad02ff7f",
+        "iid": 2024,
+        "updated": "2025-06-05T20:59:25.541Z"
+      },
+      {
+        "name": "2024",
+        "description": "2024",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "667f8f82ed104f1a48630463",
+        "iid": 2024,
+        "updated": "2025-07-03T13:44:08.177Z"
+      },
+      {
+        "name": "2024-2025",
+        "description": "2024-2025",
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [
+          {
+            "type": 4,
+            "value": "117435",
+            "updated": "2024-10-21T08:16:07.784Z"
+          }
+        ],
+        "id": "66c6293fac528f0cafb5ea58",
+        "iid": 2024,
+        "updated": "2025-08-19T18:07:49.591Z"
+      },
+      {
+        "name": "2024-2025",
+        "description": "2024-2025",
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [
+          {
+            "type": 4,
+            "value": "117441",
+            "updated": "2024-10-21T08:16:07.784Z"
+          }
+        ],
+        "id": "66c6294bac528f0cafb5ea59",
+        "iid": 2024,
+        "updated": "2025-08-19T18:08:43.834Z"
+      },
+      {
+        "name": "2024-2025",
+        "description": "2024-2025",
+        "league": {
+          "name": "High School Boys",
+          "abbr": "HSB",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "66c629717b2f8fc416ea5b76",
+        "iid": 2024,
+        "updated": "2025-08-19T18:09:24.409Z"
+      },
+      {
+        "name": "2024-2025",
+        "description": "2024-2025",
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "66c6297aac528f0cafb5ea5c",
+        "iid": 2024,
+        "updated": "2025-08-19T18:09:39.247Z"
+      },
+      {
+        "name": "2024-2025",
+        "description": "2024-2025",
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "66d8ceedf52ec712be46aa72",
+        "iid": 2024,
+        "updated": "2025-11-06T15:02:37.053Z"
+      },
+      {
+        "name": "2024-2025",
+        "description": "2024-2025",
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "66ec94cbd172189f95bf08b2",
+        "iid": 2024,
+        "updated": "2025-09-30T14:11:51.758Z"
+      },
+      {
+        "name": "2024-2025",
+        "description": "2024-2025",
+        "league": {
+          "name": "Womens North Pole Association",
+          "abbr": "WNPA",
+          "id": "66ede6923f3f09e5dde828f9",
+          "iid": 303
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "66ede946ea058b4fe286c3d5",
+        "iid": 2024,
+        "updated": "2025-09-15T18:28:25.349Z"
+      },
+      {
+        "name": "2024-2025",
+        "description": "2024-2025",
+        "league": {
+          "name": "Ontario Scholastic Basketball Association - Girls",
+          "abbr": "OSBA",
+          "id": "6175ac57bd5a38f5d93225ad",
+          "iid": 234
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "670fc466d80e41a373209e54",
+        "iid": 2024,
+        "updated": "2025-09-15T18:32:11.253Z"
+      },
+      {
+        "name": "2025",
+        "description": "2025",
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6813f4495f4f589b08802dbe",
+        "iid": 2025,
+        "updated": "2026-04-13T18:48:36.635Z"
+      },
+      {
+        "name": "2025",
+        "description": "2025",
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "684205c6d01c0c93c586dbf2",
+        "iid": 2025,
+        "updated": "2026-06-09T05:06:24.686Z"
+      },
+      {
+        "name": "2025",
+        "description": "2025",
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6864c2e74806fc9e8c05d17f",
+        "iid": 2025,
+        "updated": "2026-06-26T15:15:27.831Z"
+      },
+      {
+        "name": "2025-2026",
+        "description": "2025-2026",
+        "isDefault": true,
+        "league": {
+          "name": "College Men",
+          "abbr": "CM",
+          "id": "54457dce300969b132fcfb37",
+          "iid": 5
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [
+          {
+            "type": 4,
+            "value": "132076",
+            "updated": "2025-10-21T08:16:07.784Z"
+          }
+        ],
+        "id": "68a4bd7588184c4b74497a91",
+        "iid": 2025,
+        "updated": "2025-09-03T21:23:49.342Z"
+      },
+      {
+        "name": "2025-2026",
+        "description": "2025-2026",
+        "isDefault": true,
+        "league": {
+          "name": "College Women",
+          "abbr": "CW",
+          "id": "54457dce300969b132fcfb38",
+          "iid": 6
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [
+          {
+            "type": 4,
+            "value": "133208",
+            "updated": "2024-10-21T08:16:07.784Z"
+          }
+        ],
+        "id": "68a4bdab3c211b288250118f",
+        "iid": 2025,
+        "updated": "2025-08-19T18:08:43.76Z"
+      },
+      {
+        "name": "2025-2026",
+        "description": "2025-2026",
+        "isDefault": true,
+        "league": {
+          "name": "High School Boys",
+          "abbr": "HSB",
+          "id": "54457dce300969b132fcfb40",
+          "iid": 27
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "68a4bdd43c211b2882501190",
+        "iid": 2025,
+        "updated": "2025-08-19T18:09:24.343Z"
+      },
+      {
+        "name": "2025-2026",
+        "description": "2025-2026",
+        "isDefault": true,
+        "league": {
+          "name": "High School Girls",
+          "abbr": "HSG",
+          "id": "565d4542d269224c4b149c63",
+          "iid": 77
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "68a4bde33c211b2882501191",
+        "iid": 2025,
+        "updated": "2025-08-19T18:09:39.186Z"
+      },
+      {
+        "name": "2025-2026",
+        "description": "2025-2026",
+        "isDefault": true,
+        "league": {
+          "name": "Womens North Pole Association",
+          "abbr": "WNPA",
+          "id": "66ede6923f3f09e5dde828f9",
+          "iid": 303
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "68c85ac94d6513fdc1ff3735",
+        "iid": 2025,
+        "updated": "2025-09-15T18:28:25.287Z"
+      },
+      {
+        "name": "2025-2026",
+        "description": "2025-2026",
+        "isDefault": true,
+        "league": {
+          "name": "Ontario Scholastic Basketball Association - Girls",
+          "abbr": "OSBA",
+          "id": "6175ac57bd5a38f5d93225ad",
+          "iid": 234
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "68c85bab3d1a8532f53e4abd",
+        "iid": 2025,
+        "updated": "2025-09-15T18:32:11.193Z"
+      },
+      {
+        "name": "2025-2026",
+        "description": "2025-2026",
+        "isDefault": true,
+        "league": {
+          "name": "NBA",
+          "abbr": "N",
+          "id": "54457dce300969b132fcfb34",
+          "iid": 1
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "68dbe5272504f23a6da2cc00",
+        "iid": 2025,
+        "updated": "2025-09-30T14:11:51.668Z"
+      },
+      {
+        "name": "2025-2026",
+        "description": "2025-2026",
+        "isDefault": true,
+        "league": {
+          "name": "NBA G-League",
+          "abbr": "GL",
+          "id": "54457dce300969b132fcfb36",
+          "iid": 10
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "690cb88c39313a73ef6f0b12",
+        "iid": 2025,
+        "updated": "2025-11-06T15:02:36.98Z"
+      },
+      {
+        "name": "2026",
+        "description": "2026",
+        "isDefault": true,
+        "league": {
+          "name": "WNBA",
+          "abbr": "W",
+          "id": "54457dce300969b132fcfb35",
+          "iid": 2
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "69dd3a83ee0695a6a40e384d",
+        "iid": 2026,
+        "updated": "2026-04-13T18:48:35.749Z"
+      },
+      {
+        "name": "2026",
+        "description": "2026",
+        "isDefault": true,
+        "league": {
+          "name": "FIBA - National Teams - Women",
+          "abbr": "NW",
+          "id": "54457dce300969b132fcfb41",
+          "iid": 61
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6a279f505a56541612057320",
+        "iid": 2026,
+        "updated": "2026-06-09T05:06:24.626Z"
+      },
+      {
+        "name": "2026",
+        "description": "2026",
+        "isDefault": true,
+        "league": {
+          "name": "Summer League",
+          "abbr": "SL",
+          "id": "54457dce300969b132fcfb3a",
+          "iid": 8
+        },
+        "sport": {
+          "id": "570aaedc46c5d11de0f8c0bc",
+          "iid": 1
+        },
+        "externalSourceIds": [],
+        "id": "6a3e978fbf0772f6a867a7c3",
+        "iid": 2026,
+        "updated": "2026-06-26T15:15:27.548Z"
+      }
+    ],
+    "totalRecords": 175,
+    "errors": []
+  }
+}
