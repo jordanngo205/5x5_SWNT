@@ -1,0 +1,48 @@
+{
+  "league_id": "54457dce300969b132fcfb41",
+  "season_id": "6a279f505a56541612057320",
+  "senior_teams": [
+    {
+      "name": "Albania",
+      "id": "5910367435268c61b089432b",
+      "iid": 14185,
+      "gp": 3,
+      "poss": 78
+    },
+    {
+      "name": "Andorra",
+      "id": "62ba95eeb404f9316d786c27",
+      "iid": 32323,
+      "gp": 2,
+      "poss": 41
+    },
+    {
+      "name": "Armenia",
+      "id": "62ba960bb404f9316d786c28",
+      "iid": 32324,
+      "gp": 3,
+      "poss": 51
+    },
+    {
+      "name": "Georgia",
+      "id": "667a7d69501cd6b3065ae8a3",
+      "iid": 49957,
+      "gp": 2,
+      "poss": 77
+    },
+    {
+      "name": "Kosovo",
+      "id": "616d15ae30558ddeb2636aad",
+      "iid": 28463,
+      "gp": 3,
+      "poss": 49
+    },
+    {
+      "name": "Malta",
+      "id": "5b32b7ee9559b26e7e35ee9d",
+      "iid": 16270,
+      "gp": 3,
+      "poss": 70
+    }
+  ]
+}

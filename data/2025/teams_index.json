@@ -1,0 +1,412 @@
+{
+  "league_id": "54457dce300969b132fcfb41",
+  "season_id": "684205c6d01c0c93c586dbf2",
+  "season": "2025",
+  "teams": [
+    {
+      "name": "Angola",
+      "id": "54457df7300969b132fd1048",
+      "gp": 3
+    },
+    {
+      "name": "Argentina",
+      "id": "54457df7300969b132fd1050",
+      "gp": 12
+    },
+    {
+      "name": "Australia",
+      "id": "54457df8300969b132fd109b",
+      "gp": 10
+    },
+    {
+      "name": "Austria",
+      "id": "610ea5859f097803fbf952b1",
+      "gp": 6
+    },
+    {
+      "name": "Azerbaijan",
+      "id": "62ba9638b404f9316d786c29",
+      "gp": 6
+    },
+    {
+      "name": "Belgium",
+      "id": "54457df7300969b132fd105c",
+      "gp": 13
+    },
+    {
+      "name": "Bosnia and Herzegovina",
+      "id": "59e6128644b2b8aa7e89cf1e",
+      "gp": 6
+    },
+    {
+      "name": "Brazil",
+      "id": "54457df8300969b132fd109e",
+      "gp": 12
+    },
+    {
+      "name": "Bulgaria",
+      "id": "54457df7300969b132fd106c",
+      "gp": 6
+    },
+    {
+      "name": "Cameroon",
+      "id": "577c904f576202139844db1c",
+      "gp": 6
+    },
+    {
+      "name": "Canada",
+      "id": "54457df7300969b132fd1049",
+      "gp": 12
+    },
+    {
+      "name": "Chile",
+      "id": "57b26d8057620213988e69a6",
+      "gp": 4
+    },
+    {
+      "name": "China",
+      "id": "54457df8300969b132fd109d",
+      "gp": 10
+    },
+    {
+      "name": "Chinese Taipei",
+      "id": "59e6128644b2b8aa7e89cfda",
+      "gp": 5
+    },
+    {
+      "name": "Colombia",
+      "id": "59e6128644b2b8aa7e89d000",
+      "gp": 12
+    },
+    {
+      "name": "Cook Islands",
+      "id": "6865bc74e253a5a15ea372cb",
+      "gp": 3
+    },
+    {
+      "name": "Costa Rica",
+      "id": "5b7b1872aeda719939407cec",
+      "gp": 4
+    },
+    {
+      "name": "Cote d'Ivoire",
+      "id": "59e6128644b2b8aa7e89d016",
+      "gp": 5
+    },
+    {
+      "name": "Croatia",
+      "id": "54457df7300969b132fd104a",
+      "gp": 6
+    },
+    {
+      "name": "Cyprus",
+      "id": "5b32b7ee9559b26e7e35ee88",
+      "gp": 6
+    },
+    {
+      "name": "Czech Republic",
+      "id": "54457df7300969b132fd104b",
+      "gp": 11
+    },
+    {
+      "name": "Denmark",
+      "id": "5b32b7ee9559b26e7e35ee8e",
+      "gp": 6
+    },
+    {
+      "name": "Dominican Republic",
+      "id": "55ae9fd81e31501db4414eed",
+      "gp": 7
+    },
+    {
+      "name": "Egypt",
+      "id": "57b26d8057620213988e69a1",
+      "gp": 3
+    },
+    {
+      "name": "El Salvador",
+      "id": "605cf88c4d1c202834f53a69",
+      "gp": 9
+    },
+    {
+      "name": "Estonia",
+      "id": "54457df7300969b132fd106e",
+      "gp": 6
+    },
+    {
+      "name": "Finland",
+      "id": "54457df7300969b132fd1044",
+      "gp": 2
+    },
+    {
+      "name": "France",
+      "id": "54457df7300969b132fd104c",
+      "gp": 11
+    },
+    {
+      "name": "Germany",
+      "id": "54457df7300969b132fd105d",
+      "gp": 12
+    },
+    {
+      "name": "Great Britain",
+      "id": "54457df7300969b132fd1043",
+      "gp": 10
+    },
+    {
+      "name": "Greece",
+      "id": "54457df7300969b132fd1047",
+      "gp": 9
+    },
+    {
+      "name": "Guatemala",
+      "id": "59e6128644b2b8aa7e89cfef",
+      "gp": 4
+    },
+    {
+      "name": "Guinea",
+      "id": "57b26d8057620213988e69a3",
+      "gp": 3
+    },
+    {
+      "name": "Honduras",
+      "id": "62e230909615db81eadd2558",
+      "gp": 4
+    },
+    {
+      "name": "Hungary",
+      "id": "5578c51a1e31501db4411815",
+      "gp": 5
+    },
+    {
+      "name": "Iceland",
+      "id": "59e6128644b2b8aa7e89cf22",
+      "gp": 4
+    },
+    {
+      "name": "India",
+      "id": "59e6128644b2b8aa7e89cfe4",
+      "gp": 5
+    },
+    {
+      "name": "Indonesia",
+      "id": "6865b521611a16bc760eb0f1",
+      "gp": 4
+    },
+    {
+      "name": "Iran",
+      "id": "6865bd07611a16bc760eb0f2",
+      "gp": 5
+    },
+    {
+      "name": "Ireland",
+      "id": "5b32b7ee9559b26e7e35ee99",
+      "gp": 6
+    },
+    {
+      "name": "Israel",
+      "id": "54457df7300969b132fd1069",
+      "gp": 6
+    },
+    {
+      "name": "Italy",
+      "id": "54457df7300969b132fd1066",
+      "gp": 11
+    },
+    {
+      "name": "Japan",
+      "id": "54457df7300969b132fd1072",
+      "gp": 11
+    },
+    {
+      "name": "Kazakhstan",
+      "id": "6865bc1e8e31582a96921b30",
+      "gp": 5
+    },
+    {
+      "name": "Korea",
+      "id": "54457df7300969b132fd1051",
+      "gp": 11
+    },
+    {
+      "name": "Latvia",
+      "id": "54457df7300969b132fd1046",
+      "gp": 6
+    },
+    {
+      "name": "Lebanon",
+      "id": "64992049523d6be9571e35a1",
+      "gp": 4
+    },
+    {
+      "name": "Lithuania",
+      "id": "54457df7300969b132fd1061",
+      "gp": 10
+    },
+    {
+      "name": "Luxembourg",
+      "id": "54457df7300969b132fd1045",
+      "gp": 6
+    },
+    {
+      "name": "Mali",
+      "id": "54457df7300969b132fd1052",
+      "gp": 10
+    },
+    {
+      "name": "Mexico",
+      "id": "59e6128644b2b8aa7e89cfe8",
+      "gp": 11
+    },
+    {
+      "name": "Mongolia",
+      "id": "6865bd5f611a16bc760eb0f3",
+      "gp": 6
+    },
+    {
+      "name": "Montenegro",
+      "id": "54457df7300969b132fd105e",
+      "gp": 10
+    },
+    {
+      "name": "Mozambique",
+      "id": "54457df7300969b132fd1053",
+      "gp": 6
+    },
+    {
+      "name": "Netherlands",
+      "id": "54457df7300969b132fd106b",
+      "gp": 6
+    },
+    {
+      "name": "New Zealand",
+      "id": "54457df7300969b132fd1054",
+      "gp": 10
+    },
+    {
+      "name": "Nicaragua",
+      "id": "64b8c197b3466e456a3a0397",
+      "gp": 5
+    },
+    {
+      "name": "Nigeria",
+      "id": "577c90ac576202139844e511",
+      "gp": 10
+    },
+    {
+      "name": "North Macedonia",
+      "id": "54457df7300969b132fd1070",
+      "gp": 6
+    },
+    {
+      "name": "Norway",
+      "id": "5b32b91a9559b26e7e3b24fb",
+      "gp": 6
+    },
+    {
+      "name": "Panama",
+      "id": "62e230d4851ab1c4953a2557",
+      "gp": 4
+    },
+    {
+      "name": "Philippines",
+      "id": "59e6128644b2b8aa7e89cfd5",
+      "gp": 10
+    },
+    {
+      "name": "Poland",
+      "id": "54457df7300969b132fd106d",
+      "gp": 6
+    },
+    {
+      "name": "Portugal",
+      "id": "54457df7300969b132fd106a",
+      "gp": 7
+    },
+    {
+      "name": "Puerto Rico",
+      "id": "54457df7300969b132fd1055",
+      "gp": 12
+    },
+    {
+      "name": "Romania",
+      "id": "5578c5921e31501db4411819",
+      "gp": 6
+    },
+    {
+      "name": "Rwanda",
+      "id": "64c3b8d97f5660770878e922",
+      "gp": 3
+    },
+    {
+      "name": "Senegal",
+      "id": "57a775ea576202139866d5d0",
+      "gp": 11
+    },
+    {
+      "name": "Serbia",
+      "id": "54457df7300969b132fd105f",
+      "gp": 7
+    },
+    {
+      "name": "Slovak Republic",
+      "id": "54457df7300969b132fd1065",
+      "gp": 6
+    },
+    {
+      "name": "Slovenia",
+      "id": "54457df7300969b132fd106f",
+      "gp": 10
+    },
+    {
+      "name": "South Sudan ( W )",
+      "id": "6865b844996b8b9cc70bd951",
+      "gp": 11
+    },
+    {
+      "name": "Spain",
+      "id": "54457df7300969b132fd1064",
+      "gp": 11
+    },
+    {
+      "name": "Sweden",
+      "id": "54457df7300969b132fd1060",
+      "gp": 6
+    },
+    {
+      "name": "Switzerland",
+      "id": "54457df7300969b132fd1071",
+      "gp": 9
+    },
+    {
+      "name": "Tahiti",
+      "id": "6865bbc88e31582a96921b2f",
+      "gp": 3
+    },
+    {
+      "name": "Thailand",
+      "id": "6865bd96611a16bc760eb0f4",
+      "gp": 6
+    },
+    {
+      "name": "Turkey",
+      "id": "54457df7300969b132fd104e",
+      "gp": 12
+    },
+    {
+      "name": "USA",
+      "id": "54457df7300969b132fd104f",
+      "gp": 12
+    },
+    {
+      "name": "Uganda",
+      "id": "57b26d8057620213988e69a5",
+      "gp": 5
+    },
+    {
+      "name": "Ukraine",
+      "id": "54457df7300969b132fd1062",
+      "gp": 6
+    }
+  ]
+}
