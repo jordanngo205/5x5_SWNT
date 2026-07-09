@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """Generate FIBA 5x5 Women 2025 dashboard.html"""
-import json
+import json, base64
 from pathlib import Path
 
 DIR = Path(__file__).parent
+
+_logo_path = DIR / 'Canada_Basketball_logo.svg.webp'
+if _logo_path.exists():
+    LOGO_SRC = f'data:image/webp;base64,{base64.b64encode(_logo_path.read_bytes()).decode()}'
+else:
+    LOGO_SRC = 'Canada_Basketball_logo.svg.webp'
 
 PLAY_TYPES = ['Transition','Spot Up','P&R Ball Handler','Miscellaneous Plays',
     'Cut','Offensive Rebounds','Isolation','Post-Up','Off Screen','P&R Roll Man','Handoffs']
@@ -50,32 +56,36 @@ print(f'  Teams:{len(teams_json)//1024}KB  Players:{len(players_json)//1024}KB')
 CSS = """
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--bg4:#2d333b;
-  --border:#30363d;--border2:#484f58;
-  --text:#e6edf3;--text2:#8b949e;--text3:#6e7681;
-  --blue:#58a6ff;--green:#3fb950;--red:#f85149;
-  --yellow:#d29922;--orange:#db6d28;--purple:#bc8cff;--cyan:#39d353;
+  --bg:#f0f2f5;--bg2:#ffffff;--bg3:#f5f6f8;--bg4:#ebedf0;
+  --border:#e2e5ea;--border2:#c9cdd4;
+  --text:#111827;--text2:#6b7280;--text3:#9ca3af;
+  --blue:#1a56db;--green:#16a34a;--red:#dc2626;
+  --yellow:#b45309;--orange:#c2410c;--purple:#7c3aed;
+  --canada:#d52b1e;--canada-dark:#a81e13;
   --radius:8px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
 html{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px}
 body{min-height:100vh}
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
-.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 24px;
-  display:flex;align-items:center;gap:20px;flex-shrink:0;height:56px}
-.logo{font-weight:800;font-size:16px;color:var(--text);letter-spacing:-.4px;white-space:nowrap}
-.logo span{color:var(--blue)}
-.logo-badge{font-size:10px;font-weight:700;background:var(--blue);color:#000;
-  padding:2px 7px;border-radius:4px;margin-left:8px;letter-spacing:.3px}
+.topbar{background:#111;border-bottom:4px solid var(--canada);padding:0 28px;
+  display:flex;align-items:center;gap:20px;flex-shrink:0;height:100px}
+.logo{display:flex;align-items:center;gap:14px}
+.logo img{height:64px;width:auto}
+.logo-text{display:flex;flex-direction:column}
+.logo-main{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.logo-sub{font-size:13px;color:rgba(255,255,255,.6);margin-top:1px}
+.logo-badge{font-size:11px;font-weight:700;background:var(--canada);color:#fff;
+  padding:3px 9px;border-radius:4px;margin-left:12px;letter-spacing:.3px;align-self:center}
 .topstats{display:flex;gap:24px;margin-left:auto}
 .topstat{text-align:center}
-.topstat-n{font-size:18px;font-weight:800;color:var(--blue);line-height:1}
-.topstat-l{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
+.topstat-n{font-size:18px;font-weight:800;color:var(--canada);line-height:1}
+.topstat-l{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
 .nav{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;flex-shrink:0}
 .nav-btn{padding:12px 20px;font-size:13px;font-weight:500;color:var(--text2);border:none;
   background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;
   transition:all .15s}
 .nav-btn:hover{color:var(--text)}
-.nav-btn.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
+.nav-btn.active{color:var(--canada);border-bottom-color:var(--canada);font-weight:600}
 .content{flex:1;overflow-y:auto;padding:20px}
 .tab{display:none}.tab.active{display:block}
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
@@ -83,7 +93,7 @@ body{min-height:100vh}
 .card-hdr{padding:12px 16px;background:var(--bg3);border-bottom:1px solid var(--border);
   font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;
   display:flex;align-items:center;gap:8px}
-.card-hdr .accent{color:var(--blue)}
+.card-hdr .accent{color:var(--canada)}
 .card-body{padding:16px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
@@ -96,26 +106,26 @@ thead th{background:var(--bg3);color:var(--text2);font-weight:600;padding:8px 10
   text-align:right;white-space:nowrap;position:sticky;top:0;z-index:2;cursor:pointer;
   user-select:none;border-bottom:1px solid var(--border);font-size:11px}
 thead th:first-child,thead th:nth-child(2){text-align:left}
-thead th.sorted{color:var(--blue)}
+thead th.sorted{color:var(--canada)}
 thead th:hover{color:var(--text)}
 tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
-tbody tr:hover{background:rgba(88,166,255,.05)}
+tbody tr:hover{background:rgba(213,43,30,.05)}
 tbody td{padding:7px 10px;text-align:right;color:var(--text)}
 tbody td:first-child,tbody td:nth-child(2){text-align:left}
 .rank-cell{color:var(--text3);font-size:11px;width:32px}
-.hot{color:#3fb950;font-weight:600}.warm{color:#7ce38b}
-.cold{color:#f85149;font-weight:600}.cool{color:#ffa198}
+.hot{color:#16a34a;font-weight:600}.warm{color:#4ade80}
+.cold{color:#dc2626;font-weight:600}.cool{color:#f87171}
 .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 .toggle-group{display:flex;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .toggle-btn{padding:6px 16px;font-size:12px;font-weight:500;border:none;
   background:var(--bg2);color:var(--text2);cursor:pointer;transition:all .15s}
-.toggle-btn.active{background:var(--blue);color:#000;font-weight:700}
+.toggle-btn.active{background:var(--canada);color:#fff;font-weight:700}
 .sel{background:var(--bg2);color:var(--text);border:1px solid var(--border);
   border-radius:var(--radius);padding:6px 10px;font-size:12px;cursor:pointer}
 .stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px}
 .stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
   padding:14px 18px}
-.stat-card-n{font-size:26px;font-weight:800;color:var(--blue);line-height:1.1}
+.stat-card-n{font-size:26px;font-weight:800;color:var(--canada);line-height:1.1}
 .stat-card-l{font-size:11px;color:var(--text2);margin-top:3px;font-weight:500}
 .stat-card-sub{font-size:10px;color:var(--text3);margin-top:3px}
 .hbar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:11px}
@@ -123,27 +133,27 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
   text-overflow:ellipsis;white-space:nowrap;flex-shrink:0}
 .hbar-track{flex:1;height:20px;background:var(--bg3);border-radius:4px;overflow:hidden;position:relative}
 .hbar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;
-  font-size:10px;font-weight:700;color:rgba(0,0,0,.85);white-space:nowrap;min-width:0}
+  font-size:10px;font-weight:700;color:#fff;white-space:nowrap;min-width:0}
 .hbar-val{color:var(--text);width:56px;text-align:right;flex-shrink:0;font-weight:600}
 .subtabs{display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap}
 .subtab-btn{padding:5px 14px;font-size:12px;font-weight:500;color:var(--text2);
   border:1px solid var(--border);border-radius:20px;background:var(--bg2);cursor:pointer;transition:all .15s}
-.subtab-btn.active{background:var(--blue);border-color:var(--blue);color:#000;font-weight:700}
+.subtab-btn.active{background:var(--canada);border-color:var(--canada);color:#fff;font-weight:700}
 .subtab{display:none}.subtab.active{display:block}
 .team-select-row{display:flex;gap:12px;margin-bottom:16px;align-items:center;flex-wrap:wrap}
 .team-select-row select{flex:1;min-width:200px}
 .lcard{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);
   padding:14px;position:relative;overflow:hidden}
-.lcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue)}
+.lcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--canada)}
 .lcard-rank{position:absolute;top:10px;right:12px;font-size:20px;font-weight:800;
   color:rgba(255,255,255,.08);line-height:1}
 .lcard-rank.top3{color:rgba(210,153,34,.25)}
 .lcard-name{font-size:13px;font-weight:700;color:var(--text);line-height:1.2;padding-right:32px}
 .lcard-team{font-size:10px;color:var(--text2);margin-top:2px}
-.lcard-stat{font-size:26px;font-weight:800;color:var(--blue);margin-top:8px;line-height:1}
+.lcard-stat{font-size:26px;font-weight:800;color:var(--canada);margin-top:8px;line-height:1}
 .lcard-sub{font-size:10px;color:var(--text3);margin-top:5px}
 .lcard-bar{height:3px;border-radius:2px;background:var(--border);margin-top:10px}
-.lcard-bar-fill{height:100%;border-radius:2px;background:var(--blue)}
+.lcard-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#f9a8b8,#d52b1e)}
 .leader-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .pt-tbl{width:100%;border-collapse:collapse;font-size:11.5px}
 .pt-tbl th{background:var(--bg3);color:var(--text2);font-weight:600;padding:7px 8px;
@@ -151,7 +161,7 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 .pt-tbl th:first-child{text-align:left}
 .pt-tbl td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--border)}
 .pt-tbl td:first-child{text-align:left;color:var(--text2)}
-.poss-cell{background:rgba(88,166,255,.12);color:var(--blue);font-weight:700;border-radius:3px;padding:2px 6px}
+.poss-cell{background:rgba(213,43,30,.1);color:var(--canada);font-weight:700;border-radius:3px;padding:2px 6px}
 /* Percentile rows */
 .pct-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(48,54,61,.5)}
 .pct-row:last-child{border-bottom:none}
@@ -165,7 +175,7 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 /* Tier badges */
 .tier-S{background:#ffd700;color:#000}
 .tier-A{background:#3fb950;color:#000}
-.tier-B{background:#58a6ff;color:#000}
+.tier-B{background:#d52b1e;color:#fff}
 .tier-C{background:#d29922;color:#000}
 .tier-D{background:#f85149;color:#fff}
 /* Radar chart */
@@ -190,12 +200,12 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 .extreme-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
 .extreme-card-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text3);margin-bottom:6px}
 .extreme-card-name{font-size:13px;font-weight:700;color:var(--text)}
-.extreme-card-val{font-size:20px;font-weight:800;color:var(--blue);margin-top:4px}
+.extreme-card-val{font-size:20px;font-weight:800;color:var(--canada);margin-top:4px}
 .extreme-card-sub{font-size:10px;color:var(--text3);margin-top:3px}
 /* Profile stats */
 .pi-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px}
 .pi-stat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px}
-.pi-stat-n{font-size:22px;font-weight:800;color:var(--blue);line-height:1}
+.pi-stat-n{font-size:22px;font-weight:800;color:var(--canada);line-height:1}
 .pi-stat-l{font-size:10px;color:var(--text2);margin-top:3px;font-weight:500}
 .pi-stat-rank{font-size:9px;color:var(--text3);margin-top:2px}
 /* Play type vs league avg */
@@ -213,7 +223,7 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%238b949e' stroke-width='2.5'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:8px center;transition:border-color .15s}
 .search-input::placeholder{color:var(--text3)}
-.search-input:focus{outline:none;border-color:var(--blue)}
+.search-input:focus{outline:none;border-color:var(--canada)}
 .search-dropdown{position:absolute;top:calc(100% + 4px);right:0;width:310px;
   background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
   z-index:300;max-height:380px;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.55);display:none}
@@ -241,7 +251,7 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 .pt-chip{display:inline-block;padding:4px 12px;font-size:12px;font-weight:600;
   border-radius:20px;cursor:pointer;border:1px solid var(--border);background:var(--bg3);
   color:var(--text2);transition:all .15s;white-space:nowrap}
-.pt-chip.active{background:var(--blue);border-color:var(--blue);color:#000;font-weight:700}
+.pt-chip.active{background:var(--canada);border-color:var(--canada);color:#000;font-weight:700}
 .pt-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
 .pulse-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
 .pulse-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;text-align:center}
@@ -257,7 +267,14 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 HTML_BODY = """
 <div class="app">
 <div class="topbar">
-  <div class="logo">FIBA <span>5x5</span> Women&rsquo;s <span class="logo-badge">2025</span></div>
+  <div class="logo">
+    <img src="{LOGO_SRC}" alt="Canada Basketball">
+    <div class="logo-text">
+      <span class="logo-main">Canada Basketball</span>
+      <span class="logo-sub">5×5 Women's Senior Analytics</span>
+    </div>
+    <span class="logo-badge">2025</span>
+  </div>
   <div class="topstats" id="topstats"></div>
   <div class="search-wrap">
     <input id="search-input" class="search-input" type="text" placeholder="Search team or player..."
@@ -488,7 +505,7 @@ function tierStr(pct){
 }
 function tierCol(pct){
   if(pct>=90) return '#ffd700'; if(pct>=75) return '#3fb950';
-  if(pct>=50) return '#58a6ff'; if(pct>=25) return '#d29922'; return '#f85149';
+  if(pct>=50) return '#d52b1e'; if(pct>=25) return '#d29922'; return '#f85149';
 }
 function tierTxtCol(pct){ return pct>=25?'#000':'#fff'; }
 
@@ -583,7 +600,7 @@ function tierBadge(pct) {
 function radarSvg(vals, labels, color) {
   // vals: array of 0-100 percentile values
   var n=vals.length, sz=220, cx=sz/2, cy=sz/2, r=75;
-  color = color||'#58a6ff';
+  color = color||'linear-gradient(90deg,#f9a8b8,#d52b1e)';
   var svg='<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 '+sz+' '+sz+'" style="overflow:visible">';
   // grid rings
   [0.25,0.5,0.75,1.0].forEach(function(ring){
@@ -758,7 +775,7 @@ function renderOverview(){
   var offHtml='';
   for(var i=0;i<top10.length;i++){
     var t=top10[i]; var v=ppp(t.off); var rank=TR[t.id]['off_ppp'];
-    offHtml+=hbar(t.name, v/maxOff*100, f3(v), '#58a6ff', ' <span style="font-size:9px;color:var(--text3)">#'+rank+'</span>');
+    offHtml+=hbar(t.name, v/maxOff*100, f3(v), 'linear-gradient(90deg,#f9a8b8,#d52b1e)', ' <span style="font-size:9px;color:var(--text3)">#'+rank+'</span>');
   }
   document.getElementById('ov-top-off').innerHTML=offHtml;
 
@@ -796,7 +813,7 @@ function renderOverview(){
   var pppHtml='';
   for(var j=0;j<ptPPPSorted.length;j++){
     var x=ptPPPSorted[j];
-    var col=x.ppp>leaguePPP?'#58a6ff':'#8b949e';
+    var col=x.ppp>leaguePPP?'#d52b1e':'#8b949e';
     pppHtml+=hbar(x.pt, x.ppp/maxPTPPP*100, f3(x.ppp), col);
   }
   document.getElementById('ov-pt-ppp').innerHTML=pppHtml;
@@ -854,7 +871,7 @@ function xcard(title,name,val,sub){
     '<div class="extreme-card-sub">'+sub+'</div></div>';
 }
 function lcard(name,team,stat,sub,barPct,badge,prefix,rank,color){
-  prefix=prefix||''; color=color||'var(--blue)'; rank=rank||0;
+  prefix=prefix||''; color=color||'var(--canada)'; rank=rank||0;
   return '<div class="lcard">'+
     '<div class="lcard-rank'+(rank<3?' top3':'')+'">'+(rank+1)+'</div>'+
     '<div class="lcard-name">'+esc(name)+'</div>'+
@@ -1004,7 +1021,7 @@ function renderMatchup(){
   ];
 
   var compHtml='<div class="matchup-bar-row" style="margin-bottom:8px">'+
-    '<div style="font-size:11px;color:var(--blue);font-weight:700;text-align:right">'+esc(ta.name)+'</div>'+
+    '<div style="font-size:11px;color:var(--canada);font-weight:700;text-align:right">'+esc(ta.name)+'</div>'+
     '<div></div><div style="font-size:10px;color:var(--text3);text-align:center">STAT</div>'+
     '<div></div><div style="font-size:11px;color:var(--orange);font-weight:700;text-align:left">'+esc(tb.name)+'</div></div>';
 
@@ -1016,8 +1033,8 @@ function renderMatchup(){
     var aRk=TR[ta.id]&&TR[ta.id][rkey], bRk=TR[tb.id]&&TR[tb.id][rkey];
     var aRkS=aRk?'<span style="font-size:9px;color:var(--text3)">#'+aRk+'</span>':'';
     var bRkS=bRk?'<span style="font-size:9px;color:var(--text3)">#'+bRk+'</span>':'';
-    var aBg=aWins?'var(--blue)':'var(--border2)', bBg=!aWins?'var(--orange)':'var(--border2)';
-    var aCol=aWins?'var(--blue)':'var(--text)', bCol=!aWins?'var(--orange)':'var(--text)';
+    var aBg=aWins?'var(--canada)':'var(--border2)', bBg=!aWins?'var(--orange)':'var(--border2)';
+    var aCol=aWins?'var(--canada)':'var(--text)', bCol=!aWins?'var(--orange)':'var(--text)';
     compHtml+='<div class="matchup-bar-row">'+
       '<div style="text-align:right;padding:3px 8px;font-size:12px;font-weight:700;color:'+aCol+'">'+fmt(av)+' '+aRkS+'</div>'+
       '<div style="height:16px;background:var(--bg3);border-radius:3px 0 0 3px;overflow:hidden;display:flex;justify-content:flex-end">'+
@@ -1055,12 +1072,12 @@ function renderMatchup(){
       return rPct(r, N);
     });
   }
-  var radarA=radarSvg(getRadarVals(ta),radarLabels,'#58a6ff');
+  var radarA=radarSvg(getRadarVals(ta),radarLabels,'#d52b1e');
   var radarB=radarSvg(getRadarVals(tb),radarLabels,'#db6d28');
 
   document.getElementById('mu-content').innerHTML=
     '<div class="grid2" style="margin-bottom:4px">'+
-      '<div style="font-size:22px;font-weight:800;text-align:center;color:var(--blue)">'+esc(ta.name)+'</div>'+
+      '<div style="font-size:22px;font-weight:800;text-align:center;color:var(--canada)">'+esc(ta.name)+'</div>'+
       '<div style="font-size:22px;font-weight:800;text-align:center;color:var(--orange)">'+esc(tb.name)+'</div>'+
     '</div>'+
     '<div class="grid2" style="text-align:center;color:var(--text2);font-size:11px;margin-bottom:16px">'+
@@ -1080,10 +1097,10 @@ function renderMatchup(){
     '<div class="card"><div class="card-hdr">Play Type Offense Comparison</div>'+
       '<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
         '<th style="text-align:left">Play Type</th>'+
-        '<th style="color:var(--blue)">POSS</th><th style="color:var(--blue)">PPP</th>'+
+        '<th style="color:var(--canada)">POSS</th><th style="color:var(--canada)">PPP</th>'+
         '<th style="color:var(--orange)">PPP</th><th style="color:var(--orange)">POSS</th>'+
       '</tr><tr><th style="text-align:left"></th>'+
-        '<th colspan="2" style="color:var(--blue);text-align:center;font-size:9px">'+esc(ta.name)+'</th>'+
+        '<th colspan="2" style="color:var(--canada);text-align:center;font-size:9px">'+esc(ta.name)+'</th>'+
         '<th colspan="2" style="color:var(--orange);text-align:center;font-size:9px">'+esc(tb.name)+'</th>'+
       '</tr></thead><tbody>'+ptHtml+'</tbody></table></div></div>';
 }
@@ -1124,7 +1141,7 @@ function renderTeamIntel(){
   var radarKeys2=['off_ppp','off_efg','off_fg3','off_to','def_ppp','pace','off_ftr','def_to'];
   var radarLabels2=['Off PPP','EFG%','3FG%','Ball Sec.','Defense','Pace','FT Draw','Force TO'];
   var radarVals=radarKeys2.map(function(k){var rk=r[k];return rk?rPct(rk,N):50;});
-  var radar=radarSvg(radarVals,radarLabels2,'#58a6ff');
+  var radar=radarSvg(radarVals,radarLabels2,'#d52b1e');
 
   // Auto analysis
   var an=autoAnalysis(t);
@@ -1274,12 +1291,12 @@ function renderPlayerIntel(){
   var shotProfile='<div style="margin-bottom:12px">'+
     '<div style="font-size:10px;color:var(--text2);margin-bottom:6px;font-weight:600">SHOT SELECTION</div>'+
     '<div style="display:flex;height:12px;border-radius:6px;overflow:hidden;margin-bottom:4px">'+
-      '<div style="width:'+shots2Pct.toFixed(1)+'%;background:#58a6ff"></div>'+
+      '<div style="width:'+shots2Pct.toFixed(1)+'%;background:#d52b1e"></div>'+
       '<div style="width:'+shots3Pct.toFixed(1)+'%;background:#bc8cff"></div>'+
       '<div style="flex:1;background:var(--bg3)"></div>'+
     '</div>'+
     '<div style="display:flex;gap:16px;font-size:10px;color:var(--text2)">'+
-      '<span><span style="color:#58a6ff">&#9632;</span> 2PT: '+fP(shots2Pct)+' ('+o.a2+' att, '+fP(fg2(o))+')</span>'+
+      '<span><span style="color:#d52b1e">&#9632;</span> 2PT: '+fP(shots2Pct)+' ('+o.a2+' att, '+fP(fg2(o))+')</span>'+
       '<span><span style="color:#bc8cff">&#9632;</span> 3PT: '+fP(shots3Pct)+' ('+o.a3+' att, '+fP(fg3(o))+')</span>'+
     '</div></div>';
 
@@ -1367,7 +1384,7 @@ function renderPlayerIntel(){
     var pv4=ppp(s);
     ptBars+=hbar(pt, s.p/maxPT*100,
       s.p+' ('+fP(s.p/totalP*100)+')  '+f3(pv4)+' PPP',
-      pv4>=1.0?'#3fb950':pv4>=0.85?'#58a6ff':pv4>=0.70?'#d29922':'#f85149');
+      pv4>=1.0?'#3fb950':pv4>=0.85?'#d52b1e':pv4>=0.70?'#d29922':'#f85149');
   }
 
   // Defense
@@ -1508,12 +1525,12 @@ function renderScatterPlot(){
     svg+='<text x="'+(pL-5)+'" y="'+gy.toFixed(1)+'" text-anchor="end" dominant-baseline="middle" fill="#6e7681" font-size="8">'+dv.toFixed(3)+'</text>';
   }
   // avg lines
-  svg+='<line x1="'+ax.toFixed(1)+'" y1="'+pT+'" x2="'+ax.toFixed(1)+'" y2="'+(pT+iH)+'" stroke="#58a6ff" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>';
-  svg+='<line x1="'+pL+'" y1="'+ay.toFixed(1)+'" x2="'+(pL+iW)+'" y2="'+ay.toFixed(1)+'" stroke="#58a6ff" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>';
+  svg+='<line x1="'+ax.toFixed(1)+'" y1="'+pT+'" x2="'+ax.toFixed(1)+'" y2="'+(pT+iH)+'" stroke="#d52b1e" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>';
+  svg+='<line x1="'+pL+'" y1="'+ay.toFixed(1)+'" x2="'+(pL+iW)+'" y2="'+ay.toFixed(1)+'" stroke="#d52b1e" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>';
   // dots
   validT.forEach(function(t){
     var x=xS(ppp(t.off)), y=yS(ppp(t.def)), n=net(t);
-    var col=n>=0.10?'#3fb950':n>=-0.05?'#58a6ff':n>=-0.15?'#d29922':'#f85149';
+    var col=n>=0.10?'#3fb950':n>=-0.05?'#d52b1e':n>=-0.15?'#d29922':'#f85149';
     var nr=TR[t.id]?TR[t.id].net:99;
     svg+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="5.5" fill="'+col+'" fill-opacity="0.85" stroke="#0d1117" stroke-width="1" style="cursor:pointer" onclick="goTeam(\''+t.id+'\')"><title>'+esc(t.name)+'\nOff PPP: '+f3(ppp(t.off))+'\nDef PPP: '+f3(ppp(t.def))+'\nNet: '+(n>=0?'+':'')+f3(n)+'</title></circle>';
     if(nr<=10||nr>=72){
@@ -1526,7 +1543,7 @@ function renderScatterPlot(){
   svg+='<text transform="rotate(-90)" x="'+(-(pT+iH/2))+'" y="16" text-anchor="middle" fill="#8b949e" font-size="10" font-weight="600">&#8592; Defensive PPP allowed (lower = better)</text>';
   svg+='</svg>';
   var legend='<div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:11px;color:var(--text2)">';
-  [{c:'#3fb950',l:'Net &ge;+0.10 (Elite)'},{c:'#58a6ff',l:'Net -0.05 to +0.10'},{c:'#d29922',l:'Net -0.15 to -0.05'},{c:'#f85149',l:'Net &lt;-0.15'}].forEach(function(it){
+  [{c:'#3fb950',l:'Net &ge;+0.10 (Elite)'},{c:'#d52b1e',l:'Net -0.05 to +0.10'},{c:'#d29922',l:'Net -0.15 to -0.05'},{c:'#f85149',l:'Net &lt;-0.15'}].forEach(function(it){
     legend+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+it.c+';margin-right:5px;vertical-align:middle"></span>'+it.l+'</span>';
   });
   legend+='<span style="color:var(--text3)">Blue dashed lines = league averages</span></div>';
@@ -1537,7 +1554,7 @@ function renderScatterPlot(){
 function renderTierDist(){
   var el=document.getElementById('ov-tier-dist'); if(!el) return;
   var tiers={S:0,A:0,B:0,C:0,D:0};
-  var cols={S:'#ffd700',A:'#3fb950',B:'#58a6ff',C:'#d29922',D:'#f85149'};
+  var cols={S:'#ffd700',A:'#3fb950',B:'#d52b1e',C:'#d29922',D:'#f85149'};
   var labels={S:'Elite (top 10%)',A:'Strong (top 25%)',B:'Average (50%)',C:'Below Avg',D:'Struggling'};
   var N=TEAMS.length;
   TEAMS.forEach(function(t){
@@ -1643,7 +1660,7 @@ function renderPlayTypeExplorer(pt){
     var diffCol=diff>=0?'#3fb950':'#f85149';
     pHtml+='<tr onclick="goPlayer(\''+p.tid+'\',\''+p.id+'\')" style="cursor:pointer">'+
       '<td class="rank-cell">'+(i+1)+'</td>'+
-      '<td style="font-weight:600;color:var(--blue)">'+esc(p.name)+'</td>'+
+      '<td style="font-weight:600;color:var(--canada)">'+esc(p.name)+'</td>'+
       '<td style="color:var(--text2)">'+esc(p.team)+'</td>'+
       '<td>'+d.p+'</td>'+
       '<td class="'+cPPP(v)+'">'+f3(v)+'</td>'+
@@ -1696,7 +1713,7 @@ function renderPlayerCompare(){
             rPct(pr.fg2,NP)||0, rPct(pr.fg3,NP)||0, rPct(pr.to,NP)||0,
             rPct(pr.ftr,NP)||0, rPct(pr.vol,NP)||0];
   }
-  var svgA=radarSvg(rpv(prA),rLabels,'#58a6ff');
+  var svgA=radarSvg(rpv(prA),rLabels,'#d52b1e');
   var svgB=radarSvg(rpv(prB),rLabels,'#db6d28');
 
   // Comparison rows
@@ -1713,7 +1730,7 @@ function renderPlayerCompare(){
 
   var statsHtml=
     '<div style="display:grid;grid-template-columns:1fr auto 1fr;padding:8px 0;border-bottom:2px solid var(--border)">'+
-      '<div style="text-align:right;padding-right:12px;font-size:14px;font-weight:800;color:#58a6ff">'+esc(pA.name)+'<div style="font-size:10px;font-weight:400;color:var(--text2)">'+esc(pA.team)+' &middot; '+pA.gp+' GP &middot; '+oA.p+' poss</div></div>'+
+      '<div style="text-align:right;padding-right:12px;font-size:14px;font-weight:800;color:#d52b1e">'+esc(pA.name)+'<div style="font-size:10px;font-weight:400;color:var(--text2)">'+esc(pA.team)+' &middot; '+pA.gp+' GP &middot; '+oA.p+' poss</div></div>'+
       '<div style="text-align:center;font-size:10px;font-weight:700;color:var(--text3);padding:0 8px;align-self:center">STAT</div>'+
       '<div style="text-align:left;padding-left:12px;font-size:14px;font-weight:800;color:#db6d28">'+esc(pB.name)+'<div style="font-size:10px;font-weight:400;color:var(--text2)">'+esc(pB.team)+' &middot; '+pB.gp+' GP &middot; '+oB.p+' poss</div></div>'+
     '</div>'+
@@ -1735,7 +1752,7 @@ function renderPlayerCompare(){
     var winA=dA.p&&dB.p&&ppp(dA)>=ppp(dB);
     var winB=dA.p&&dB.p&&ppp(dB)>ppp(dA);
     ptRows+='<tr>'+
-      '<td style="text-align:right;color:#58a6ff;font-weight:'+(winA?'700':'400')+'">'+vA+' <span style="color:var(--text3);font-size:9px">'+(dA.p?'('+dA.p+'p)':'')+'</span></td>'+
+      '<td style="text-align:right;color:#d52b1e;font-weight:'+(winA?'700':'400')+'">'+vA+' <span style="color:var(--text3);font-size:9px">'+(dA.p?'('+dA.p+'p)':'')+'</span></td>'+
       '<td style="text-align:center;color:var(--text2);font-size:11px;padding:6px 8px">'+esc(pt)+'</td>'+
       '<td style="color:#db6d28;font-weight:'+(winB?'700':'400')+'"><span style="color:var(--text3);font-size:9px">'+(dB.p?'('+dB.p+'p)':'')+'</span> '+vB+'</td>'+
     '</tr>';
@@ -1743,14 +1760,14 @@ function renderPlayerCompare(){
 
   el.innerHTML=
     '<div class="grid2" style="margin-bottom:16px">'+
-      '<div style="text-align:center"><div style="font-size:12px;font-weight:700;color:#58a6ff;margin-bottom:10px">'+esc(pA.name)+'</div><div class="radar-wrap">'+svgA+'</div></div>'+
+      '<div style="text-align:center"><div style="font-size:12px;font-weight:700;color:#d52b1e;margin-bottom:10px">'+esc(pA.name)+'</div><div class="radar-wrap">'+svgA+'</div></div>'+
       '<div style="text-align:center"><div style="font-size:12px;font-weight:700;color:#db6d28;margin-bottom:10px">'+esc(pB.name)+'</div><div class="radar-wrap">'+svgB+'</div></div>'+
     '</div>'+
     '<div class="card" style="margin-bottom:16px"><div class="card-hdr">Head-to-Head Stats (global rank vs '+NP+' qualified players)</div>'+
       '<div class="card-body">'+statsHtml+'</div></div>'+
     '<div class="card"><div class="card-hdr">Play Type PPP Comparison</div><div class="card-body">'+
       (ptRows?'<div class="tbl-wrap"><table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr>'+
-        '<th style="text-align:right;background:var(--bg3);padding:8px 10px;color:#58a6ff">'+esc(pA.name)+'</th>'+
+        '<th style="text-align:right;background:var(--bg3);padding:8px 10px;color:#d52b1e">'+esc(pA.name)+'</th>'+
         '<th style="text-align:center;background:var(--bg3);padding:8px;color:var(--text3);font-size:10px">PLAY TYPE (PPP)</th>'+
         '<th style="background:var(--bg3);padding:8px 10px;color:#db6d28">'+esc(pB.name)+'</th>'+
       '</tr></thead><tbody>'+ptRows+'</tbody></table></div>':'<div class="empty">No play type data</div>')+
@@ -1783,9 +1800,10 @@ init();
 DATA_BLOCK = ("const TEAMS="+teams_json+";\nconst PLAYERS="+players_json+";\nconst PLAY_TYPES="+pt_json+";\n")
 HTML = ('<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
     '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
-    '<title>FIBA 5x5 Women 2025 &mdash; Analytics</title>\n'
+    '<title>Canada Basketball — 5×5 Women\'s Analytics</title>\n'
     '<style>'+CSS+'</style>\n</head>\n<body>\n'+HTML_BODY+
-    '<script>\n'+DATA_BLOCK+JS+'</script>\n</body>\n</html>\n')
+    '<script>\n'+DATA_BLOCK+JS+'</script>\n</body>\n</html>\n'
+).replace('{LOGO_SRC}', LOGO_SRC)
 
 out = DIR/'docs'/'index.html'
 out.parent.mkdir(exist_ok=True)
