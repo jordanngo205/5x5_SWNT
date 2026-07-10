@@ -40,13 +40,16 @@ for t in json.loads((DIR/'data/2025/teams_all.json').read_text()):
 TEAMS.sort(key=lambda x:x['name'])
 
 print('Loading player data...')
+_def_pt_file = DIR/'data/2025/player_def_pt.json'
+_player_def_pt = json.loads(_def_pt_file.read_text()) if _def_pt_file.exists() else {}
 PLAYERS=[]
 for p in json.loads((DIR/'data/2025/players_all.json').read_text()):
-    PLAYERS.append({'id':p['player']['id'],'name':p['player']['name'],
+    pid=p['player']['id']
+    PLAYERS.append({'id':pid,'name':p['player']['name'],
         'tid':p['team']['id'],'team':p['team']['name'],'gp':p['gp'],
         'off':cpr(p['overall']['offense']),'def':cpr(p['overall']['defense']),
         'pt_off':{k:cpt(v) for k,v in p['play_types']['offense'].items()},
-        'pt_def':{k:cpt(v) for k,v in p['play_types'].get('defense',{}).items()}})
+        'pt_def':{k:cpt(v) for k,v in _player_def_pt.get(pid,{}).items()}})
 PLAYERS.sort(key=lambda x:x['name'])
 
 teams_json=json.dumps(TEAMS,separators=(',',':'))

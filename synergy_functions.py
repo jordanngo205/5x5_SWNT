@@ -142,8 +142,18 @@ def get_access_token(session, code_verifier, code_challenge, username, password)
             verify_page = session.get(final_url, headers=nav_headers)
             verify_csrf = _extract_csrf_token(verify_page.text)
 
-        print("Synergy requires email verification. Check your inbox (j***@uwaterloo.ca).")
-        code = input("Enter 2FA code: ").strip()
+        print("Synergy requires email verification. Check your inbox for the code.")
+        _code_file = os.path.join(os.path.dirname(__file__) or '.', '.2fa_code')
+        try:
+            code = input("Enter 2FA code: ").strip()
+        except EOFError:
+            import time as _time
+            print(f"Waiting for 2FA code in {_code_file} ...")
+            while not os.path.exists(_code_file):
+                _time.sleep(1)
+            with open(_code_file) as _f:
+                code = _f.read().strip()
+            os.remove(_code_file)
 
         verify_response = session.post(
             final_url,
