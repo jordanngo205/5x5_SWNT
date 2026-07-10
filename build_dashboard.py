@@ -45,7 +45,8 @@ for p in json.loads((DIR/'data/2025/players_all.json').read_text()):
     PLAYERS.append({'id':p['player']['id'],'name':p['player']['name'],
         'tid':p['team']['id'],'team':p['team']['name'],'gp':p['gp'],
         'off':cpr(p['overall']['offense']),'def':cpr(p['overall']['defense']),
-        'pt_off':{k:cpt(v) for k,v in p['play_types']['offense'].items()}})
+        'pt_off':{k:cpt(v) for k,v in p['play_types']['offense'].items()},
+        'pt_def':{k:cpt(v) for k,v in p['play_types'].get('defense',{}).items()}})
 PLAYERS.sort(key=lambda x:x['name'])
 
 teams_json=json.dumps(TEAMS,separators=(',',':'))
@@ -1451,18 +1452,44 @@ function renderPlayerIntel(){
       pv4>=1.0?'#3fb950':pv4>=0.85?'#d52b1e':pv4>=0.70?'#d29922':'#f85149');
   }
 
-  // Defense
+  // Defense overall + play type breakdown
   var defHtml='';
   if(d&&d.p>0){
     var dPPP=ppp(d);
-    defHtml='<div class="card"><div class="card-hdr">Defense Stats</div><div class="card-body">'+
+    var dTotalP=d.p||1;
+    // Play type defense table
+    var ptDefHtml='';
+    for(var j=0;j<PLAY_TYPES.length;j++){
+      var pt=PLAY_TYPES[j]; var s=p.pt_def[pt]||{};
+      if(!s.p){
+        ptDefHtml+='<tr><td style="color:var(--text3)">'+pt+'</td><td colspan="5" style="color:var(--text3)">&mdash;</td></tr>';
+      } else {
+        var dv=ppp(s); var pRk=s.pr; var ptPct=pRk?rPct(pRk,NP):null;
+        ptDefHtml+='<tr>'+
+          '<td>'+pt+'</td>'+
+          '<td class="poss-cell">'+s.p+'</td>'+
+          '<td>'+fP(s.p/dTotalP*100)+'</td>'+
+          '<td class="'+cPPP(dv)+'">'+f3(dv)+'</td>'+
+          '<td style="color:'+pppRatingColor(dv)+'">'+pppRating(dv)+'</td>'+
+          (pRk?'<td><span class="tier-chip tier-'+tierStr(ptPct||0)+'" style="background:'+tierCol(ptPct||0)+';color:'+tierTxtCol(ptPct||0)+';font-size:9px;padding:1px 5px;border-radius:3px">#'+pRk+'</span></td>':'<td>&mdash;</td>')+
+          '</tr>';
+      }
+    }
+    defHtml='<div class="card"><div class="card-hdr">Defense</div><div class="card-body">'+
       '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px">'+
         '<div class="pi-stat"><div class="pi-stat-n">'+d.p+'</div><div class="pi-stat-l">Poss Defended</div></div>'+
         '<div class="pi-stat"><div class="pi-stat-n" style="color:'+pppRatingColor(1.8-dPPP)+'">'+f3(dPPP)+'</div><div class="pi-stat-l">PPP Allowed</div></div>'+
         '<div class="pi-stat"><div class="pi-stat-n">'+fP(fg(d))+'</div><div class="pi-stat-l">FG% Allowed</div></div>'+
         '<div class="pi-stat"><div class="pi-stat-n">'+fP(efg(d))+'</div><div class="pi-stat-l">EFG% Allowed</div></div>'+
         '<div class="pi-stat"><div class="pi-stat-n">'+fP(topR(d))+'</div><div class="pi-stat-l">TO% Forced</div></div>'+
-      '</div></div></div>';
+      '</div>'+
+      (ptDefHtml.replace(/&mdash;<\/td><\/tr>/g,'').trim()?
+        '<div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">Play Type Breakdown (PPP Allowed)</div>'+
+        '<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
+          '<th style="text-align:left">PLAY TYPE</th><th>POSS</th><th>%TIME</th>'+
+          '<th>PPP ALLOWED</th><th>RATING</th><th>PPP RANK</th>'+
+        '</tr></thead><tbody>'+ptDefHtml+'</tbody></table></div>':'')+
+    '</div></div>';
   }
 
   // Build team context (how player compares to teammates)
@@ -1846,6 +1873,44 @@ function renderPlayerCompare(){
       '</div>';
   });
 
+  // Play type defense butterfly
+  var allDefPPPs=[];
+  PLAY_TYPES.forEach(function(pt){
+    var dA=pA.pt_def[pt]||{},dB=pB.pt_def[pt]||{};
+    if(dA.p) allDefPPPs.push(ppp(dA));
+    if(dB.p) allDefPPPs.push(ppp(dB));
+  });
+  var maxDefPPP=allDefPPPs.length?Math.max.apply(null,allDefPPPs)*1.05:2;
+  var ptDefRows='';
+  PLAY_TYPES.forEach(function(pt){
+    var dA=pA.pt_def[pt]||{},dB=pB.pt_def[pt]||{};
+    if(!dA.p&&!dB.p) return;
+    var vA=dA.p?ppp(dA):null, vB=dB.p?ppp(dB):null;
+    // Lower PPP allowed is better for defense
+    var winA=vA!==null&&vB!==null&&vA<=vB;
+    var winB=vA!==null&&vB!==null&&vB<vA;
+    var wA=vA?Math.min(vA/maxDefPPP*100,100):0, wB=vB?Math.min(vB/maxDefPPP*100,100):0;
+    var colA_d=winA?colA_team:'var(--border2)', colB_d=winB?colB_team:'var(--border2)';
+    ptDefRows+=
+      '<div style="display:grid;grid-template-columns:1fr 130px 1fr;align-items:center;gap:4px;padding:5px 0;border-bottom:1px solid var(--border)">'+
+        '<div style="display:flex;align-items:center;justify-content:flex-end;gap:6px">'+
+          '<span style="font-size:11px;font-weight:'+(winA?700:400)+';color:'+(winA?colA_team:'var(--text2)')+'">'+
+            (vA!==null?f3(vA)+' <span style="color:var(--text3);font-size:9px">('+dA.p+'p)</span>':'<span style="color:var(--text3)">—</span>')+
+          '</span>'+
+          '<div style="width:80px;height:14px;background:var(--bg3);border-radius:3px 0 0 3px;overflow:hidden;display:flex;justify-content:flex-end">'+
+            '<div style="width:'+wA.toFixed(1)+'%;height:100%;background:'+colA_d+'"></div></div>'+
+        '</div>'+
+        '<div style="text-align:center;font-size:10px;color:var(--text2);font-weight:600;padding:0 6px">'+esc(pt)+'</div>'+
+        '<div style="display:flex;align-items:center;gap:6px">'+
+          '<div style="width:80px;height:14px;background:var(--bg3);border-radius:0 3px 3px 0;overflow:hidden">'+
+            '<div style="width:'+wB.toFixed(1)+'%;height:100%;background:'+colB_d+'"></div></div>'+
+          '<span style="font-size:11px;font-weight:'+(winB?700:400)+';color:'+(winB?colB_team:'var(--text2)')+'">'+
+            (vB!==null?f3(vB)+' <span style="color:var(--text3);font-size:9px">('+dB.p+'p)</span>':'<span style="color:var(--text3)">—</span>')+
+          '</span>'+
+        '</div>'+
+      '</div>';
+  });
+
   el.innerHTML=
     '<div class="grid2" style="margin-bottom:16px">'+
       '<div style="text-align:center"><div style="font-size:12px;font-weight:700;color:'+colA_team+';margin-bottom:10px">'+esc(pA.name)+'</div><div class="radar-wrap">'+svgA+'</div></div>'+
@@ -1853,13 +1918,21 @@ function renderPlayerCompare(){
     '</div>'+
     '<div class="card" style="margin-bottom:16px"><div class="card-hdr">Head-to-Head Stats (global rank vs '+NP+' qualified players)</div>'+
       '<div class="card-body">'+statsHtml+'</div></div>'+
-    '<div class="card"><div class="card-hdr">Play Type PPP Comparison</div><div class="card-body">'+
+    '<div class="card" style="margin-bottom:16px"><div class="card-hdr">Play Type PPP — Offense</div><div class="card-body">'+
       '<div style="display:grid;grid-template-columns:1fr 130px 1fr;gap:4px;padding:6px 0 8px;border-bottom:2px solid var(--border);margin-bottom:4px">'+
         '<div style="text-align:right;font-size:12px;font-weight:700;color:'+colA_team+'">'+esc(pA.name)+'</div>'+
         '<div style="text-align:center;font-size:10px;color:var(--text3);font-weight:600">PLAY TYPE (PPP)</div>'+
         '<div style="font-size:12px;font-weight:700;color:'+colB_team+'">'+esc(pB.name)+'</div>'+
       '</div>'+
       (ptRows||'<div class="empty">No play type data</div>')+
+    '</div></div>'+
+    '<div class="card"><div class="card-hdr">Play Type PPP — Defense <span style="font-weight:400;font-size:10px;text-transform:none;color:var(--text3)">(lower = better)</span></div><div class="card-body">'+
+      '<div style="display:grid;grid-template-columns:1fr 130px 1fr;gap:4px;padding:6px 0 8px;border-bottom:2px solid var(--border);margin-bottom:4px">'+
+        '<div style="text-align:right;font-size:12px;font-weight:700;color:'+colA_team+'">'+esc(pA.name)+'</div>'+
+        '<div style="text-align:center;font-size:10px;color:var(--text3);font-weight:600">PPP ALLOWED</div>'+
+        '<div style="font-size:12px;font-weight:700;color:'+colB_team+'">'+esc(pB.name)+'</div>'+
+      '</div>'+
+      (ptDefRows||'<div class="empty">No defensive play type data</div>')+
     '</div></div>';
 }
 
