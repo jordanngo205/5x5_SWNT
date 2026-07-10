@@ -1369,11 +1369,12 @@ function renderPlayerIntel(){
       '</div>';
   }
 
-  // Play type table
+  // Play type table — sorted by possessions descending
   var totalP=o.p||1;
+  var ptSortedOff=PLAY_TYPES.slice().sort(function(a,b){return ((p.pt_off[b]||{}).p||0)-((p.pt_off[a]||{}).p||0);});
   var ptHtml='';
-  for(var j=0;j<PLAY_TYPES.length;j++){
-    var pt=PLAY_TYPES[j]; var s=p.pt_off[pt]||{};
+  for(var j=0;j<ptSortedOff.length;j++){
+    var pt=ptSortedOff[j]; var s=p.pt_off[pt]||{};
     if(!s.p){
       ptHtml+='<tr><td style="color:var(--text3)">'+pt+'</td><td colspan="10" style="color:var(--text3)">&mdash;</td></tr>';
     } else {
@@ -1412,10 +1413,12 @@ function renderPlayerIntel(){
   if(d&&d.p>0){
     var dPPP=ppp(d);
     var dTotalP=d.p||1;
-    // Play type defense table
+    // Play type defense table — sorted by possessions descending
+    var defTotalP=PLAY_TYPES.reduce(function(acc,pt){return acc+((p.pt_def[pt]||{}).p||0);},0)||1;
+    var ptSortedDef=PLAY_TYPES.slice().sort(function(a,b){return ((p.pt_def[b]||{}).p||0)-((p.pt_def[a]||{}).p||0);});
     var ptDefHtml='';
-    for(var j=0;j<PLAY_TYPES.length;j++){
-      var pt=PLAY_TYPES[j]; var s=p.pt_def[pt]||{};
+    for(var j=0;j<ptSortedDef.length;j++){
+      var pt=ptSortedDef[j]; var s=p.pt_def[pt]||{};
       if(!s.p){
         ptDefHtml+='<tr><td style="color:var(--text3)">'+pt+'</td><td colspan="10" style="color:var(--text3)">&mdash;</td></tr>';
       } else {
@@ -1423,7 +1426,7 @@ function renderPlayerIntel(){
         ptDefHtml+='<tr>'+
           '<td>'+pt+'</td>'+
           '<td class="poss-cell">'+s.p+'</td>'+
-          '<td>'+fP(s.p/dTotalP*100)+'</td>'+
+          '<td>'+fP(s.p/defTotalP*100)+'</td>'+
           '<td class="'+cPPP(dv)+'">'+f3(dv)+'</td>'+
           '<td style="color:'+pppRatingColor(dv)+'">'+pppRating(dv)+'</td>'+
           (pRk?'<td><span class="tier-chip tier-'+tierStr(ptPct||0)+'" style="background:'+tierCol(ptPct||0)+';color:'+tierTxtCol(ptPct||0)+';font-size:9px;padding:1px 5px;border-radius:3px">#'+pRk+'</span></td>':'<td>&mdash;</td>')+
@@ -1476,7 +1479,7 @@ function renderPlayerIntel(){
         '<th>PPP</th><th>RATING</th><th>RANK</th>'+
         '<th>EFG%</th><th>2FG%</th><th>3FG%</th><th>TO%</th><th>FT%</th>'+
       '</tr></thead><tbody>'+ptHtml+'</tbody></table></div>'+
-      '<div style="padding:10px 16px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);border-bottom:2px solid var(--border2);margin-bottom:0;display:inline-block">Defense (PPP Allowed)</div>'+
+      '<div style="margin-top:24px;padding:10px 16px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);border-bottom:2px solid var(--border2);margin-bottom:0;display:inline-block">Defense (PPP Allowed)</div>'+
       '<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
         '<th style="text-align:left">PLAY TYPE</th><th>POSS</th><th>%TIME</th>'+
         '<th>PPP</th><th>RATING</th><th>RANK</th>'+
@@ -1807,7 +1810,10 @@ function renderPlayerCompare(){
   });
   var maxPPP=allPPPs.length?Math.max.apply(null,allPPPs)*1.05:2;
   var ptRows='';
-  PLAY_TYPES.forEach(function(pt){
+  var ptSortedOff2=PLAY_TYPES.slice().sort(function(a,b){
+    return (((pB.pt_off[b]||{}).p||0)+((pA.pt_off[b]||{}).p||0))-(((pB.pt_off[a]||{}).p||0)+((pA.pt_off[a]||{}).p||0));
+  });
+  ptSortedOff2.forEach(function(pt){
     var dA=pA.pt_off[pt]||{},dB=pB.pt_off[pt]||{};
     if(!dA.p&&!dB.p) return;
     var vA=dA.p?ppp(dA):null, vB=dB.p?ppp(dB):null;
@@ -1844,7 +1850,10 @@ function renderPlayerCompare(){
   });
   var maxDefPPP=allDefPPPs.length?Math.max.apply(null,allDefPPPs)*1.05:2;
   var ptDefRows='';
-  PLAY_TYPES.forEach(function(pt){
+  var ptSortedDef2=PLAY_TYPES.slice().sort(function(a,b){
+    return (((pB.pt_def[b]||{}).p||0)+((pA.pt_def[b]||{}).p||0))-(((pB.pt_def[a]||{}).p||0)+((pA.pt_def[a]||{}).p||0));
+  });
+  ptSortedDef2.forEach(function(pt){
     var dA=pA.pt_def[pt]||{},dB=pB.pt_def[pt]||{};
     if(!dA.p&&!dB.p) return;
     var vA=dA.p?ppp(dA):null, vB=dB.p?ppp(dB):null;
