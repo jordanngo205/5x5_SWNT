@@ -1299,7 +1299,9 @@ function renderTeamIntel(){
       '</tr>';
   }
 
+  var teamCol=countryColor(t.name);
   document.getElementById('ti-content').innerHTML=
+    '<div style="font-size:28px;font-weight:800;color:'+teamCol+';margin-bottom:20px;padding-bottom:16px;border-bottom:3px solid '+teamCol+'">'+esc(t.name)+'</div>'+
     netPanel+
     '<div class="grid2" style="margin-bottom:16px">'+
       '<div>'+
@@ -1462,7 +1464,7 @@ function renderPlayerIntel(){
     for(var j=0;j<PLAY_TYPES.length;j++){
       var pt=PLAY_TYPES[j]; var s=p.pt_def[pt]||{};
       if(!s.p){
-        ptDefHtml+='<tr><td style="color:var(--text3)">'+pt+'</td><td colspan="5" style="color:var(--text3)">&mdash;</td></tr>';
+        ptDefHtml+='<tr><td style="color:var(--text3)">'+pt+'</td><td colspan="10" style="color:var(--text3)">&mdash;</td></tr>';
       } else {
         var dv=ppp(s); var pRk=s.pr; var ptPct=pRk?rPct(pRk,NP):null;
         ptDefHtml+='<tr>'+
@@ -1472,24 +1474,22 @@ function renderPlayerIntel(){
           '<td class="'+cPPP(dv)+'">'+f3(dv)+'</td>'+
           '<td style="color:'+pppRatingColor(dv)+'">'+pppRating(dv)+'</td>'+
           (pRk?'<td><span class="tier-chip tier-'+tierStr(ptPct||0)+'" style="background:'+tierCol(ptPct||0)+';color:'+tierTxtCol(ptPct||0)+';font-size:9px;padding:1px 5px;border-radius:3px">#'+pRk+'</span></td>':'<td>&mdash;</td>')+
+          '<td>'+fP(efg(s))+'</td>'+
+          '<td>'+fP(fg2(s))+'</td>'+
+          '<td>'+fP(fg3(s))+'</td>'+
+          '<td>'+fP(topR(s))+'</td>'+
+          '<td>'+fP(ftr(s))+'</td>'+
           '</tr>';
       }
     }
-    defHtml='<div class="card"><div class="card-hdr">Defense</div><div class="card-body">'+
+    defHtml='<div class="card"><div class="card-body">'+
       '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px">'+
         '<div class="pi-stat"><div class="pi-stat-n">'+d.p+'</div><div class="pi-stat-l">Poss Defended</div></div>'+
         '<div class="pi-stat"><div class="pi-stat-n" style="color:'+pppRatingColor(1.8-dPPP)+'">'+f3(dPPP)+'</div><div class="pi-stat-l">PPP Allowed</div></div>'+
         '<div class="pi-stat"><div class="pi-stat-n">'+fP(fg(d))+'</div><div class="pi-stat-l">FG% Allowed</div></div>'+
         '<div class="pi-stat"><div class="pi-stat-n">'+fP(efg(d))+'</div><div class="pi-stat-l">EFG% Allowed</div></div>'+
         '<div class="pi-stat"><div class="pi-stat-n">'+fP(topR(d))+'</div><div class="pi-stat-l">TO% Forced</div></div>'+
-      '</div>'+
-      (ptDefHtml.replace(/&mdash;<\/td><\/tr>/g,'').trim()?
-        '<div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">Play Type Breakdown (PPP Allowed)</div>'+
-        '<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
-          '<th style="text-align:left">PLAY TYPE</th><th>POSS</th><th>%TIME</th>'+
-          '<th>PPP ALLOWED</th><th>RATING</th><th>PPP RANK</th>'+
-        '</tr></thead><tbody>'+ptDefHtml+'</tbody></table></div>':'')+
-    '</div></div>';
+      '</div></div></div>';
   }
 
   // Build team context (how player compares to teammates)
@@ -1516,11 +1516,20 @@ function renderPlayerIntel(){
       '</div>'+
     '</div>'+
     '<div class="section-hdr">Play Type Breakdown</div>'+
-    '<div class="card"><div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
-      '<th style="text-align:left">PLAY TYPE</th><th>POSS</th><th>%TIME</th>'+
-      '<th>PPP</th><th>RATING</th><th>PPP RANK</th>'+
-      '<th>EFG%</th><th>2FG%</th><th>3FG%</th><th>TO%</th><th>FT%</th>'+
-    '</tr></thead><tbody>'+ptHtml+'</tbody></table></div></div>'+
+    '<div class="card">'+
+      '<div style="padding:10px 16px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--canada);border-bottom:2px solid var(--canada);margin-bottom:0;display:inline-block">Offense</div>'+
+      '<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
+        '<th style="text-align:left">PLAY TYPE</th><th>POSS</th><th>%TIME</th>'+
+        '<th>PPP</th><th>RATING</th><th>RANK</th>'+
+        '<th>EFG%</th><th>2FG%</th><th>3FG%</th><th>TO%</th><th>FT%</th>'+
+      '</tr></thead><tbody>'+ptHtml+'</tbody></table></div>'+
+      '<div style="padding:10px 16px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);border-bottom:2px solid var(--border2);margin-bottom:0;display:inline-block">Defense (PPP Allowed)</div>'+
+      '<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
+        '<th style="text-align:left">PLAY TYPE</th><th>POSS</th><th>%TIME</th>'+
+        '<th>PPP</th><th>RATING</th><th>RANK</th>'+
+        '<th>EFG%</th><th>2FG%</th><th>3FG%</th><th>TO%</th><th>FT%</th>'+
+      '</tr></thead><tbody>'+(ptDefHtml||'<tr><td colspan="11" class="empty" style="padding:16px">No defensive play type data — re-run scraper</td></tr>')+'</tbody></table></div>'+
+    '</div>'+
     defHtml;
 }
 
