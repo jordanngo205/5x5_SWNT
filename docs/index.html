@@ -124,11 +124,11 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 .tier-chip{flex:0 0 22px;height:22px;border-radius:4px;font-size:10px;font-weight:800;
   display:flex;align-items:center;justify-content:center;color:#000}
 /* Tier badges */
-.tier-S{background:#ffd700;color:#000}
-.tier-A{background:#3fb950;color:#000}
-.tier-B{background:#d52b1e;color:#fff}
-.tier-C{background:#d29922;color:#000}
-.tier-D{background:#f85149;color:#fff}
+.tier-S{background:#7c3aed;color:#fff}
+.tier-A{background:#16a34a;color:#fff}
+.tier-B{background:#2563eb;color:#fff}
+.tier-C{background:#d97706;color:#fff}
+.tier-D{background:#dc2626;color:#fff}
 /* Radar chart */
 .radar-wrap{display:flex;justify-content:center;padding:8px}
 /* Auto analysis */
@@ -458,10 +458,10 @@ function tierStr(pct){
   if(pct>=50) return 'B'; if(pct>=25) return 'C'; return 'D';
 }
 function tierCol(pct){
-  if(pct>=90) return '#ffd700'; if(pct>=75) return '#3fb950';
-  if(pct>=50) return '#d52b1e'; if(pct>=25) return '#d29922'; return '#f85149';
+  if(pct>=90) return '#7c3aed'; if(pct>=75) return '#16a34a';
+  if(pct>=50) return '#2563eb'; if(pct>=25) return '#d97706'; return '#dc2626';
 }
-function tierTxtCol(pct){ return pct>=25?'#000':'#fff'; }
+function tierTxtCol(pct){ return '#fff'; }
 
 function pppRating(v){
   if(v>=1.10) return 'Elite'; if(v>=0.95) return 'Very Good';
@@ -469,9 +469,41 @@ function pppRating(v){
   if(v>=0.60) return 'Below Avg'; return 'Poor';
 }
 function pppRatingColor(v){
-  if(v>=1.05) return '#3fb950'; if(v>=0.90) return '#7ce38b';
-  if(v>=0.80) return '#e6edf3'; if(v>=0.70) return '#ffa198'; return '#f85149';
+  if(v>=1.05) return '#16a34a'; if(v>=0.90) return '#4ade80';
+  if(v>=0.80) return '#6b7280'; if(v>=0.70) return '#c2410c'; return '#dc2626';
 }
+
+// ── Country theme colours ─────────────────────────────────────────────────────
+var COUNTRY_COLORS = {
+  'Canada':'#d52b1e','USA':'#002868','United States':'#002868',
+  'France':'#002395','Spain':'#c60b1e','Australia':'#00843d',
+  'China':'#de2910','Belgium':'#000000','Argentina':'#74acdf',
+  'Brazil':'#009c3b','Germany':'#000000','Japan':'#bc002d',
+  'South Korea':'#003478','Korea':'#003478','Italy':'#009246',
+  'Greece':'#0d5eaf','Nigeria':'#008751','Serbia':'#c6363c',
+  'Hungary':'#436f4d','Czech Republic':'#d7141a','Sweden':'#006aa7',
+  'Poland':'#dc143c','Romania':'#002b7f','Croatia':'#171796',
+  'Turkey':'#e30a17','Israel':'#0038b8','Russia':'#d52b1e',
+  'Netherlands':'#ff6600','Portugal':'#006600','Latvia':'#9e3039',
+  'Lithuania':'#fdba12','Ukraine':'#005bbb','Belarus':'#cf101a',
+  'Bulgaria':'#00966e','Switzerland':'#ff0000','Austria':'#ed2939',
+  'Norway':'#ef2b2d','Denmark':'#c60c30','Finland':'#003580',
+  'Slovakia':'#005da4','Slovenia':'#003da5','Bosnia':'#002395',
+  'Montenegro':'#d4af37','North Macedonia':'#ce2028','Albania':'#e41e20',
+  'Moldova':'#003DA5','Estonia':'#0072ce','Georgia':'#ff0000',
+  'Angola':'#cc0000','Mozambique':'#009a44','Senegal':'#00853f',
+  'Mali':'#14b53a','Cameroon':'#007a5e','Egypt':'#c8102e',
+  'South Africa':'#007a4d','Kenya':'#006600','Rwanda':'#20603d',
+  'Morocco':'#c1272d','Tunisia':'#e70013','Algeria':'#006233',
+  'Philippines':'#0038a8','Indonesia':'#ce1126','Thailand':'#a51931',
+  'India':'#ff9933','Iran':'#239f40','Kazakhstan':'#00afca',
+  'Mongolia':'#c4272f','Taiwan':'#003087','Chinese Taipei':'#003087',
+  'Tahiti':'#009a44','Cook Islands':'#003087','New Zealand':'#00247d',
+  'Puerto Rico':'#ed0c27','Cuba':'#002a8f','Mexico':'#006847',
+  'Colombia':'#fcd116','Venezuela':'#cf142b','Peru':'#d91023',
+  'Chile':'#d52b1e','Ecuador':'#ffd100','Uruguay':'#5EB6E4',
+};
+function countryColor(name){ return COUNTRY_COLORS[name]||'#d52b1e'; }
 
 // ── Global rank tables ────────────────────────────────────────────────────────
 var TR = {}, PR = {};  // TR[team_id][key]=rank, PR[player_id][key]=rank
@@ -975,9 +1007,9 @@ function renderMatchup(){
   ];
 
   var compHtml='<div class="matchup-bar-row" style="margin-bottom:8px">'+
-    '<div style="font-size:11px;color:var(--canada);font-weight:700;text-align:right">'+esc(ta.name)+'</div>'+
+    '<div style="font-size:11px;font-weight:700;text-align:right;color:'+colA+'">'+esc(ta.name)+'</div>'+
     '<div></div><div style="font-size:10px;color:var(--text3);text-align:center">STAT</div>'+
-    '<div></div><div style="font-size:11px;color:var(--orange);font-weight:700;text-align:left">'+esc(tb.name)+'</div></div>';
+    '<div></div><div style="font-size:11px;font-weight:700;text-align:left;color:'+colB+'">'+esc(tb.name)+'</div></div>';
 
   for(var i=0;i<statDefs.length;i++){
     var label=statDefs[i][0],fn=statDefs[i][1],fmt=statDefs[i][2],lb=statDefs[i][3],rkey=statDefs[i][4];
@@ -987,8 +1019,8 @@ function renderMatchup(){
     var aRk=TR[ta.id]&&TR[ta.id][rkey], bRk=TR[tb.id]&&TR[tb.id][rkey];
     var aRkS=aRk?'<span style="font-size:9px;color:var(--text3)">#'+aRk+'</span>':'';
     var bRkS=bRk?'<span style="font-size:9px;color:var(--text3)">#'+bRk+'</span>':'';
-    var aBg=aWins?'var(--canada)':'var(--border2)', bBg=!aWins?'var(--orange)':'var(--border2)';
-    var aCol=aWins?'var(--canada)':'var(--text)', bCol=!aWins?'var(--orange)':'var(--text)';
+    var aBg=aWins?colA:'var(--border2)', bBg=!aWins?colB:'var(--border2)';
+    var aCol=aWins?colA:'var(--text)', bCol=!aWins?colB:'var(--text)';
     compHtml+='<div class="matchup-bar-row">'+
       '<div style="text-align:right;padding:3px 8px;font-size:12px;font-weight:700;color:'+aCol+'">'+fmt(av)+' '+aRkS+'</div>'+
       '<div style="height:16px;background:var(--bg3);border-radius:3px 0 0 3px;overflow:hidden;display:flex;justify-content:flex-end">'+
@@ -1026,13 +1058,14 @@ function renderMatchup(){
       return rPct(r, N);
     });
   }
-  var radarA=radarSvg(getRadarVals(ta),radarLabels,'#d52b1e');
-  var radarB=radarSvg(getRadarVals(tb),radarLabels,'#db6d28');
+  var colA=countryColor(ta.name), colB=countryColor(tb.name);
+  var radarA=radarSvg(getRadarVals(ta),radarLabels,colA);
+  var radarB=radarSvg(getRadarVals(tb),radarLabels,colB);
 
   document.getElementById('mu-content').innerHTML=
     '<div class="grid2" style="margin-bottom:4px">'+
-      '<div style="font-size:22px;font-weight:800;text-align:center;color:var(--canada)">'+esc(ta.name)+'</div>'+
-      '<div style="font-size:22px;font-weight:800;text-align:center;color:var(--orange)">'+esc(tb.name)+'</div>'+
+      '<div style="font-size:22px;font-weight:800;text-align:center;color:'+colA+'">'+esc(ta.name)+'</div>'+
+      '<div style="font-size:22px;font-weight:800;text-align:center;color:'+colB+'">'+esc(tb.name)+'</div>'+
     '</div>'+
     '<div class="grid2" style="text-align:center;color:var(--text2);font-size:11px;margin-bottom:16px">'+
       '<div>'+ta.gp+' games &nbsp;&middot;&nbsp; '+f3(ppp(ta.off))+' PPP off &nbsp;&middot;&nbsp; '+f3(ppp(ta.def))+' PPP def</div>'+
@@ -1460,44 +1493,44 @@ function renderScatterPlot(){
   var ax=xS(avgO), ay=yS(avgD);
   var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="font-family:-apple-system,sans-serif;max-width:'+W+'px">';
   // quadrant fills
-  svg+='<rect x="'+pL+'" y="'+pT+'" width="'+(ax-pL)+'" height="'+(ay-pT)+'" fill="rgba(88,166,255,.05)"/>';  // good D, below-avg O
-  svg+='<rect x="'+ax+'" y="'+pT+'" width="'+(pL+iW-ax)+'" height="'+(ay-pT)+'" fill="rgba(63,185,80,.07)"/>';  // elite
-  svg+='<rect x="'+pL+'" y="'+ay+'" width="'+(ax-pL)+'" height="'+(pT+iH-ay)+'" fill="rgba(248,81,73,.08)"/>';  // struggling
-  svg+='<rect x="'+ax+'" y="'+ay+'" width="'+(pL+iW-ax)+'" height="'+(pT+iH-ay)+'" fill="rgba(210,153,34,.05)"/>';  // good O, poor D
+  svg+='<rect x="'+pL+'" y="'+pT+'" width="'+(ax-pL)+'" height="'+(ay-pT)+'" fill="rgba(26,86,219,.06)"/>';  // good D, below-avg O
+  svg+='<rect x="'+ax+'" y="'+pT+'" width="'+(pL+iW-ax)+'" height="'+(ay-pT)+'" fill="rgba(22,163,74,.08)"/>';  // elite
+  svg+='<rect x="'+pL+'" y="'+ay+'" width="'+(ax-pL)+'" height="'+(pT+iH-ay)+'" fill="rgba(220,38,38,.07)"/>';  // struggling
+  svg+='<rect x="'+ax+'" y="'+ay+'" width="'+(pL+iW-ax)+'" height="'+(pT+iH-ay)+'" fill="rgba(217,119,6,.06)"/>';  // good O, poor D
   // quadrant labels
-  svg+='<text x="'+(ax+6)+'" y="'+(pT+12)+'" fill="rgba(63,185,80,.5)" font-size="9" font-weight="700">ELITE</text>';
-  svg+='<text x="'+(pL+4)+'" y="'+(pT+12)+'" fill="rgba(88,166,255,.4)" font-size="9" font-weight="700">DEFENSIVE</text>';
-  svg+='<text x="'+(ax+6)+'" y="'+(pT+iH-4)+'" fill="rgba(210,153,34,.5)" font-size="9" font-weight="700">OFFENSIVE</text>';
-  svg+='<text x="'+(pL+4)+'" y="'+(pT+iH-4)+'" fill="rgba(248,81,73,.5)" font-size="9" font-weight="700">STRUGGLING</text>';
+  svg+='<text x="'+(ax+6)+'" y="'+(pT+14)+'" fill="rgba(22,163,74,.8)" font-size="10" font-weight="700">ELITE</text>';
+  svg+='<text x="'+(pL+4)+'" y="'+(pT+14)+'" fill="rgba(26,86,219,.7)" font-size="10" font-weight="700">DEFENSIVE</text>';
+  svg+='<text x="'+(ax+6)+'" y="'+(pT+iH-6)+'" fill="rgba(217,119,6,.8)" font-size="10" font-weight="700">OFFENSIVE</text>';
+  svg+='<text x="'+(pL+4)+'" y="'+(pT+iH-6)+'" fill="rgba(220,38,38,.8)" font-size="10" font-weight="700">STRUGGLING</text>';
   // grid
   for(var gi=0;gi<=4;gi++){
     var gv=minO+(maxO-minO)*gi/4, gx=xS(gv);
-    svg+='<line x1="'+gx.toFixed(1)+'" y1="'+pT+'" x2="'+gx.toFixed(1)+'" y2="'+(pT+iH)+'" stroke="#30363d" stroke-width="0.5"/>';
-    svg+='<text x="'+gx.toFixed(1)+'" y="'+(pT+iH+16)+'" text-anchor="middle" fill="#6e7681" font-size="8">'+gv.toFixed(3)+'</text>';
+    svg+='<line x1="'+gx.toFixed(1)+'" y1="'+pT+'" x2="'+gx.toFixed(1)+'" y2="'+(pT+iH)+'" stroke="#d1d5db" stroke-width="1"/>';
+    svg+='<text x="'+gx.toFixed(1)+'" y="'+(pT+iH+16)+'" text-anchor="middle" fill="#6b7280" font-size="9" font-weight="500">'+gv.toFixed(3)+'</text>';
     var dv=minD+(maxD-minD)*gi/4, gy=yS(dv);
-    svg+='<line x1="'+pL+'" y1="'+gy.toFixed(1)+'" x2="'+(pL+iW)+'" y2="'+gy.toFixed(1)+'" stroke="#30363d" stroke-width="0.5"/>';
-    svg+='<text x="'+(pL-5)+'" y="'+gy.toFixed(1)+'" text-anchor="end" dominant-baseline="middle" fill="#6e7681" font-size="8">'+dv.toFixed(3)+'</text>';
+    svg+='<line x1="'+pL+'" y1="'+gy.toFixed(1)+'" x2="'+(pL+iW)+'" y2="'+gy.toFixed(1)+'" stroke="#d1d5db" stroke-width="1"/>';
+    svg+='<text x="'+(pL-5)+'" y="'+gy.toFixed(1)+'" text-anchor="end" dominant-baseline="middle" fill="#6b7280" font-size="9" font-weight="500">'+dv.toFixed(3)+'</text>';
   }
   // avg lines
-  svg+='<line x1="'+ax.toFixed(1)+'" y1="'+pT+'" x2="'+ax.toFixed(1)+'" y2="'+(pT+iH)+'" stroke="#d52b1e" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>';
-  svg+='<line x1="'+pL+'" y1="'+ay.toFixed(1)+'" x2="'+(pL+iW)+'" y2="'+ay.toFixed(1)+'" stroke="#d52b1e" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>';
+  svg+='<line x1="'+ax.toFixed(1)+'" y1="'+pT+'" x2="'+ax.toFixed(1)+'" y2="'+(pT+iH)+'" stroke="#d52b1e" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>';
+  svg+='<line x1="'+pL+'" y1="'+ay.toFixed(1)+'" x2="'+(pL+iW)+'" y2="'+ay.toFixed(1)+'" stroke="#d52b1e" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>';
   // dots
   validT.forEach(function(t){
     var x=xS(ppp(t.off)), y=yS(ppp(t.def)), n=net(t);
-    var col=n>=0.10?'#3fb950':n>=-0.05?'#d52b1e':n>=-0.15?'#d29922':'#f85149';
+    var col=n>=0.10?'#16a34a':n>=-0.05?'#d52b1e':n>=-0.15?'#d97706':'#dc2626';
     var nr=TR[t.id]?TR[t.id].net:99;
-    svg+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="5.5" fill="'+col+'" fill-opacity="0.85" stroke="#0d1117" stroke-width="1" style="cursor:pointer" onclick="goTeam(\''+t.id+'\')"><title>'+esc(t.name)+'\nOff PPP: '+f3(ppp(t.off))+'\nDef PPP: '+f3(ppp(t.def))+'\nNet: '+(n>=0?'+':'')+f3(n)+'</title></circle>';
+    svg+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="6" fill="'+col+'" fill-opacity="0.9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="goTeam(\''+t.id+'\')"><title>'+esc(t.name)+'\nOff PPP: '+f3(ppp(t.off))+'\nDef PPP: '+f3(ppp(t.def))+'\nNet: '+(n>=0?'+':'')+f3(n)+'</title></circle>';
     if(nr<=10||nr>=72){
-      var anchor=x>ax?'start':'end'; var lx=x>ax?x+8:x-8;
-      svg+='<text x="'+lx.toFixed(1)+'" y="'+(y+3).toFixed(1)+'" text-anchor="'+anchor+'" fill="#8b949e" font-size="8" style="pointer-events:none">'+esc(t.name)+'</text>';
+      var anchor=x>ax?'start':'end'; var lx=x>ax?x+9:x-9;
+      svg+='<text x="'+lx.toFixed(1)+'" y="'+(y+3).toFixed(1)+'" text-anchor="'+anchor+'" fill="#374151" font-size="9" font-weight="600" style="pointer-events:none">'+esc(t.name)+'</text>';
     }
   });
   // axis labels
-  svg+='<text x="'+(pL+iW/2)+'" y="'+(H-4)+'" text-anchor="middle" fill="#8b949e" font-size="10" font-weight="600">Offensive PPP &#8594;</text>';
-  svg+='<text transform="rotate(-90)" x="'+(-(pT+iH/2))+'" y="16" text-anchor="middle" fill="#8b949e" font-size="10" font-weight="600">&#8592; Defensive PPP allowed (lower = better)</text>';
+  svg+='<text x="'+(pL+iW/2)+'" y="'+(H-4)+'" text-anchor="middle" fill="#374151" font-size="11" font-weight="600">Offensive PPP &#8594;</text>';
+  svg+='<text transform="rotate(-90)" x="'+(-(pT+iH/2))+'" y="16" text-anchor="middle" fill="#374151" font-size="11" font-weight="600">&#8592; Defensive PPP allowed (lower = better)</text>';
   svg+='</svg>';
   var legend='<div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:11px;color:var(--text2)">';
-  [{c:'#3fb950',l:'Net &ge;+0.10 (Elite)'},{c:'#d52b1e',l:'Net -0.05 to +0.10'},{c:'#d29922',l:'Net -0.15 to -0.05'},{c:'#f85149',l:'Net &lt;-0.15'}].forEach(function(it){
+  [{c:'#16a34a',l:'Net &ge;+0.10 (Elite)'},{c:'#d52b1e',l:'Net -0.05 to +0.10'},{c:'#d97706',l:'Net -0.15 to -0.05'},{c:'#dc2626',l:'Net &lt;-0.15'}].forEach(function(it){
     legend+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+it.c+';margin-right:5px;vertical-align:middle"></span>'+it.l+'</span>';
   });
   legend+='<span style="color:var(--text3)">Blue dashed lines = league averages</span></div>';
@@ -1667,26 +1700,27 @@ function renderPlayerCompare(){
             rPct(pr.fg2,NP)||0, rPct(pr.fg3,NP)||0, rPct(pr.to,NP)||0,
             rPct(pr.ftr,NP)||0, rPct(pr.vol,NP)||0];
   }
-  var svgA=radarSvg(rpv(prA),rLabels,'#d52b1e');
-  var svgB=radarSvg(rpv(prB),rLabels,'#db6d28');
+  var colA_team=countryColor(pA.team), colB_team=countryColor(pB.team);
+  var svgA=radarSvg(rpv(prA),rLabels,colA_team);
+  var svgB=radarSvg(rpv(prB),rLabels,colB_team);
 
   // Comparison rows
   function cRow(lbl,vA,vB,rkA,rkB,lbetter){
     var pA2=rkA?rPct(rkA,NP):50, pB2=rkB?rPct(rkB,NP):50;
-    var cA=tierCol(pA2), cB=tierCol(pB2);
+    var cA=rkA?colA_team:'var(--text2)', cB=rkB?colB_team:'var(--text2)';
     var wA=lbetter?(parseFloat(vA)||0)<=(parseFloat(vB)||0):(parseFloat(vA)||0)>=(parseFloat(vB)||0);
     return '<div class="cmp-row">'+
-      '<div class="cmp-a" style="color:'+cA+'">'+(wA?'<span style="font-size:16px">&#9654;</span> ':'')+vA+' <span class="cmp-rank">'+(rkA?'#'+rkA:'')+'</span></div>'+
+      '<div class="cmp-a" style="color:'+cA+'">'+(wA?'<span style="font-size:16px">&#9654;</span> ':'')+vA+' <span class="cmp-rank">'+(rkA?'#'+rkA:'<span style="color:var(--text3);font-size:9px">N/Q</span>')+'</span></div>'+
       '<div class="cmp-label">'+lbl+'</div>'+
-      '<div class="cmp-b" style="color:'+cB+'">'+vB+' <span class="cmp-rank">'+(rkB?'#'+rkB:'')+'</span>'+(!wA?' <span style="font-size:16px">&#9664;</span>':'')+'</div>'+
+      '<div class="cmp-b" style="color:'+cB+'">'+vB+' <span class="cmp-rank">'+(rkB?'#'+rkB:'<span style="color:var(--text3);font-size:9px">N/Q</span>')+'</span>'+(!wA?' <span style="font-size:16px">&#9664;</span>':'')+'</div>'+
     '</div>';
   }
 
   var statsHtml=
     '<div style="display:grid;grid-template-columns:1fr auto 1fr;padding:8px 0;border-bottom:2px solid var(--border)">'+
-      '<div style="text-align:right;padding-right:12px;font-size:14px;font-weight:800;color:#d52b1e">'+esc(pA.name)+'<div style="font-size:10px;font-weight:400;color:var(--text2)">'+esc(pA.team)+' &middot; '+pA.gp+' GP &middot; '+oA.p+' poss</div></div>'+
+      '<div style="text-align:right;padding-right:12px;font-size:14px;font-weight:800;color:'+colA_team+'">'+esc(pA.name)+'<div style="font-size:10px;font-weight:400;color:var(--text2)">'+esc(pA.team)+' &middot; '+pA.gp+' GP &middot; '+oA.p+' poss</div></div>'+
       '<div style="text-align:center;font-size:10px;font-weight:700;color:var(--text3);padding:0 8px;align-self:center">STAT</div>'+
-      '<div style="text-align:left;padding-left:12px;font-size:14px;font-weight:800;color:#db6d28">'+esc(pB.name)+'<div style="font-size:10px;font-weight:400;color:var(--text2)">'+esc(pB.team)+' &middot; '+pB.gp+' GP &middot; '+oB.p+' poss</div></div>'+
+      '<div style="text-align:left;padding-left:12px;font-size:14px;font-weight:800;color:'+colB_team+'">'+esc(pB.name)+'<div style="font-size:10px;font-weight:400;color:var(--text2)">'+esc(pB.team)+' &middot; '+pB.gp+' GP &middot; '+oB.p+' poss</div></div>'+
     '</div>'+
     cRow('PPP', oA.p?f3(ppp(oA)):'—', oB.p?f3(ppp(oB)):'—', prA.ppp, prB.ppp, false)+
     cRow('EFG%', oA.fa?fP(efg(oA)):'—', oB.fa?fP(efg(oB)):'—', prA.efg, prB.efg, false)+
@@ -1698,33 +1732,57 @@ function renderPlayerCompare(){
     cRow('Possessions', oA.p||0, oB.p||0, prA.vol, prB.vol, false);
 
   // Play type PPP head-to-head
+  // Butterfly chart for play types
+  var allPPPs=[];
+  PLAY_TYPES.forEach(function(pt){
+    var dA=pA.pt_off[pt]||{},dB=pB.pt_off[pt]||{};
+    if(dA.p) allPPPs.push(ppp(dA));
+    if(dB.p) allPPPs.push(ppp(dB));
+  });
+  var maxPPP=allPPPs.length?Math.max.apply(null,allPPPs)*1.05:2;
   var ptRows='';
   PLAY_TYPES.forEach(function(pt){
-    var dA=pA.pt_off[pt]||{}, dB=pB.pt_off[pt]||{};
+    var dA=pA.pt_off[pt]||{},dB=pB.pt_off[pt]||{};
     if(!dA.p&&!dB.p) return;
-    var vA=dA.p?f3(ppp(dA)):'—', vB=dB.p?f3(ppp(dB)):'—';
-    var winA=dA.p&&dB.p&&ppp(dA)>=ppp(dB);
-    var winB=dA.p&&dB.p&&ppp(dB)>ppp(dA);
-    ptRows+='<tr>'+
-      '<td style="text-align:right;color:#d52b1e;font-weight:'+(winA?'700':'400')+'">'+vA+' <span style="color:var(--text3);font-size:9px">'+(dA.p?'('+dA.p+'p)':'')+'</span></td>'+
-      '<td style="text-align:center;color:var(--text2);font-size:11px;padding:6px 8px">'+esc(pt)+'</td>'+
-      '<td style="color:#db6d28;font-weight:'+(winB?'700':'400')+'"><span style="color:var(--text3);font-size:9px">'+(dB.p?'('+dB.p+'p)':'')+'</span> '+vB+'</td>'+
-    '</tr>';
+    var vA=dA.p?ppp(dA):null, vB=dB.p?ppp(dB):null;
+    var winA=vA!==null&&vB!==null&&vA>=vB;
+    var winB=vA!==null&&vB!==null&&vB>vA;
+    var wA=vA?Math.min(vA/maxPPP*100,100):0, wB=vB?Math.min(vB/maxPPP*100,100):0;
+    var colA=winA?colA_team:'var(--border2)', colB=winB?colB_team:'var(--border2)';
+    ptRows+=
+      '<div style="display:grid;grid-template-columns:1fr 130px 1fr;align-items:center;gap:4px;padding:5px 0;border-bottom:1px solid var(--border)">'+
+        '<div style="display:flex;align-items:center;justify-content:flex-end;gap:6px">'+
+          '<span style="font-size:11px;font-weight:'+(winA?700:400)+';color:'+(winA?colA_team:'var(--text2)')+'">'+
+            (vA!==null?f3(vA)+' <span style="color:var(--text3);font-size:9px">('+dA.p+'p)</span>':'<span style="color:var(--text3)">—</span>')+
+          '</span>'+
+          '<div style="width:80px;height:14px;background:var(--bg3);border-radius:3px 0 0 3px;overflow:hidden;display:flex;justify-content:flex-end">'+
+            '<div style="width:'+wA.toFixed(1)+'%;height:100%;background:'+colA+'"></div></div>'+
+        '</div>'+
+        '<div style="text-align:center;font-size:10px;color:var(--text2);font-weight:600;padding:0 6px">'+esc(pt)+'</div>'+
+        '<div style="display:flex;align-items:center;gap:6px">'+
+          '<div style="width:80px;height:14px;background:var(--bg3);border-radius:0 3px 3px 0;overflow:hidden">'+
+            '<div style="width:'+wB.toFixed(1)+'%;height:100%;background:'+colB+'"></div></div>'+
+          '<span style="font-size:11px;font-weight:'+(winB?700:400)+';color:'+(winB?colB_team:'var(--text2)')+'">'+
+            (vB!==null?f3(vB)+' <span style="color:var(--text3);font-size:9px">('+dB.p+'p)</span>':'<span style="color:var(--text3)">—</span>')+
+          '</span>'+
+        '</div>'+
+      '</div>';
   });
 
   el.innerHTML=
     '<div class="grid2" style="margin-bottom:16px">'+
-      '<div style="text-align:center"><div style="font-size:12px;font-weight:700;color:#d52b1e;margin-bottom:10px">'+esc(pA.name)+'</div><div class="radar-wrap">'+svgA+'</div></div>'+
-      '<div style="text-align:center"><div style="font-size:12px;font-weight:700;color:#db6d28;margin-bottom:10px">'+esc(pB.name)+'</div><div class="radar-wrap">'+svgB+'</div></div>'+
+      '<div style="text-align:center"><div style="font-size:12px;font-weight:700;color:'+colA_team+';margin-bottom:10px">'+esc(pA.name)+'</div><div class="radar-wrap">'+svgA+'</div></div>'+
+      '<div style="text-align:center"><div style="font-size:12px;font-weight:700;color:'+colB_team+';margin-bottom:10px">'+esc(pB.name)+'</div><div class="radar-wrap">'+svgB+'</div></div>'+
     '</div>'+
     '<div class="card" style="margin-bottom:16px"><div class="card-hdr">Head-to-Head Stats (global rank vs '+NP+' qualified players)</div>'+
       '<div class="card-body">'+statsHtml+'</div></div>'+
     '<div class="card"><div class="card-hdr">Play Type PPP Comparison</div><div class="card-body">'+
-      (ptRows?'<div class="tbl-wrap"><table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr>'+
-        '<th style="text-align:right;background:var(--bg3);padding:8px 10px;color:#d52b1e">'+esc(pA.name)+'</th>'+
-        '<th style="text-align:center;background:var(--bg3);padding:8px;color:var(--text3);font-size:10px">PLAY TYPE (PPP)</th>'+
-        '<th style="background:var(--bg3);padding:8px 10px;color:#db6d28">'+esc(pB.name)+'</th>'+
-      '</tr></thead><tbody>'+ptRows+'</tbody></table></div>':'<div class="empty">No play type data</div>')+
+      '<div style="display:grid;grid-template-columns:1fr 130px 1fr;gap:4px;padding:6px 0 8px;border-bottom:2px solid var(--border);margin-bottom:4px">'+
+        '<div style="text-align:right;font-size:12px;font-weight:700;color:'+colA_team+'">'+esc(pA.name)+'</div>'+
+        '<div style="text-align:center;font-size:10px;color:var(--text3);font-weight:600">PLAY TYPE (PPP)</div>'+
+        '<div style="font-size:12px;font-weight:700;color:'+colB_team+'">'+esc(pB.name)+'</div>'+
+      '</div>'+
+      (ptRows||'<div class="empty">No play type data</div>')+
     '</div></div>';
 }
 
