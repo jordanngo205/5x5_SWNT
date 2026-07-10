@@ -1630,7 +1630,7 @@ function renderScatterPlot(){
   // dots
   validT.forEach(function(t){
     var x=xS(ppp(t.off)), y=yS(ppp(t.def)), n=net(t);
-    var col=n>=0.10?'#16a34a':n>=-0.05?'#d52b1e':n>=-0.15?'#d97706':'#dc2626';
+    var col=n>=0.10?'#16a34a':n>=-0.05?'#eab308':n>=-0.15?'#f97316':'#dc2626';
     var nr=TR[t.id]?TR[t.id].net:99;
     svg+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="6" fill="'+col+'" fill-opacity="0.9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="goTeam(\''+t.id+'\')"><title>'+esc(t.name)+'\nOff PPP: '+f3(ppp(t.off))+'\nDef PPP: '+f3(ppp(t.def))+'\nNet: '+(n>=0?'+':'')+f3(n)+'</title></circle>';
     if(nr<=10||nr>=72){
@@ -1643,7 +1643,7 @@ function renderScatterPlot(){
   svg+='<text transform="rotate(-90)" x="'+(-(pT+iH/2))+'" y="16" text-anchor="middle" fill="#374151" font-size="11" font-weight="600">&#8592; Defensive PPP allowed (lower = better)</text>';
   svg+='</svg>';
   var legend='<div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:11px;color:var(--text2)">';
-  [{c:'#16a34a',l:'Net &ge;+0.10 (Elite)'},{c:'#d52b1e',l:'Net -0.05 to +0.10'},{c:'#d97706',l:'Net -0.15 to -0.05'},{c:'#dc2626',l:'Net &lt;-0.15'}].forEach(function(it){
+  [{c:'#16a34a',l:'Net &ge;+0.10 (Elite)'},{c:'#eab308',l:'Net -0.05 to +0.10'},{c:'#f97316',l:'Net -0.15 to -0.05'},{c:'#dc2626',l:'Net &lt;-0.15'}].forEach(function(it){
     legend+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+it.c+';margin-right:5px;vertical-align:middle"></span>'+it.l+'</span>';
   });
   legend+='<span style="color:var(--text3)"><span style="display:inline-block;width:20px;height:2px;border-top:2px dashed #d52b1e;vertical-align:middle;margin-right:5px"></span>Dashed lines = league averages</span></div>';
