@@ -140,12 +140,12 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 .analysis-strength::before{background:var(--green)}
 .analysis-weakness::before{background:var(--red)}
 /* Net rating */
-.net-panel{display:flex;gap:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);margin-bottom:16px}
-.net-box{flex:1;padding:16px;text-align:center;background:var(--bg3)}
-.net-box+.net-box{border-left:1px solid var(--border)}
-.net-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text3)}
-.net-val{font-size:28px;font-weight:800;line-height:1.2;margin-top:4px}
-.net-rank{font-size:10px;color:var(--text3);margin-top:2px}
+.net-panel{display:flex;gap:12px;margin-bottom:16px}
+.net-box{flex:1;padding:18px 16px;text-align:center;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius)}
+.net-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:6px}
+.net-val{font-size:32px;font-weight:800;line-height:1.1;margin-bottom:4px}
+.net-rank{font-size:11px;color:var(--text2);margin-bottom:8px}
+.net-tier{display:inline-block;padding:4px 16px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.5px}
 /* Extreme cards */
 .extreme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
 .extreme-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
@@ -989,6 +989,7 @@ function renderMatchup(){
   for(var i=0;i<TEAMS.length;i++){if(TEAMS[i].id===aId) ta=TEAMS[i];if(TEAMS[i].id===bId) tb=TEAMS[i];}
   if(!ta||!tb) return;
   var N=TEAMS.length;
+  var colA=countryColor(ta.name), colB=countryColor(tb.name);
 
   var statDefs=[
     ['PPP Off',  function(t){return ppp(t.off);}, f3, false, 'off_ppp'],
@@ -1032,21 +1033,46 @@ function renderMatchup(){
       '</div>';
   }
 
-  // Play type comparison
-  var ptHtml='';
-  for(var j=0;j<PLAY_TYPES.length;j++){
-    var pt=PLAY_TYPES[j];
-    var aD=ta.pt_off[pt]||{},bD=tb.pt_off[pt]||{};
-    var av=ppp(aD),bv=ppp(bD);
-    var aWins2=(aD.p||0)>0&&(bD.p||0)>0?av>bv:false;
-    ptHtml+='<tr>'+
-      '<td>'+pt+'</td>'+
-      '<td>'+(aD.p||0)+'</td>'+
-      '<td class="'+cPPP(av)+'">'+((aD.p||0)?f3(av):'&mdash;')+'</td>'+
-      '<td class="'+cPPP(bv)+'">'+((bD.p||0)?f3(bv):'&mdash;')+'</td>'+
-      '<td>'+(bD.p||0)+'</td>'+
-      '</tr>';
+  // Play type butterfly builder
+  function ptButterfly(ptObjA, ptObjB, titleA, titleB, cA, cB){
+    var allV=[];
+    PLAY_TYPES.forEach(function(pt){
+      var dA=ptObjA[pt]||{},dB=ptObjB[pt]||{};
+      if(dA.p) allV.push(ppp(dA)); if(dB.p) allV.push(ppp(dB));
+    });
+    var mx=allV.length?Math.max.apply(null,allV)*1.05:2;
+    var h='<div style="display:grid;grid-template-columns:1fr 140px 1fr;gap:4px;padding:8px 0 10px;border-bottom:2px solid var(--border);margin-bottom:2px">'+
+      '<div style="text-align:right;font-weight:700;font-size:13px;color:'+cA+'">'+titleA+'</div>'+
+      '<div style="text-align:center;font-size:10px;color:var(--text3);font-weight:600;align-self:center">PLAY TYPE (PPP)</div>'+
+      '<div style="font-weight:700;font-size:13px;color:'+cB+'">'+titleB+'</div></div>';
+    PLAY_TYPES.forEach(function(pt){
+      var dA=ptObjA[pt]||{},dB=ptObjB[pt]||{};
+      if(!dA.p&&!dB.p) return;
+      var vA=dA.p?ppp(dA):null, vB=dB.p?ppp(dB):null;
+      var winA=vA!==null&&vB!==null&&vA>vB, winB=vA!==null&&vB!==null&&vB>vA;
+      var wA=vA?Math.min(vA/mx*100,100):0, wB=vB?Math.min(vB/mx*100,100):0;
+      h+='<div style="display:grid;grid-template-columns:1fr 140px 1fr;align-items:center;gap:4px;padding:4px 0;border-bottom:1px solid var(--border)">'+
+        '<div style="display:flex;align-items:center;justify-content:flex-end;gap:6px">'+
+          '<span style="font-size:11px;font-weight:'+(winA?700:400)+';color:'+(winA?cA:'var(--text2)')+'">'+
+            (vA!==null?f3(vA)+' <span style="color:var(--text3);font-size:9px">('+dA.p+'p)</span>':'<span style="color:var(--text3)">—</span>')+
+          '</span>'+
+          '<div style="width:90px;height:16px;background:var(--bg3);border-radius:3px 0 0 3px;overflow:hidden;display:flex;justify-content:flex-end">'+
+            '<div style="width:'+wA.toFixed(1)+'%;height:100%;background:'+(winA?cA:'var(--border2)')+'"></div></div>'+
+        '</div>'+
+        '<div style="text-align:center;font-size:10px;color:var(--text2);font-weight:600;padding:0 4px">'+esc(pt)+'</div>'+
+        '<div style="display:flex;align-items:center;gap:6px">'+
+          '<div style="width:90px;height:16px;background:var(--bg3);border-radius:0 3px 3px 0;overflow:hidden">'+
+            '<div style="width:'+wB.toFixed(1)+'%;height:100%;background:'+(winB?cB:'var(--border2)')+'"></div></div>'+
+          '<span style="font-size:11px;font-weight:'+(winB?700:400)+';color:'+(winB?cB:'var(--text2)')+'">'+
+            (vB!==null?f3(vB)+' <span style="color:var(--text3);font-size:9px">('+dB.p+'p)</span>':'<span style="color:var(--text3)">—</span>')+
+          '</span>'+
+        '</div>'+
+      '</div>';
+    });
+    return h;
   }
+  var ptOffHtml=ptButterfly(ta.pt_off,tb.pt_off,esc(ta.name),esc(tb.name),colA,colB);
+  var ptDefHtml=ptButterfly(ta.pt_def,tb.pt_def,esc(ta.name),esc(tb.name),colA,colB);
 
   // Radar comparison
   var radarKeys=['off_ppp','off_efg','off_fg3','off_to','def_ppp','pace'];
@@ -1058,7 +1084,6 @@ function renderMatchup(){
       return rPct(r, N);
     });
   }
-  var colA=countryColor(ta.name), colB=countryColor(tb.name);
   var radarA=radarSvg(getRadarVals(ta),radarLabels,colA);
   var radarB=radarSvg(getRadarVals(tb),radarLabels,colB);
 
@@ -1081,15 +1106,10 @@ function renderMatchup(){
     '</div>'+
     '<div class="card" style="margin-bottom:16px"><div class="card-hdr">Head-to-Head Stat Comparison</div>'+
       '<div class="card-body" style="padding:12px">'+compHtml+'</div></div>'+
-    '<div class="card"><div class="card-hdr">Play Type Offense Comparison</div>'+
-      '<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
-        '<th style="text-align:left">Play Type</th>'+
-        '<th style="color:var(--canada)">POSS</th><th style="color:var(--canada)">PPP</th>'+
-        '<th style="color:var(--orange)">PPP</th><th style="color:var(--orange)">POSS</th>'+
-      '</tr><tr><th style="text-align:left"></th>'+
-        '<th colspan="2" style="color:var(--canada);text-align:center;font-size:9px">'+esc(ta.name)+'</th>'+
-        '<th colspan="2" style="color:var(--orange);text-align:center;font-size:9px">'+esc(tb.name)+'</th>'+
-      '</tr></thead><tbody>'+ptHtml+'</tbody></table></div></div>';
+    '<div class="card" style="margin-bottom:16px"><div class="card-hdr">Play Type PPP — Offense</div>'+
+      '<div class="card-body">'+ptOffHtml+'</div></div>'+
+    '<div class="card"><div class="card-hdr">Play Type PPP — Defense <span style="font-weight:400;font-size:10px;text-transform:none;color:var(--text3)">(PPP allowed vs each play type)</span></div>'+
+      '<div class="card-body">'+ptDefHtml+'</div></div>';
 }
 
 // ── TEAM INTELLIGENCE ─────────────────────────────────────────────────────────
@@ -1105,22 +1125,33 @@ function renderTeamIntel(){
   var offPct=rPct(offRank,N), defPct=rPct(defRank,N), netPct=rPct(netRank,N);
 
   // Net panel
+  function netBadge(pct){
+    var t=tierStr(pct),col=tierCol(pct);
+    return '<span class="net-tier" style="background:'+col+';color:#fff">'+t+' &mdash; '+tierLabel(pct)+'</span>';
+  }
+  function tierLabel(pct){
+    if(pct>=90)return'Elite';if(pct>=75)return'Great';if(pct>=50)return'Above Avg';
+    if(pct>=25)return'Below Avg';return'Poor';
+  }
   var netPanel='<div class="net-panel">'+
     '<div class="net-box">'+
       '<div class="net-label">Offensive PPP</div>'+
       '<div class="net-val" style="color:'+pppRatingColor(offPPP)+'">'+f3(offPPP)+'</div>'+
-      '<div class="net-rank">#'+offRank+' of '+N+' &nbsp;&middot;&nbsp; '+pppRating(offPPP)+' &nbsp;'+tierBadge(offPct)+'</div>'+
+      '<div class="net-rank">#'+offRank+' of '+N+' &middot; '+pppRating(offPPP)+'</div>'+
+      netBadge(offPct)+
     '</div>'+
     '<div class="net-box">'+
       '<div class="net-label">Net Rating</div>'+
-      '<div class="net-val" style="color:'+(netPPP>=0?'#3fb950':'#f85149')+'">'+
+      '<div class="net-val" style="color:'+(netPPP>=0?'#16a34a':'#dc2626')+'">'+
         (netPPP>=0?'+':'')+f3(netPPP)+'</div>'+
-      '<div class="net-rank">#'+netRank+' of '+N+' &nbsp;'+tierBadge(netPct)+'</div>'+
+      '<div class="net-rank">#'+netRank+' of '+N+'</div>'+
+      netBadge(netPct)+
     '</div>'+
     '<div class="net-box">'+
       '<div class="net-label">Defensive PPP</div>'+
       '<div class="net-val" style="color:'+(defPPP>0?pppRatingColor(1.8-defPPP):'var(--text3)')+'">'+f3(defPPP)+'</div>'+
-      '<div class="net-rank">#'+defRank+' of '+N+' &nbsp;&middot;&nbsp; '+pppRating(1.8-defPPP)+' &nbsp;'+tierBadge(defPct)+'</div>'+
+      '<div class="net-rank">#'+defRank+' of '+N+' &middot; '+pppRating(1.8-defPPP)+'</div>'+
+      netBadge(defPct)+
     '</div>'+
     '</div>';
 
@@ -1128,7 +1159,7 @@ function renderTeamIntel(){
   var radarKeys2=['off_ppp','off_efg','off_fg3','off_to','def_ppp','pace','off_ftr','def_to'];
   var radarLabels2=['Off PPP','EFG%','3FG%','Ball Sec.','Defense','Pace','FT Draw','Force TO'];
   var radarVals=radarKeys2.map(function(k){var rk=r[k];return rk?rPct(rk,N):50;});
-  var radar=radarSvg(radarVals,radarLabels2,'#d52b1e');
+  var radar=radarSvg(radarVals,radarLabels2,countryColor(t.name));
 
   // Auto analysis
   var an=autoAnalysis(t);
@@ -1480,7 +1511,7 @@ function globalSearch(q){
 function renderScatterPlot(){
   var el=document.getElementById('ov-scatter'); if(!el) return;
   var validT=TEAMS.filter(function(t){return t.off.p>0&&t.def.p>0;});
-  var W=800,H=440,pL=64,pR=24,pT=24,pB=52,iW=W-pL-pR,iH=H-pT-pB;
+  var W=1200,H=480,pL=68,pR=24,pT=28,pB=52,iW=W-pL-pR,iH=H-pT-pB;
   var offs=validT.map(function(t){return ppp(t.off);});
   var defs=validT.map(function(t){return ppp(t.def);});
   var minO=Math.min.apply(null,offs)-0.04, maxO=Math.max.apply(null,offs)+0.04;
@@ -1491,7 +1522,7 @@ function renderScatterPlot(){
   function xS(v){return pL+(v-minO)/(maxO-minO)*iW;}
   function yS(v){return pT+(1-(v-minD)/(maxD-minD))*iH;}
   var ax=xS(avgO), ay=yS(avgD);
-  var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="font-family:-apple-system,sans-serif;max-width:'+W+'px">';
+  var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="font-family:-apple-system,sans-serif;display:block">';
   // quadrant fills
   svg+='<rect x="'+pL+'" y="'+pT+'" width="'+(ax-pL)+'" height="'+(ay-pT)+'" fill="rgba(26,86,219,.06)"/>';  // good D, below-avg O
   svg+='<rect x="'+ax+'" y="'+pT+'" width="'+(pL+iW-ax)+'" height="'+(ay-pT)+'" fill="rgba(22,163,74,.08)"/>';  // elite
@@ -1533,7 +1564,7 @@ function renderScatterPlot(){
   [{c:'#16a34a',l:'Net &ge;+0.10 (Elite)'},{c:'#d52b1e',l:'Net -0.05 to +0.10'},{c:'#d97706',l:'Net -0.15 to -0.05'},{c:'#dc2626',l:'Net &lt;-0.15'}].forEach(function(it){
     legend+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+it.c+';margin-right:5px;vertical-align:middle"></span>'+it.l+'</span>';
   });
-  legend+='<span style="color:var(--text3)">Blue dashed lines = league averages</span></div>';
+  legend+='<span style="color:var(--text3)"><span style="display:inline-block;width:20px;height:2px;border-top:2px dashed #d52b1e;vertical-align:middle;margin-right:5px"></span>Dashed lines = league averages</span></div>';
   el.innerHTML=svg+legend;
 }
 
