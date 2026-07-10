@@ -5,8 +5,7 @@ For each player on the 81 senior teams:
   - overall offense   (from team cumulative_box already scraped)
   - overall defense   (per-team possession report, grouped by defensiveplayer)
   - play type offense (leaderboard reportType=0, all 11 play types)
-
-Note: player-level defense by play type is not logged by Synergy for FIBA.
+  - play type defense (leaderboard reportType=1, all 11 play types)
 
 Data saved to data/2025/players/{player_id}.json
 Index saved to data/2025/players_index.json
@@ -190,33 +189,37 @@ def main():
     total_players = len(player_off)
     print(f'  {len(all_teams)} teams, {total_players} players found')
 
-    # ── Phase 1: Player play-type leaderboard (offense, 11 calls) ────────────
-    print(f'\n=== Phase 1: Player play type leaderboard (offense) ===')
-    # pt_lb[player_id][pt_name] = stats dict
-    pt_lb = {pid: {} for pid in player_off}
+    # ── Phase 1: Player play-type leaderboard (offense + defense) ────────────
+    pt_lb_off = {pid: {} for pid in player_off}
+    pt_lb_def = {pid: {} for pid in player_off}
 
-    for pt_name, pt_id in PLAY_TYPES:
-        print(f'  {pt_name:<25}', end=' ', flush=True)
-        records = get_leaderboard_players(session, h, pt_id, report_type=0)
+    for side_name, report_type, pt_store in [
+        ('offense', 0, pt_lb_off),
+        ('defense', 1, pt_lb_def),
+    ]:
+        print(f'\n=== Phase 1: Player play type leaderboard ({side_name}) ===')
+        for pt_name, pt_id in PLAY_TYPES:
+            print(f'  {pt_name:<25}', end=' ', flush=True)
+            records = get_leaderboard_players(session, h, pt_id, report_type=report_type)
 
-        by_pid = {}
-        for rec in records:
-            pr   = rec.get('possessionReport', {})
-            tid  = pr.get('team', {}).get('id', '')
-            pid  = pr.get('player', {}).get('id', '')
-            if tid not in team_ids or not pid:
-                continue
-            by_pid[pid] = extract_pr(pr)
+            by_pid = {}
+            for rec in records:
+                pr   = rec.get('possessionReport', {})
+                tid  = pr.get('team', {}).get('id', '')
+                pid  = pr.get('player', {}).get('id', '')
+                if tid not in team_ids or not pid:
+                    continue
+                by_pid[pid] = extract_pr(pr)
 
-        assign_ranks(by_pid)
+            assign_ranks(by_pid)
 
-        for pid, d in by_pid.items():
-            if pid in pt_lb:
-                pt_lb[pid][pt_name] = d
+            for pid, d in by_pid.items():
+                if pid in pt_store:
+                    pt_store[pid][pt_name] = d
 
-        matched = sum(1 for pid in by_pid if pid in player_off)
-        print(f'{len(records)} total  →  {matched} senior team players')
-        time.sleep(0.15)
+            matched = sum(1 for pid in by_pid if pid in player_off)
+            print(f'{len(records)} total  →  {matched} senior team players')
+            time.sleep(0.15)
 
     # ── Phase 2: Per-team player defense overall (81 calls) ───────────────────
     print(f'\n=== Phase 2: Player defense overall (81 team calls) ===')
@@ -256,7 +259,8 @@ def main():
                 'defense': player_def.get(pid, {}),
             },
             'play_types': {
-                'offense': pt_lb.get(pid, {}),
+                'offense': pt_lb_off.get(pid, {}),
+                'defense': pt_lb_def.get(pid, {}),
             },
         }
         (player_dir / f'{pid}.json').write_text(json.dumps(record, indent=2))
