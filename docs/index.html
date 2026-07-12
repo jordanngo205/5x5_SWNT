@@ -350,10 +350,14 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
     <label style="font-size:11px;color:var(--text2)">Play Type:
       <select class="sel" id="pr-pt" onchange="renderPlayerRank()"><option value="">Overall</option></select>
     </label>
+    <span style="margin-left:8px;font-size:11px;color:var(--text2)">Tier:</span>
+    <button class="toggle-btn" id="pr-t3" onclick="setPrTier(3,this)">All</button>
+    <button class="toggle-btn active" id="pr-t2" onclick="setPrTier(2,this)">T1&ndash;2</button>
+    <button class="toggle-btn" id="pr-t1" onclick="setPrTier(1,this)">T1 Only</button>
   </div>
   <div class="card"><div class="tbl-wrap"><table id="pr-tbl">
     <thead><tr>
-      <th>#</th><th onclick="sortPR('name')">Player</th><th onclick="sortPR('team')">Team</th>
+      <th>#</th><th onclick="sortPR('name')">Player</th><th onclick="sortPR('team')">Team</th><th>Tier</th>
       <th onclick="sortPR('gp')">GP</th><th onclick="sortPR('poss')">POSS</th>
       <th onclick="sortPR('ppp')" class="sorted">PPP</th>
       <th onclick="sortPR('fg')">FG%</th><th onclick="sortPR('efg')">EFG%</th>
@@ -971,6 +975,8 @@ function renderPlayerRank(){
   var rows=PLAYERS.filter(function(p){
     if(p.gp<minGP) return false;
     if(teamF&&p.tid!==teamF) return false;
+    var ptier=TEAM_TIER[p.tid]||3;
+    if(ptier>prTierMax) return false;
     var d=ptF?(p.pt_off[ptF]||null):p.off;
     return d&&(d.p||0)>=minPoss;
   });
@@ -986,10 +992,12 @@ function renderPlayerRank(){
     var p=rows[i]; var d=ptF?(p.pt_off[ptF]||{}):p.off;
     var pv=ppp(d); var ev=efg(d);
     var pRank=PR[p.id]&&PR[p.id].ppp;
+    var ptier=TEAM_TIER[p.tid]||3;
     html+='<tr>'+
       '<td class="rank-cell">'+(i+1)+'</td>'+
       '<td style="font-weight:700">'+esc(p.name)+'</td>'+
       '<td style="color:var(--text2);font-size:11px">'+esc(p.team)+'</td>'+
+      '<td><span class="tcmp-chip tcmp-'+ptier+'">T'+ptier+'</span></td>'+
       '<td>'+p.gp+'</td>'+
       '<td>'+(d.p||0)+'</td>'+
       '<td class="'+cPPP(pv)+'">'+f3(pv)+(pRank&&!ptF?' <span style="font-size:9px;color:var(--text3)">#'+pRank+'</span>':'')+'</td>'+
@@ -1571,6 +1579,18 @@ function globalSearch(q){
     });
   }
   drop.innerHTML=h; drop.style.display='block';
+}
+
+// ── Tier lookups ─────────────────────────────────────────────────────────────
+var TEAM_TIER={};
+TEAMS.forEach(function(t){TEAM_TIER[t.id]=t.tier;});
+
+var prTierMax=2;
+function setPrTier(tier,btn){
+  prTierMax=tier;
+  document.querySelectorAll('#pr-t1,#pr-t2,#pr-t3').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderPlayerRank();
 }
 
 // ── Scatter plot ──────────────────────────────────────────────────────────────
