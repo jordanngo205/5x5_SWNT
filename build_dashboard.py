@@ -35,36 +35,45 @@ _tier_wb = openpyxl.load_workbook('/Users/jordanngo/Downloads/fiba 5x5 teams.xls
 TIERS_MAP = {row[0]: row[1] for row in _tier_wb.active.iter_rows(min_row=2, values_only=True) if row[0]}
 
 print('Loading team data...')
-_qual_team_file = DIR/'data/2025/team_vs_quality.json'
-_qual_team = json.loads(_qual_team_file.read_text()) if _qual_team_file.exists() else {}
+_qual_team_file    = DIR/'data/2025/team_vs_quality.json'
+_qual_team_pt_file = DIR/'data/2025/team_pt_vs_quality.json'
+_qual_team    = json.loads(_qual_team_file.read_text())    if _qual_team_file.exists()    else {}
+_qual_team_pt = json.loads(_qual_team_pt_file.read_text()) if _qual_team_pt_file.exists() else {}
 TEAMS=[]
 for t in json.loads((DIR/'data/2025/teams_all.json').read_text()):
     name=t['team']['name']
     tid=t['team']['id']
     qt=_qual_team.get(tid,{})
+    qtp=_qual_team_pt.get(tid,{})
     TEAMS.append({'id':tid,'name':name,'gp':t['team']['gp'],
         'tier':TIERS_MAP.get(name,3),
         'off':cpr(t['overall']['offense']),'def':cpr(t['overall']['defense']),
         'qoff':cpr(qt.get('off',{})),'qdef':cpr(qt.get('def',{})),'qgp':qt.get('gp_quality',0),
         'pt_off':{k:cpt(v) for k,v in t['play_types']['offense'].items()},
-        'pt_def':{k:cpt(v) for k,v in t['play_types']['defense'].items()}})
+        'pt_def':{k:cpt(v) for k,v in t['play_types']['defense'].items()},
+        'qpt_off':{k:cpt(v) for k,v in qtp.get('off',{}).items()} if qtp else {},
+        'qpt_def':{k:cpt(v) for k,v in qtp.get('def',{}).items()} if qtp else {}})
 TEAMS.sort(key=lambda x:x['name'])
 
 print('Loading player data...')
-_def_pt_file = DIR/'data/2025/player_def_pt.json'
-_player_def_pt = json.loads(_def_pt_file.read_text()) if _def_pt_file.exists() else {}
-_qual_player_file = DIR/'data/2025/player_vs_quality.json'
-_qual_player = json.loads(_qual_player_file.read_text()) if _qual_player_file.exists() else {}
+_def_pt_file       = DIR/'data/2025/player_def_pt.json'
+_player_def_pt     = json.loads(_def_pt_file.read_text())       if _def_pt_file.exists()       else {}
+_qual_player_file   = DIR/'data/2025/player_vs_quality.json'
+_qual_player        = json.loads(_qual_player_file.read_text())  if _qual_player_file.exists()   else {}
+_qual_player_pt_file = DIR/'data/2025/player_pt_vs_quality.json'
+_qual_player_pt     = json.loads(_qual_player_pt_file.read_text()) if _qual_player_pt_file.exists() else {}
 PLAYERS=[]
 for p in json.loads((DIR/'data/2025/players_all.json').read_text()):
     pid=p['player']['id']
     qp=_qual_player.get(pid,{})
+    qpp=_qual_player_pt.get(pid,{})
     PLAYERS.append({'id':pid,'name':p['player']['name'],
         'tid':p['team']['id'],'team':p['team']['name'],'gp':p['gp'],
         'off':cpr(p['overall']['offense']),'def':cpr(p['overall']['defense']),
         'qoff':cpr(qp.get('off',{})) if qp else {},
         'pt_off':{k:cpt(v) for k,v in p['play_types']['offense'].items()},
-        'pt_def':{k:cpt(v) for k,v in _player_def_pt.get(pid,{}).items()}})
+        'pt_def':{k:cpt(v) for k,v in _player_def_pt.get(pid,{}).items()},
+        'qpt_off':{k:cpt(v) for k,v in qpp.get('pt_off',{}).items()} if qpp else {}})
 PLAYERS.sort(key=lambda x:x['name'])
 
 teams_json=json.dumps(TEAMS,separators=(',',':'))
@@ -494,6 +503,9 @@ HTML_BODY = """
 
 <!-- PLAY TYPE EXPLORER -->
 <div class="tab" id="tab-play-types">
+  <div id="pt-qual-note" style="display:none;background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:8px 14px;font-size:11px;color:#92400e;margin-bottom:12px">
+    &#9888; Play type stats are filtered to vs T1&ndash;2 opponents only.
+  </div>
   <div class="pt-chips" id="pte-chips"></div>
   <div class="grid2">
     <div>
@@ -1256,7 +1268,8 @@ function renderTeamIntel(){
     if(pct>=90)return'Elite';if(pct>=75)return'Great';if(pct>=50)return'Above Avg';
     if(pct>=25)return'Below Avg';return'Poor';
   }
-  var netPanel='<div class="net-panel">'+
+  var qualNote=useQual&&t.qgp?'<div style="font-size:9px;color:var(--text3);margin-bottom:8px;text-align:center">Showing stats vs T1–2 opponents only &middot; '+t.qgp+' quality games</div>':'';
+  var netPanel='<div class="net-panel">'+qualNote+
     '<div class="net-box">'+
       '<div class="net-label">Offensive PPP</div>'+
       '<div class="net-val" style="color:'+pppRatingColor(offPPP)+'">'+f3(offPPP)+'</div>'+
@@ -1677,29 +1690,35 @@ function setQualMode(on,btn){
   useQual=on;
   document.querySelectorAll('#qual-all,#qual-q').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
-  // Swap off/def data on every team and player — all render functions just work
+  // Swap off/def + play type data — all render functions just work
   TEAMS.forEach(function(t){
     if(on){
-      if(!t._off){t._off=t.off;t._def=t.def;}
+      if(!t._off){t._off=t.off;t._def=t.def;t._pt_off=t.pt_off;t._pt_def=t.pt_def;}
       t.off=t.qoff&&t.qoff.p?t.qoff:t._off;
       t.def=t.qdef&&t.qdef.p?t.qdef:t._def;
+      if(t.qpt_off&&Object.keys(t.qpt_off).length) t.pt_off=t.qpt_off;
+      if(t.qpt_def&&Object.keys(t.qpt_def).length) t.pt_def=t.qpt_def;
     } else {
-      if(t._off){t.off=t._off;t.def=t._def;}
+      if(t._off){t.off=t._off;t.def=t._def;t.pt_off=t._pt_off;t.pt_def=t._pt_def;}
     }
   });
   PLAYERS.forEach(function(p){
     if(on){
-      if(!p._off) p._off=p.off;
+      if(!p._off){p._off=p.off;p._pt_off=p.pt_off;}
       p.off=p.qoff&&p.qoff.p?p.qoff:p._off;
+      if(p.qpt_off&&Object.keys(p.qpt_off).length) p.pt_off=p.qpt_off;
     } else {
-      if(p._off) p.off=p._off;
+      if(p._off){p.off=p._off;p.pt_off=p._pt_off;}
     }
   });
   var lbl=document.getElementById('qual-label');
-  if(lbl) lbl.textContent=on?'(stats recalculated for quality matchups only)':'';
+  if(lbl) lbl.textContent=on?'(quality opponents only)':'';
+  var ptNote=document.getElementById('pt-qual-note');
+  if(ptNote) ptNote.style.display=on?'block':'none';
   computeRanks();
   renderOverview(); renderTeamRank(); renderPlayerRank(); renderScatterPlot();
   var tid=document.getElementById('ti-team').value; if(tid) renderTeamIntel();
+  var ptChip=document.querySelector('.pt-chip.active'); if(ptChip) ptChip.click();
 }
 
 // ── Tier lookups ─────────────────────────────────────────────────────────────
