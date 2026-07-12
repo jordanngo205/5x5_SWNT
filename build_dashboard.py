@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate FIBA 5x5 Women 2025 dashboard.html"""
-import json, base64
+import json, base64, openpyxl
 from pathlib import Path
 
 DIR = Path(__file__).parent
@@ -30,10 +30,16 @@ def cpt(pr):
     if d: d['pr']=pr.get('pppRank'); d['qr']=pr.get('possRank')
     return d
 
+print('Loading team tiers...')
+_tier_wb = openpyxl.load_workbook('/Users/jordanngo/Downloads/fiba 5x5 teams.xlsx')
+TIERS_MAP = {row[0]: row[1] for row in _tier_wb.active.iter_rows(min_row=2, values_only=True) if row[0]}
+
 print('Loading team data...')
 TEAMS=[]
 for t in json.loads((DIR/'data/2025/teams_all.json').read_text()):
-    TEAMS.append({'id':t['team']['id'],'name':t['team']['name'],'gp':t['team']['gp'],
+    name=t['team']['name']
+    TEAMS.append({'id':t['team']['id'],'name':name,'gp':t['team']['gp'],
+        'tier':TIERS_MAP.get(name,3),
         'off':cpr(t['overall']['offense']),'def':cpr(t['overall']['defense']),
         'pt_off':{k:cpt(v) for k,v in t['play_types']['offense'].items()},
         'pt_def':{k:cpt(v) for k,v in t['play_types']['defense'].items()}})
@@ -182,6 +188,11 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 .tier-B{background:#2563eb;color:#fff}
 .tier-C{background:#d97706;color:#fff}
 .tier-D{background:#dc2626;color:#fff}
+/* Competition tier chips (T1/T2/T3) */
+.tcmp-chip{display:inline-block;font-size:9px;font-weight:800;padding:1px 5px;border-radius:3px;vertical-align:middle;line-height:1.5}
+.tcmp-1{background:#7c3aed;color:#fff}
+.tcmp-2{background:#2563eb;color:#fff}
+.tcmp-3{background:#6b7280;color:#fff}
 /* Radar chart */
 .radar-wrap{display:flex;justify-content:center;padding:8px}
 /* Auto analysis */
@@ -315,7 +326,17 @@ HTML_BODY = """
     <div class="card"><div class="card-hdr">Efficiency &mdash; League Avg PPP</div><div class="card-body" id="ov-pt-ppp"></div></div>
   </div>
   <div class="section-hdr">Team Efficiency Map <span style="font-weight:400;text-transform:none;color:var(--text3);font-size:10px">&mdash; click any dot to open Team Intel</span></div>
-  <div class="card"><div class="card-hdr"><span class="accent">&#9677;</span> Offensive PPP vs Defensive PPP &mdash; colored by net rating</div><div class="card-body scatter-wrap" id="ov-scatter"></div></div>
+  <div class="card">
+    <div class="card-hdr" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span><span class="accent">&#9677;</span> Offensive PPP vs Defensive PPP &mdash; colored by net rating</span>
+      <div style="display:flex;gap:6px">
+        <button class="toggle-btn" id="sct-t3" onclick="setScatterTier(3,this)">All Teams</button>
+        <button class="toggle-btn active" id="sct-t2" onclick="setScatterTier(2,this)">Tier 1&ndash;2</button>
+        <button class="toggle-btn" id="sct-t1" onclick="setScatterTier(1,this)">Tier 1 Only</button>
+      </div>
+    </div>
+    <div class="card-body scatter-wrap" id="ov-scatter"></div>
+  </div>
   <div class="grid2" style="align-items:stretch">
     <div style="display:flex;flex-direction:column">
       <div class="section-hdr">Efficiency Tier Distribution <span style="font-weight:400;text-transform:none;color:var(--text3);font-size:10px">(by net rating)</span></div>
@@ -596,6 +617,15 @@ function computeRanks() {
     sorted.forEach(function(t,i){
       if(!TR[t.id]) TR[t.id]={};
       TR[t.id][def.key]=i+1;
+    });
+    // Within-tier ranks
+    [1,2,3].forEach(function(tier){
+      var tierT=validT.filter(function(t){return t.tier===tier;});
+      var ts=tierT.slice().sort(function(a,b){return def.lb?def.fn(a)-def.fn(b):def.fn(b)-def.fn(a);});
+      ts.forEach(function(t,i){
+        TR[t.id]['t_'+def.key]=i+1;
+        TR[t.id]['t_size']=tierT.length;
+      });
     });
   });
   var pool = PLAYERS.filter(function(p){return p.off.p>=15;});
@@ -956,6 +986,7 @@ function renderTeamRank(){
     html+='<tr>'+
       '<td class="rank-cell">'+(i+1)+'</td>'+
       '<td><span style="font-weight:700">'+esc(t.name)+'</span> '+
+        '<span class="tcmp-chip tcmp-'+t.tier+'">T'+t.tier+'</span> '+
         '<span class="tier-chip" style="background:'+tc+';color:'+ttc+';font-size:9px;padding:1px 5px;border-radius:3px">'+tt+'</span></td>'+
       '<td>'+t.gp+'</td>'+
       '<td>'+(s.p||0)+'</td>'+
@@ -1303,8 +1334,11 @@ function renderTeamIntel(){
   }
 
   var teamCol=countryColor(t.name);
+  var tierSize=r['t_size']||'?';
   document.getElementById('ti-content').innerHTML=
-    '<div style="font-size:28px;font-weight:800;color:'+teamCol+';margin-bottom:20px;padding-bottom:16px;border-bottom:3px solid '+teamCol+'">'+esc(t.name)+'</div>'+
+    '<div style="font-size:28px;font-weight:800;color:'+teamCol+';margin-bottom:20px;padding-bottom:16px;border-bottom:3px solid '+teamCol+'">'+
+      esc(t.name)+' <span class="tcmp-chip tcmp-'+t.tier+'" style="font-size:13px;padding:2px 8px;border-radius:5px;vertical-align:middle">T'+t.tier+'</span>'+
+    '</div>'+
     netPanel+
     '<div class="grid2" style="margin-bottom:16px">'+
       '<div>'+
@@ -1318,8 +1352,8 @@ function renderTeamIntel(){
       '</div>'+
     '</div>'+
     '<div class="grid2" style="margin-bottom:16px">'+
-      '<div class="card"><div class="card-hdr accent">Offensive Rankings vs 81 Teams</div><div class="card-body" style="padding:8px 16px">'+offRankHtml+'</div></div>'+
-      '<div class="card"><div class="card-hdr accent">Defensive Rankings vs 81 Teams</div><div class="card-body" style="padding:8px 16px">'+defRankHtml+'</div></div>'+
+      '<div class="card"><div class="card-hdr accent">Offensive Rankings vs All '+N+' Teams <span style="font-weight:400;font-size:9px;text-transform:none;color:var(--text3)">&nbsp;&middot;&nbsp;T'+t.tier+' rank: #'+(r['t_off_ppp']||'?')+' of '+tierSize+'</span></div><div class="card-body" style="padding:8px 16px">'+offRankHtml+'</div></div>'+
+      '<div class="card"><div class="card-hdr accent">Defensive Rankings vs All '+N+' Teams <span style="font-weight:400;font-size:9px;text-transform:none;color:var(--text3)">&nbsp;&middot;&nbsp;T'+t.tier+' rank: #'+(r['t_def_ppp']||'?')+' of '+tierSize+'</span></div><div class="card-body" style="padding:8px 16px">'+defRankHtml+'</div></div>'+
     '</div>'+
     '<div class="subtabs">'+
       '<button class="subtab-btn active" onclick="showSubtab(this,\'ti-pt-off\')">Play Types &mdash; Offense</button>'+
@@ -1596,9 +1630,17 @@ function globalSearch(q){
 }
 
 // ── Scatter plot ──────────────────────────────────────────────────────────────
+var scatterTierMax=2;
+function setScatterTier(tier,btn){
+  scatterTierMax=tier;
+  document.querySelectorAll('#sct-t1,#sct-t2,#sct-t3').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderScatterPlot();
+}
 function renderScatterPlot(){
   var el=document.getElementById('ov-scatter'); if(!el) return;
-  var validT=TEAMS.filter(function(t){return t.off.p>0&&t.def.p>0;});
+  var validT=TEAMS.filter(function(t){return t.off.p>0&&t.def.p>0&&t.tier<=scatterTierMax;});
+  var ghostT=TEAMS.filter(function(t){return t.off.p>0&&t.def.p>0&&t.tier>scatterTierMax;});
   var W=1200,H=480,pL=68,pR=24,pT=28,pB=52,iW=W-pL-pR,iH=H-pT-pB;
   var offs=validT.map(function(t){return ppp(t.off);});
   var defs=validT.map(function(t){return ppp(t.def);});
@@ -1633,15 +1675,24 @@ function renderScatterPlot(){
   // avg lines
   svg+='<line x1="'+ax.toFixed(1)+'" y1="'+pT+'" x2="'+ax.toFixed(1)+'" y2="'+(pT+iH)+'" stroke="#d52b1e" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>';
   svg+='<line x1="'+pL+'" y1="'+ay.toFixed(1)+'" x2="'+(pL+iW)+'" y2="'+ay.toFixed(1)+'" stroke="#d52b1e" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>';
-  // dots
+  // ghost dots (filtered-out tiers) — shown dim, no labels
+  ghostT.forEach(function(t){
+    var x=xS(ppp(t.off)), y=yS(ppp(t.def));
+    svg+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="4" fill="#9ca3af" fill-opacity="0.3" stroke="#9ca3af" stroke-width="1" style="cursor:pointer" onclick="goTeam(\''+t.id+'\')"><title>'+esc(t.name)+' [Tier '+t.tier+']\nOff PPP: '+f3(ppp(t.off))+'\nDef PPP: '+f3(ppp(t.def))+'</title></circle>';
+  });
+  // main dots
+  var tierR={1:8,2:6,3:5}, tierOp={1:0.95,2:0.85,3:0.7};
   validT.forEach(function(t){
     var x=xS(ppp(t.off)), y=yS(ppp(t.def)), n=net(t);
     var col=n>=0.10?'#16a34a':n>=-0.05?'#eab308':n>=-0.15?'#f97316':'#dc2626';
+    var r=tierR[t.tier]||6, op=tierOp[t.tier]||0.85;
+    var sw=t.tier===1?2:1.5;
+    svg+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r+'" fill="'+col+'" fill-opacity="'+op+'" stroke="#fff" stroke-width="'+sw+'" style="cursor:pointer" onclick="goTeam(\''+t.id+'\')"><title>'+esc(t.name)+' [Tier '+t.tier+']\nOff PPP: '+f3(ppp(t.off))+'\nDef PPP: '+f3(ppp(t.def))+'\nNet: '+(n>=0?'+':'')+f3(n)+'</title></circle>';
+    // label T1 always; T2 only if extreme position
     var nr=TR[t.id]?TR[t.id].net:99;
-    svg+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="6" fill="'+col+'" fill-opacity="0.9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="goTeam(\''+t.id+'\')"><title>'+esc(t.name)+'\nOff PPP: '+f3(ppp(t.off))+'\nDef PPP: '+f3(ppp(t.def))+'\nNet: '+(n>=0?'+':'')+f3(n)+'</title></circle>';
-    if(nr<=10||nr>=72){
+    if(t.tier===1||(t.tier===2&&(nr<=5||nr>=validT.length-3))){
       var anchor=x>ax?'start':'end'; var lx=x>ax?x+9:x-9;
-      svg+='<text x="'+lx.toFixed(1)+'" y="'+(y+3).toFixed(1)+'" text-anchor="'+anchor+'" fill="#374151" font-size="9" font-weight="600" style="pointer-events:none">'+esc(t.name)+'</text>';
+      svg+='<text x="'+lx.toFixed(1)+'" y="'+(y+3).toFixed(1)+'" text-anchor="'+anchor+'" fill="#374151" font-size="9" font-weight="'+(t.tier===1?'700':'500')+'" style="pointer-events:none">'+esc(t.name)+'</text>';
     }
   });
   // axis labels
@@ -1649,10 +1700,13 @@ function renderScatterPlot(){
   svg+='<text transform="rotate(-90)" x="'+(-(pT+iH/2))+'" y="16" text-anchor="middle" fill="#374151" font-size="11" font-weight="600">Defensive PPP allowed &#8595; (lower = better, &#8593; = elite defense)</text>';
   svg+='</svg>';
   var legend='<div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:11px;color:var(--text2)">';
-  [{c:'#16a34a',l:'Net &ge;+0.10 (Elite)'},{c:'#eab308',l:'Net -0.05 to +0.10'},{c:'#f97316',l:'Net -0.15 to -0.05'},{c:'#dc2626',l:'Net &lt;-0.15'}].forEach(function(it){
+  [{c:'#16a34a',l:'Net &ge;+0.10'},{c:'#eab308',l:'Net &minus;0.05 to +0.10'},{c:'#f97316',l:'Net &minus;0.15 to &minus;0.05'},{c:'#dc2626',l:'Net &lt;&minus;0.15'}].forEach(function(it){
     legend+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+it.c+';margin-right:5px;vertical-align:middle"></span>'+it.l+'</span>';
   });
-  legend+='<span style="color:var(--text3)"><span style="display:inline-block;width:20px;height:2px;border-top:2px dashed #d52b1e;vertical-align:middle;margin-right:5px"></span>Dashed lines = league averages</span></div>';
+  legend+='<span style="margin-left:8px;padding-left:8px;border-left:1px solid var(--border)"><svg width="10" height="10" style="vertical-align:middle;margin-right:3px"><circle cx="5" cy="5" r="4" fill="#888" stroke="#fff" stroke-width="1.5"/></svg>Tier 1 (large)</span>';
+  legend+='<span><svg width="10" height="10" style="vertical-align:middle;margin-right:3px"><circle cx="5" cy="5" r="3" fill="#888" stroke="#fff" stroke-width="1.2"/></svg>Tier 2</span>';
+  legend+='<span><svg width="10" height="10" style="vertical-align:middle;margin-right:3px"><circle cx="5" cy="5" r="2" fill="#9ca3af" fill-opacity="0.4" stroke="#9ca3af" stroke-width="1"/></svg>Tier 3 (dim)</span>';
+  legend+='<span style="color:var(--text3)"><span style="display:inline-block;width:20px;height:2px;border-top:2px dashed #d52b1e;vertical-align:middle;margin-right:5px"></span>avg (filtered set)</span></div>';
   el.innerHTML=svg+legend;
 }
 
