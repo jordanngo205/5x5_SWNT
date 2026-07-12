@@ -1703,7 +1703,8 @@ function renderScatterPlot(){
   function xS(v){return pL+(v-minO)/(maxO-minO)*iW;}
   function yS(v){return pT+(v-minD)/(maxD-minD)*iH;}
   var ax=xS(avgO), ay=yS(avgD);
-  var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="font-family:-apple-system,sans-serif;display:block">';
+  var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="font-family:-apple-system,sans-serif;display:block;overflow:hidden">';
+  svg+='<defs><clipPath id="plot-area"><rect x="'+pL+'" y="'+pT+'" width="'+iW+'" height="'+iH+'"/></clipPath></defs>';
   // quadrant fills
   svg+='<rect x="'+pL+'" y="'+pT+'" width="'+(ax-pL)+'" height="'+(ay-pT)+'" fill="rgba(26,86,219,.06)"/>';  // good D, below-avg O
   svg+='<rect x="'+ax+'" y="'+pT+'" width="'+(pL+iW-ax)+'" height="'+(ay-pT)+'" fill="rgba(22,163,74,.08)"/>';  // elite
@@ -1726,6 +1727,7 @@ function renderScatterPlot(){
   // avg lines
   svg+='<line x1="'+ax.toFixed(1)+'" y1="'+pT+'" x2="'+ax.toFixed(1)+'" y2="'+(pT+iH)+'" stroke="#d52b1e" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>';
   svg+='<line x1="'+pL+'" y1="'+ay.toFixed(1)+'" x2="'+(pL+iW)+'" y2="'+ay.toFixed(1)+'" stroke="#d52b1e" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>';
+  svg+='<g clip-path="url(#plot-area)">';
   // ghost dots (filtered-out tiers) — shown dim, no labels
   ghostT.forEach(function(t){
     var x=xS(ppp(t.off)), y=yS(ppp(t.def));
@@ -1746,6 +1748,7 @@ function renderScatterPlot(){
       svg+='<text x="'+lx.toFixed(1)+'" y="'+(y+3).toFixed(1)+'" text-anchor="'+anchor+'" fill="#374151" font-size="9" font-weight="'+(t.tier===1?'700':'500')+'" style="pointer-events:none">'+esc(t.name)+'</text>';
     }
   });
+  svg+='</g>';
   // axis labels
   svg+='<text x="'+(pL+iW/2)+'" y="'+(H-4)+'" text-anchor="middle" fill="#374151" font-size="11" font-weight="600">Offensive PPP &#8594;</text>';
   svg+='<text transform="rotate(-90)" x="'+(-(pT+iH/2))+'" y="16" text-anchor="middle" fill="#374151" font-size="11" font-weight="600">Defensive PPP allowed &#8595; (lower = better, &#8593; = elite defense)</text>';
