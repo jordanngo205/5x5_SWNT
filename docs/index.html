@@ -1207,8 +1207,8 @@ function renderTeamIntel(){
     if(pct>=90)return'Elite';if(pct>=75)return'Great';if(pct>=50)return'Above Avg';
     if(pct>=25)return'Below Avg';return'Poor';
   }
-  var qualNote=useQual&&t.qgp?'<div style="font-size:9px;color:var(--text3);margin-bottom:8px;text-align:center">Showing stats vs T1–2 opponents only &middot; '+t.qgp+' quality games</div>':'';
-  var netPanel='<div class="net-panel">'+qualNote+
+  var qualNote=useQual&&t.qgp?'<div style="font-size:9px;color:var(--text3);margin-bottom:8px">Showing stats vs T1–2 opponents only &middot; '+t.qgp+' quality games</div>':'';
+  var netPanel=qualNote+'<div class="net-panel">'+
     '<div class="net-box">'+
       '<div class="net-label">Offensive PPP</div>'+
       '<div class="net-val" style="color:'+pppRatingColor(offPPP)+'">'+f3(offPPP)+'</div>'+
