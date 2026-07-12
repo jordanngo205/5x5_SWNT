@@ -253,8 +253,10 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 </nav>
 <div class="qual-bar">
   <span style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3)">Game Filter:</span>
-  <button class="toggle-btn active" id="qual-all" onclick="setQualMode(false,this)">All Games</button>
-  <button class="toggle-btn" id="qual-q" onclick="setQualMode(true,this)">vs T1&ndash;2 Opponents Only</button>
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="qual-all" onclick="setQualMode(false,this)">All Games</button>
+    <button class="toggle-btn" id="qual-q" onclick="setQualMode(true,this)">vs T1&ndash;2 Opponents Only</button>
+  </div>
   <span id="qual-label" style="font-size:10px;color:var(--text3);margin-left:4px"></span>
 </div>
 <div class="content">
@@ -430,14 +432,25 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
   <div id="pt-qual-note" style="display:none;background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:8px 14px;font-size:11px;color:#92400e;margin-bottom:12px">
     &#9888; Play type stats are filtered to vs T1&ndash;2 opponents only.
   </div>
-  <div class="pt-chips" id="pte-chips"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+    <div class="pt-chips" id="pte-chips" style="margin-bottom:0"></div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3);flex-shrink:0">
+      <span style="font-weight:700;text-transform:uppercase;letter-spacing:.4px">GP Min:</span>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="pt-gp-0" onclick="setPTGP(0,this)">All</button>
+        <button class="toggle-btn" id="pt-gp-3" onclick="setPTGP(3,this)">3</button>
+        <button class="toggle-btn" id="pt-gp-5" onclick="setPTGP(5,this)">5</button>
+        <button class="toggle-btn" id="pt-gp-8" onclick="setPTGP(8,this)">8</button>
+      </div>
+    </div>
+  </div>
   <div class="grid2">
     <div>
       <div class="section-hdr">Team Rankings</div>
       <div class="card"><div class="card-body" id="pte-teams"><div class="empty">Select a play type</div></div></div>
     </div>
     <div>
-      <div class="section-hdr">Individual Leaders <span style="font-weight:400;text-transform:none;color:var(--text3);font-size:10px">(min 5 poss)</span></div>
+      <div class="section-hdr">Individual Leaders</div>
       <div class="card"><div class="card-body" id="pte-players"><div class="empty">Select a play type</div></div></div>
     </div>
   </div>
@@ -1801,6 +1814,14 @@ function renderShotQuality(){
 
 // ── Play Type Explorer ────────────────────────────────────────────────────────
 var activePTE='Transition';
+var ptGPMin=0;
+function setPTGP(gp,btn){
+  ptGPMin=gp;
+  document.querySelectorAll('#pt-gp-0,#pt-gp-3,#pt-gp-5,#pt-gp-8').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderPlayTypeExplorer();
+}
+
 function renderPlayTypeExplorer(pt){
   if(pt) activePTE=pt;
   // Update chips
@@ -1817,13 +1838,14 @@ function renderPlayTypeExplorer(pt){
   if(!tEl||!pEl) return;
 
   // Team rankings
-  var teams=TEAMS.filter(function(t){return t.pt_off[activePTE]&&t.pt_off[activePTE].p>0;});
+  var teams=TEAMS.filter(function(t){return t.pt_off[activePTE]&&t.pt_off[activePTE].p>0&&(t.pt_off[activePTE].gp||0)>=ptGPMin;});
   teams.sort(function(a,b){return ppp(b.pt_off[activePTE])-ppp(a.pt_off[activePTE]);});
   var lgPoss=0,lgPts=0;
   teams.forEach(function(t){var d=t.pt_off[activePTE];lgPoss+=d.p;lgPts+=d.pts;});
   var lgAvg=lgPoss?lgPts/lgPoss:0;
+  var gpNote=ptGPMin>0?' &middot; min '+ptGPMin+' GP':'';
   var tHtml='<div style="font-size:10px;color:var(--text3);margin-bottom:10px">'+
-    teams.length+' teams with data &middot; League avg PPP: <strong style="color:var(--text)">'+f3(lgAvg)+'</strong></div>';
+    teams.length+' teams'+gpNote+' &middot; League avg PPP: <strong style="color:var(--text)">'+f3(lgAvg)+'</strong></div>';
   tHtml+='<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
     '<th style="text-align:left">#</th><th style="text-align:left">Team</th>'+
     '<th>POSS</th><th>FREQ%</th><th>PPP</th><th>vs Avg</th><th>EFG%</th><th>TO%</th>'+
@@ -1847,7 +1869,8 @@ function renderPlayTypeExplorer(pt){
   tEl.innerHTML=tHtml;
 
   // Player leaders
-  var players=PLAYERS.filter(function(p){return p.pt_off[activePTE]&&p.pt_off[activePTE].p>=5;});
+  var minPoss=Math.max(5,ptGPMin*3);
+  var players=PLAYERS.filter(function(p){return p.pt_off[activePTE]&&p.pt_off[activePTE].p>=minPoss&&(p.pt_off[activePTE].gp||0)>=ptGPMin;});
   players.sort(function(a,b){return ppp(b.pt_off[activePTE])-ppp(a.pt_off[activePTE]);});
   var pHtml='<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
     '<th style="text-align:left">#</th><th style="text-align:left">Player</th><th style="text-align:left">Team</th>'+
