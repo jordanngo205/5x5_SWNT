@@ -362,8 +362,8 @@ HTML_BODY = """
 <div class="tab" id="tab-team-rank">
   <div class="controls">
     <div class="toggle-group">
-      <button class="toggle-btn active" onclick="setTRSide('off',this)">Offense</button>
-      <button class="toggle-btn" onclick="setTRSide('def',this)">Defense</button>
+      <button class="toggle-btn active" id="tr-off" onclick="setTRSide('off',this)">Offense</button>
+      <button class="toggle-btn" id="tr-def" onclick="setTRSide('def',this)">Defense</button>
     </div>
     <label style="font-size:11px;color:var(--text2)">Min GP:
       <select class="sel" id="tr-min-gp" onchange="renderTeamRank()">
@@ -371,6 +371,10 @@ HTML_BODY = """
         <option value="6" selected>6+</option><option value="10">10+</option>
       </select>
     </label>
+    <span style="margin-left:8px;font-size:11px;color:var(--text2)">Tier:</span>
+    <button class="toggle-btn" id="tr-t3" onclick="setTRTier(3,this)">All</button>
+    <button class="toggle-btn active" id="tr-t2" onclick="setTRTier(2,this)">T1&ndash;2</button>
+    <button class="toggle-btn" id="tr-t1" onclick="setTRTier(1,this)">T1 Only</button>
   </div>
   <div class="card"><div class="tbl-wrap"><table id="tr-tbl">
     <thead><tr>
@@ -953,10 +957,15 @@ function lcard(name,team,stat,sub,barPct,badge,prefix,rank,color){
 }
 
 // ── TEAM RANKINGS ─────────────────────────────────────────────────────────────
-var trSide='off',trSort='ppp',trAsc=false;
+var trSide='off',trSort='ppp',trAsc=false,trTierMax=2;
 function setTRSide(s,btn){
   trSide=s;
-  document.querySelectorAll('#tab-team-rank .toggle-btn').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('#tr-off,#tr-def').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active'); renderTeamRank();
+}
+function setTRTier(tier,btn){
+  trTierMax=tier;
+  document.querySelectorAll('#tr-t1,#tr-t2,#tr-t3').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active'); renderTeamRank();
 }
 function sortTR(col){
@@ -974,7 +983,7 @@ function getTRVal(t,col){
 }
 function renderTeamRank(){
   var minGP=parseInt(document.getElementById('tr-min-gp').value)||0;
-  var rows=TEAMS.filter(function(t){return t.gp>=minGP;});
+  var rows=TEAMS.filter(function(t){return t.gp>=minGP&&t.tier<=trTierMax;});
   rows.sort(function(a,b){
     var av=getTRVal(a,trSort),bv=getTRVal(b,trSort);
     return trAsc?(av>bv?1:-1):(av<bv?1:-1);
