@@ -256,7 +256,14 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
   <div class="stat-cards" id="ov-cards"></div>
   <div class="section-hdr">League Pulse</div>
   <div class="pulse-grid" id="ov-pulse"></div>
-  <div class="section-hdr">Offensive Extremes</div>
+  <div class="section-hdr" style="display:flex;align-items:center;justify-content:space-between">
+    <span>Offensive Extremes</span>
+    <div style="display:flex;gap:6px">
+      <button class="toggle-btn" id="ov-t3" onclick="setOvTier(3,this)">All</button>
+      <button class="toggle-btn active" id="ov-t2" onclick="setOvTier(2,this)">T1&ndash;2</button>
+      <button class="toggle-btn" id="ov-t1" onclick="setOvTier(1,this)">T1 Only</button>
+    </div>
+  </div>
   <div class="extreme-grid" id="ov-extremes"></div>
   <div class="grid2">
     <div class="card"><div class="card-hdr"><span class="accent">&#9651;</span> Top 10 Offense &mdash; PPP</div><div class="card-body" id="ov-top-off"></div></div>
@@ -752,7 +759,7 @@ function renderOverview(){
     scard(f1(avgPace)+'','Avg Pace','poss / game');
 
   // Pulse stats (derived)
-  var validT=TEAMS.filter(function(t){return t.off.p>0;});
+  var validT=TEAMS.filter(function(t){return t.off.p>0&&t.tier<=ovTierMax;});
   var defPoss=TEAMS.reduce(function(s,t){return s+(t.def.p||0);},0);
   var defPts=TEAMS.reduce(function(s,t){return s+(t.def.pts||0);},0);
   var leagueDefPPP=defPoss?defPts/defPoss:0;
@@ -836,8 +843,9 @@ function renderOverview(){
   }
   document.getElementById('ov-pt-ppp').innerHTML=pppHtml;
 
-  // Player leaders
-  var pppLeaders=PLAYERS.filter(function(p){return p.off.p>=30;}).sort(function(a,b){return ppp(b.off)-ppp(a.off);}).slice(0,8);
+  // Player leaders — filtered by same tier as the rest of overview
+  var ovPlayers=PLAYERS.filter(function(p){return (TEAM_TIER[p.tid]||3)<=ovTierMax;});
+  var pppLeaders=ovPlayers.filter(function(p){return p.off.p>=30;}).sort(function(a,b){return ppp(b.off)-ppp(a.off);}).slice(0,8);
   var maxPPP=pppLeaders[0]?ppp(pppLeaders[0].off):1;
   var pppHtml2='<div class="leader-grid">';
   for(var i=0;i<pppLeaders.length;i++){
@@ -846,7 +854,7 @@ function renderOverview(){
   }
   document.getElementById('ov-ppp-leaders').innerHTML=pppHtml2+'</div>';
 
-  var efgLeaders=PLAYERS.filter(function(p){return p.off.fa>=30;}).sort(function(a,b){return efg(b.off)-efg(a.off);}).slice(0,8);
+  var efgLeaders=ovPlayers.filter(function(p){return p.off.fa>=30;}).sort(function(a,b){return efg(b.off)-efg(a.off);}).slice(0,8);
   var maxEFG=efgLeaders[0]?efg(efgLeaders[0].off):1;
   var efgHtml='<div class="leader-grid">';
   for(var i=0;i<efgLeaders.length;i++){
@@ -855,7 +863,7 @@ function renderOverview(){
   }
   document.getElementById('ov-efg-leaders').innerHTML=efgHtml+'</div>';
 
-  var volLeaders=PLAYERS.slice().sort(function(a,b){return (b.off.p||0)-(a.off.p||0);}).slice(0,8);
+  var volLeaders=ovPlayers.slice().sort(function(a,b){return (b.off.p||0)-(a.off.p||0);}).slice(0,8);
   var maxVol=volLeaders[0]?volLeaders[0].off.p:1;
   var volHtml='<div class="leader-grid">';
   for(var i=0;i<volLeaders.length;i++){
@@ -864,7 +872,7 @@ function renderOverview(){
   }
   document.getElementById('ov-vol-leaders').innerHTML=volHtml+'</div>';
 
-  var toLeaders=PLAYERS.filter(function(p){return p.off.p>=40;}).sort(function(a,b){return topR(a.off)-topR(b.off);}).slice(0,8);
+  var toLeaders=ovPlayers.filter(function(p){return p.off.p>=40;}).sort(function(a,b){return topR(a.off)-topR(b.off);}).slice(0,8);
   var maxTOInv=toLeaders.length?1/(topR(toLeaders[toLeaders.length-1].off)||1):1;
   var toHtml='<div class="leader-grid">';
   for(var i=0;i<toLeaders.length;i++){
@@ -1600,6 +1608,14 @@ function setPrTier(tier,btn){
   document.querySelectorAll('#pr-t1,#pr-t2,#pr-t3').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
   renderPlayerRank();
+}
+
+var ovTierMax=2;
+function setOvTier(tier,btn){
+  ovTierMax=tier;
+  document.querySelectorAll('#ov-t1,#ov-t2,#ov-t3').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderOverview();
 }
 
 // ── Scatter plot ──────────────────────────────────────────────────────────────
