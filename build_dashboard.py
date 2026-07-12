@@ -35,12 +35,17 @@ _tier_wb = openpyxl.load_workbook('/Users/jordanngo/Downloads/fiba 5x5 teams.xls
 TIERS_MAP = {row[0]: row[1] for row in _tier_wb.active.iter_rows(min_row=2, values_only=True) if row[0]}
 
 print('Loading team data...')
+_qual_team_file = DIR/'data/2025/team_vs_quality.json'
+_qual_team = json.loads(_qual_team_file.read_text()) if _qual_team_file.exists() else {}
 TEAMS=[]
 for t in json.loads((DIR/'data/2025/teams_all.json').read_text()):
     name=t['team']['name']
-    TEAMS.append({'id':t['team']['id'],'name':name,'gp':t['team']['gp'],
+    tid=t['team']['id']
+    qt=_qual_team.get(tid,{})
+    TEAMS.append({'id':tid,'name':name,'gp':t['team']['gp'],
         'tier':TIERS_MAP.get(name,3),
         'off':cpr(t['overall']['offense']),'def':cpr(t['overall']['defense']),
+        'qoff':cpr(qt.get('off',{})),'qdef':cpr(qt.get('def',{})),'qgp':qt.get('gp_quality',0),
         'pt_off':{k:cpt(v) for k,v in t['play_types']['offense'].items()},
         'pt_def':{k:cpt(v) for k,v in t['play_types']['defense'].items()}})
 TEAMS.sort(key=lambda x:x['name'])
@@ -48,12 +53,16 @@ TEAMS.sort(key=lambda x:x['name'])
 print('Loading player data...')
 _def_pt_file = DIR/'data/2025/player_def_pt.json'
 _player_def_pt = json.loads(_def_pt_file.read_text()) if _def_pt_file.exists() else {}
+_qual_player_file = DIR/'data/2025/player_vs_quality.json'
+_qual_player = json.loads(_qual_player_file.read_text()) if _qual_player_file.exists() else {}
 PLAYERS=[]
 for p in json.loads((DIR/'data/2025/players_all.json').read_text()):
     pid=p['player']['id']
+    qp=_qual_player.get(pid,{})
     PLAYERS.append({'id':pid,'name':p['player']['name'],
         'tid':p['team']['id'],'team':p['team']['name'],'gp':p['gp'],
         'off':cpr(p['overall']['offense']),'def':cpr(p['overall']['defense']),
+        'qoff':cpr(qp.get('off',{})) if qp else {},
         'pt_off':{k:cpt(v) for k,v in p['play_types']['offense'].items()},
         'pt_def':{k:cpt(v) for k,v in _player_def_pt.get(pid,{}).items()}})
 PLAYERS.sort(key=lambda x:x['name'])
@@ -188,6 +197,8 @@ tbody td:first-child,tbody td:nth-child(2){text-align:left}
 .tier-B{background:#2563eb;color:#fff}
 .tier-C{background:#d97706;color:#fff}
 .tier-D{background:#dc2626;color:#fff}
+/* Quality filter bar */
+.qual-bar{display:flex;align-items:center;gap:8px;padding:6px 20px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
 /* Competition tier chips (T1/T2/T3) */
 .tcmp-chip{display:inline-block;font-size:9px;font-weight:800;padding:1px 5px;border-radius:3px;vertical-align:middle;line-height:1.5}
 .tcmp-1{background:#7c3aed;color:#fff}
@@ -307,6 +318,12 @@ HTML_BODY = """
   <button class="nav-btn" onclick="showTab('player-compare',this)">&#9878;&#65039; P vs P</button>
   <button class="nav-btn" onclick="showTab('play-types',this)">&#127919; Play Types</button>
 </nav>
+<div class="qual-bar">
+  <span style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3)">Game Filter:</span>
+  <button class="toggle-btn active" id="qual-all" onclick="setQualMode(false,this)">All Games</button>
+  <button class="toggle-btn" id="qual-q" onclick="setQualMode(true,this)">vs T1&ndash;2 Opponents Only</button>
+  <span id="qual-label" style="font-size:10px;color:var(--text3);margin-left:4px"></span>
+</div>
 <div class="content">
 
 <!-- OVERVIEW -->
@@ -1652,6 +1669,37 @@ function globalSearch(q){
     });
   }
   drop.innerHTML=h; drop.style.display='block';
+}
+
+// ── Quality game filter (vs T1-2 opponents only) ──────────────────────────────
+var useQual=false;
+function setQualMode(on,btn){
+  useQual=on;
+  document.querySelectorAll('#qual-all,#qual-q').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  // Swap off/def data on every team and player — all render functions just work
+  TEAMS.forEach(function(t){
+    if(on){
+      if(!t._off){t._off=t.off;t._def=t.def;}
+      t.off=t.qoff&&t.qoff.p?t.qoff:t._off;
+      t.def=t.qdef&&t.qdef.p?t.qdef:t._def;
+    } else {
+      if(t._off){t.off=t._off;t.def=t._def;}
+    }
+  });
+  PLAYERS.forEach(function(p){
+    if(on){
+      if(!p._off) p._off=p.off;
+      p.off=p.qoff&&p.qoff.p?p.qoff:p._off;
+    } else {
+      if(p._off) p.off=p._off;
+    }
+  });
+  var lbl=document.getElementById('qual-label');
+  if(lbl) lbl.textContent=on?'(stats recalculated for quality matchups only)':'';
+  computeRanks();
+  renderOverview(); renderTeamRank(); renderPlayerRank(); renderScatterPlot();
+  var tid=document.getElementById('ti-team').value; if(tid) renderTeamIntel();
 }
 
 // ── Tier lookups ─────────────────────────────────────────────────────────────
