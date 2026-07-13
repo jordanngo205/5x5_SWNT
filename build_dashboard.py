@@ -62,13 +62,18 @@ _qual_player_file   = DIR/'data/2025/player_vs_quality.json'
 _qual_player        = json.loads(_qual_player_file.read_text())  if _qual_player_file.exists()   else {}
 _qual_player_pt_file = DIR/'data/2025/player_pt_vs_quality.json'
 _qual_player_pt     = json.loads(_qual_player_pt_file.read_text()) if _qual_player_pt_file.exists() else {}
+_boxscores_file     = DIR/'data/2025/player_boxscores.json'
+_boxscores          = json.loads(_boxscores_file.read_text())       if _boxscores_file.exists()     else {}
 PLAYERS=[]
 for p in json.loads((DIR/'data/2025/players_all.json').read_text()):
     pid=p['player']['id']
     qp=_qual_player.get(pid,{})
     qpp=_qual_player_pt.get(pid,{})
+    bx=_boxscores.get(pid,{})
     PLAYERS.append({'id':pid,'name':p['player']['name'],
         'tid':p['team']['id'],'team':p['team']['name'],'gp':p['gp'],
+        'ppg':bx.get('ppg',0),'rpg':bx.get('rpg',0),'apg':bx.get('apg',0),
+        'spg':bx.get('spg',0),'bpg':bx.get('bpg',0),'mpg':bx.get('mpg',0),
         'off':cpr(p['overall']['offense']),'def':cpr(p['overall']['defense']),
         'qoff':cpr(qp.get('off',{})) if qp else {},
         'pt_off':{k:cpt(v) for k,v in p['play_types']['offense'].items()},
@@ -329,8 +334,10 @@ HTML_BODY = """
 </nav>
 <div class="qual-bar">
   <span style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3)">Game Filter:</span>
-  <button class="toggle-btn active" id="qual-all" onclick="setQualMode(false,this)">All Games</button>
-  <button class="toggle-btn" id="qual-q" onclick="setQualMode(true,this)">vs T1&ndash;2 Opponents Only</button>
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="qual-all" onclick="setQualMode(false,this)">All Games</button>
+    <button class="toggle-btn" id="qual-q" onclick="setQualMode(true,this)">vs T1&ndash;2 Opponents Only</button>
+  </div>
   <span id="qual-label" style="font-size:10px;color:var(--text3);margin-left:4px"></span>
 </div>
 <div class="content">
@@ -453,7 +460,7 @@ HTML_BODY = """
   <div class="card"><div class="tbl-wrap"><table id="pr-tbl">
     <thead><tr>
       <th>#</th><th onclick="sortPR('name')">Player</th><th onclick="sortPR('team')">Team</th><th>Tier</th>
-      <th onclick="sortPR('gp')">GP</th><th onclick="sortPR('poss')">POSS</th>
+      <th onclick="sortPR('gp')">GP</th><th onclick="sortPR('ppg')">PPG</th><th onclick="sortPR('poss')">POSS</th>
       <th onclick="sortPR('ppp')" class="sorted">PPP</th>
       <th onclick="sortPR('fg')">FG%</th><th onclick="sortPR('efg')">EFG%</th>
       <th onclick="sortPR('fg2')">2FG%</th><th onclick="sortPR('a2')">2FGA</th>
@@ -506,14 +513,25 @@ HTML_BODY = """
   <div id="pt-qual-note" style="display:none;background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:8px 14px;font-size:11px;color:#92400e;margin-bottom:12px">
     &#9888; Play type stats are filtered to vs T1&ndash;2 opponents only.
   </div>
-  <div class="pt-chips" id="pte-chips"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+    <div class="pt-chips" id="pte-chips" style="margin-bottom:0"></div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3);flex-shrink:0">
+      <span style="font-weight:700;text-transform:uppercase;letter-spacing:.4px">GP Min:</span>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="pt-gp-0" onclick="setPTGP(0,this)">All</button>
+        <button class="toggle-btn" id="pt-gp-3" onclick="setPTGP(3,this)">3</button>
+        <button class="toggle-btn" id="pt-gp-5" onclick="setPTGP(5,this)">5</button>
+        <button class="toggle-btn" id="pt-gp-8" onclick="setPTGP(8,this)">8</button>
+      </div>
+    </div>
+  </div>
   <div class="grid2">
     <div>
       <div class="section-hdr">Team Rankings</div>
       <div class="card"><div class="card-body" id="pte-teams"><div class="empty">Select a play type</div></div></div>
     </div>
     <div>
-      <div class="section-hdr">Individual Leaders <span style="font-weight:400;text-transform:none;color:var(--text3);font-size:10px">(min 5 poss)</span></div>
+      <div class="section-hdr">Individual Leaders</div>
       <div class="card"><div class="card-body" id="pte-players"><div class="empty">Select a play type</div></div></div>
     </div>
   </div>
@@ -1062,12 +1080,13 @@ function sortPR(col){
 }
 function getPRVal(p,col,d){
   if(col==='name') return p.name; if(col==='team') return p.team;
-  if(col==='gp')   return p.gp;   if(col==='poss') return d.p||0;
-  if(col==='ppp')  return ppp(d); if(col==='fg')  return fg(d);
-  if(col==='efg')  return efg(d); if(col==='fg2') return fg2(d);
-  if(col==='a2')   return d.a2||0;if(col==='fg3') return fg3(d);
-  if(col==='a3')   return d.a3||0;if(col==='to')  return topR(d);
-  if(col==='ts')   return ts(d);  return 0;
+  if(col==='gp')   return p.gp;   if(col==='ppg')  return p.ppg||0;
+  if(col==='poss') return d.p||0; if(col==='ppp')  return ppp(d);
+  if(col==='fg')   return fg(d);  if(col==='efg')  return efg(d);
+  if(col==='fg2')  return fg2(d); if(col==='a2')   return d.a2||0;
+  if(col==='fg3')  return fg3(d); if(col==='a3')   return d.a3||0;
+  if(col==='to')   return topR(d);if(col==='ts')   return ts(d);
+  return 0;
 }
 function renderPlayerRank(){
   var minGP=parseInt(document.getElementById('pr-min-gp').value)||0;
@@ -1101,6 +1120,7 @@ function renderPlayerRank(){
       '<td style="color:var(--text2);font-size:11px">'+esc(p.team)+'</td>'+
       '<td><span class="tcmp-chip tcmp-'+ptier+'">T'+ptier+'</span></td>'+
       '<td>'+p.gp+'</td>'+
+      '<td style="font-weight:600">'+(p.ppg?p.ppg.toFixed(1):'—')+'</td>'+
       '<td>'+(d.p||0)+'</td>'+
       '<td class="'+cPPP(pv)+'">'+f3(pv)+(pRank&&!ptF?' <span style="font-size:9px;color:var(--text3)">#'+pRank+'</span>':'')+'</td>'+
       '<td class="'+cPct(fg(d),50,33)+'">'+fP(fg(d))+'</td>'+
@@ -1268,8 +1288,8 @@ function renderTeamIntel(){
     if(pct>=90)return'Elite';if(pct>=75)return'Great';if(pct>=50)return'Above Avg';
     if(pct>=25)return'Below Avg';return'Poor';
   }
-  var qualNote=useQual&&t.qgp?'<div style="font-size:9px;color:var(--text3);margin-bottom:8px;text-align:center">Showing stats vs T1–2 opponents only &middot; '+t.qgp+' quality games</div>':'';
-  var netPanel='<div class="net-panel">'+qualNote+
+  var qualNote=useQual&&t.qgp?'<div style="font-size:9px;color:var(--text3);margin-bottom:8px">Showing stats vs T1–2 opponents only &middot; '+t.qgp+' quality games</div>':'';
+  var netPanel=qualNote+'<div class="net-panel">'+
     '<div class="net-box">'+
       '<div class="net-label">Offensive PPP</div>'+
       '<div class="net-val" style="color:'+pppRatingColor(offPPP)+'">'+f3(offPPP)+'</div>'+
@@ -1587,10 +1607,13 @@ function renderPlayerIntel(){
       '</div></div></div>';
   }
 
-  // Build team context (how player compares to teammates)
-  var teammates=PLAYERS.filter(function(x){return x.tid===p.tid&&x.id!==p.id&&x.off.p>=15;});
-  var tmRank=1; teammates.forEach(function(x){if(ppp(x.off)>ppp(o)) tmRank++;});
-  var tmContext='<span style="color:var(--text3);font-size:11px">&nbsp;&middot;&nbsp; #'+tmRank+' on '+esc(p.team)+'</span>';
+  // Build team context — rank by PPG among teammates with ≥3 GP
+  var tmContext='';
+  if(p.gp>=3&&p.ppg>0){
+    var teammates=PLAYERS.filter(function(x){return x.tid===p.tid&&x.id!==p.id&&x.gp>=3&&x.ppg>0;});
+    var tmRank=1; teammates.forEach(function(x){if(x.ppg>p.ppg) tmRank++;});
+    tmContext='<span style="color:var(--text3);font-size:11px">&nbsp;&middot;&nbsp; #'+tmRank+' on '+esc(p.team)+'</span>';
+  }
 
   document.getElementById('pi-content').innerHTML=
     '<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">'+
@@ -1764,7 +1787,8 @@ function renderScatterPlot(){
   function xS(v){return pL+(v-minO)/(maxO-minO)*iW;}
   function yS(v){return pT+(v-minD)/(maxD-minD)*iH;}
   var ax=xS(avgO), ay=yS(avgD);
-  var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="font-family:-apple-system,sans-serif;display:block">';
+  var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="font-family:-apple-system,sans-serif;display:block;overflow:hidden">';
+  svg+='<defs><clipPath id="plot-area"><rect x="'+pL+'" y="'+pT+'" width="'+iW+'" height="'+iH+'"/></clipPath></defs>';
   // quadrant fills
   svg+='<rect x="'+pL+'" y="'+pT+'" width="'+(ax-pL)+'" height="'+(ay-pT)+'" fill="rgba(26,86,219,.06)"/>';  // good D, below-avg O
   svg+='<rect x="'+ax+'" y="'+pT+'" width="'+(pL+iW-ax)+'" height="'+(ay-pT)+'" fill="rgba(22,163,74,.08)"/>';  // elite
@@ -1787,6 +1811,7 @@ function renderScatterPlot(){
   // avg lines
   svg+='<line x1="'+ax.toFixed(1)+'" y1="'+pT+'" x2="'+ax.toFixed(1)+'" y2="'+(pT+iH)+'" stroke="#d52b1e" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>';
   svg+='<line x1="'+pL+'" y1="'+ay.toFixed(1)+'" x2="'+(pL+iW)+'" y2="'+ay.toFixed(1)+'" stroke="#d52b1e" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>';
+  svg+='<g clip-path="url(#plot-area)">';
   // ghost dots (filtered-out tiers) — shown dim, no labels
   ghostT.forEach(function(t){
     var x=xS(ppp(t.off)), y=yS(ppp(t.def));
@@ -1807,6 +1832,7 @@ function renderScatterPlot(){
       svg+='<text x="'+lx.toFixed(1)+'" y="'+(y+3).toFixed(1)+'" text-anchor="'+anchor+'" fill="#374151" font-size="9" font-weight="'+(t.tier===1?'700':'500')+'" style="pointer-events:none">'+esc(t.name)+'</text>';
     }
   });
+  svg+='</g>';
   // axis labels
   svg+='<text x="'+(pL+iW/2)+'" y="'+(H-4)+'" text-anchor="middle" fill="#374151" font-size="11" font-weight="600">Offensive PPP &#8594;</text>';
   svg+='<text transform="rotate(-90)" x="'+(-(pT+iH/2))+'" y="16" text-anchor="middle" fill="#374151" font-size="11" font-weight="600">Defensive PPP allowed &#8595; (lower = better, &#8593; = elite defense)</text>';
@@ -1875,6 +1901,14 @@ function renderShotQuality(){
 
 // ── Play Type Explorer ────────────────────────────────────────────────────────
 var activePTE='Transition';
+var ptGPMin=0;
+function setPTGP(gp,btn){
+  ptGPMin=gp;
+  document.querySelectorAll('#pt-gp-0,#pt-gp-3,#pt-gp-5,#pt-gp-8').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderPlayTypeExplorer();
+}
+
 function renderPlayTypeExplorer(pt){
   if(pt) activePTE=pt;
   // Update chips
@@ -1891,13 +1925,14 @@ function renderPlayTypeExplorer(pt){
   if(!tEl||!pEl) return;
 
   // Team rankings
-  var teams=TEAMS.filter(function(t){return t.pt_off[activePTE]&&t.pt_off[activePTE].p>0;});
+  var teams=TEAMS.filter(function(t){return t.pt_off[activePTE]&&t.pt_off[activePTE].p>0&&(t.pt_off[activePTE].gp||0)>=ptGPMin;});
   teams.sort(function(a,b){return ppp(b.pt_off[activePTE])-ppp(a.pt_off[activePTE]);});
   var lgPoss=0,lgPts=0;
   teams.forEach(function(t){var d=t.pt_off[activePTE];lgPoss+=d.p;lgPts+=d.pts;});
   var lgAvg=lgPoss?lgPts/lgPoss:0;
+  var gpNote=ptGPMin>0?' &middot; min '+ptGPMin+' GP':'';
   var tHtml='<div style="font-size:10px;color:var(--text3);margin-bottom:10px">'+
-    teams.length+' teams with data &middot; League avg PPP: <strong style="color:var(--text)">'+f3(lgAvg)+'</strong></div>';
+    teams.length+' teams'+gpNote+' &middot; League avg PPP: <strong style="color:var(--text)">'+f3(lgAvg)+'</strong></div>';
   tHtml+='<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
     '<th style="text-align:left">#</th><th style="text-align:left">Team</th>'+
     '<th>POSS</th><th>FREQ%</th><th>PPP</th><th>vs Avg</th><th>EFG%</th><th>TO%</th>'+
@@ -1921,7 +1956,8 @@ function renderPlayTypeExplorer(pt){
   tEl.innerHTML=tHtml;
 
   // Player leaders
-  var players=PLAYERS.filter(function(p){return p.pt_off[activePTE]&&p.pt_off[activePTE].p>=5;});
+  var minPoss=Math.max(5,ptGPMin*3);
+  var players=PLAYERS.filter(function(p){return p.pt_off[activePTE]&&p.pt_off[activePTE].p>=minPoss&&(p.pt_off[activePTE].gp||0)>=ptGPMin;});
   players.sort(function(a,b){return ppp(b.pt_off[activePTE])-ppp(a.pt_off[activePTE]);});
   var pHtml='<div class="tbl-wrap"><table class="pt-tbl"><thead><tr>'+
     '<th style="text-align:left">#</th><th style="text-align:left">Player</th><th style="text-align:left">Team</th>'+
