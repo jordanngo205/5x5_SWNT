@@ -460,7 +460,7 @@ HTML_BODY = """
   <div class="card"><div class="tbl-wrap"><table id="pr-tbl">
     <thead><tr>
       <th>#</th><th onclick="sortPR('name')">Player</th><th onclick="sortPR('team')">Team</th><th>Tier</th>
-      <th onclick="sortPR('gp')">GP</th><th onclick="sortPR('ppg')">PPG</th><th onclick="sortPR('poss')">POSS</th>
+      <th onclick="sortPR('gp')">GP</th><th onclick="sortPR('poss')">POSS</th><th onclick="sortPR('ppg')">PPG</th>
       <th onclick="sortPR('ppp')" class="sorted">PPP</th>
       <th onclick="sortPR('fg')">FG%</th><th onclick="sortPR('efg')">EFG%</th>
       <th onclick="sortPR('fg2')">2FG%</th><th onclick="sortPR('a2')">2FGA</th>
@@ -669,6 +669,7 @@ var PLAYER_STAT_DEFS = [
   {key:'vol', lb:false, fn:function(p){return p.off.p||0;}},
   {key:'ftr', lb:false, fn:function(p){return ftr(p.off);}},
 ];
+var PPG_POOL_SIZE = 0;
 
 function computeRanks() {
   var validT = TEAMS.filter(function(t){return t.off.p>0;});
@@ -699,6 +700,13 @@ function computeRanks() {
       if(!PR[p.id]) PR[p.id]={};
       PR[p.id][def.key]=i+1;
     });
+  });
+  // PPG ranks use boxscore pool (players with ppg > 0)
+  var ppgPool = PLAYERS.filter(function(p){return p.ppg>0;});
+  PPG_POOL_SIZE = ppgPool.length;
+  ppgPool.slice().sort(function(a,b){return b.ppg-a.ppg;}).forEach(function(p,i){
+    if(!PR[p.id]) PR[p.id]={};
+    PR[p.id]['ppg']=i+1;
   });
 }
 
@@ -1120,8 +1128,8 @@ function renderPlayerRank(){
       '<td style="color:var(--text2);font-size:11px">'+esc(p.team)+'</td>'+
       '<td><span class="tcmp-chip tcmp-'+ptier+'">T'+ptier+'</span></td>'+
       '<td>'+p.gp+'</td>'+
-      '<td style="font-weight:600">'+(p.ppg?p.ppg.toFixed(1):'—')+'</td>'+
       '<td>'+(d.p||0)+'</td>'+
+      '<td style="font-weight:600">'+(p.ppg?p.ppg.toFixed(1):'—')+(PR[p.id]&&PR[p.id].ppg?' <span style="font-size:9px;color:var(--text3)">#'+PR[p.id].ppg+'</span>':'')+'</td>'+
       '<td class="'+cPPP(pv)+'">'+f3(pv)+(pRank&&!ptF?' <span style="font-size:9px;color:var(--text3)">#'+pRank+'</span>':'')+'</td>'+
       '<td class="'+cPct(fg(d),50,33)+'">'+fP(fg(d))+'</td>'+
       '<td class="'+cPct(ev,55,38)+'">'+fP(ev)+'</td>'+
